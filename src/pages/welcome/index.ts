@@ -1,1 +1,1 @@
-export { Welcome } from "./welcome";
+export { WelcomeLazy } from "./Welcome.lazy";

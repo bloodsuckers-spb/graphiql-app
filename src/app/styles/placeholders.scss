@@ -1,0 +1,26 @@
+%container {
+  margin: 0 auto;
+  max-width: 1920px;
+  padding: 0 20px;
+  height: 100%;
+}
+
+%content {
+  height: inherit;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+%list {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+%flex-col-center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}

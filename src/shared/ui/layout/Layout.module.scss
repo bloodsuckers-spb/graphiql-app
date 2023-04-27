@@ -1,0 +1,14 @@
+.app {
+  margin: 0 auto;
+  display: grid;
+  grid-template-rows: 70px 1fr;
+  min-height: 100vh;
+}
+
+.bounding {
+  @extend %container;
+}
+
+.inner {
+  @extend %content;
+}

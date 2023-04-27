@@ -1,0 +1,13 @@
+.header {
+  height: 70px;
+  background-color: $bg-color;
+  color: #fff;
+}
+
+.bounding {
+  @extend %container;
+}
+
+.inner {
+  @extend %content;
+}

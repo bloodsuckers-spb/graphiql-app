@@ -27,5 +27,6 @@
     "@typescript-eslint/explicit-function-return-type": "off",
     "import/no-default-export": "error",
     "func-style": ["error", "expression", { "allowArrowFunctions": true }]
-  }
+  },
+  "ignorePatterns": ["dist/**/*.js", "vite.config.ts"]
 }

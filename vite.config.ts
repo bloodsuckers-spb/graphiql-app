@@ -2,6 +2,7 @@
 
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
+import path from 'path';
 
 export default defineConfig({
   plugins: [react()],
@@ -13,6 +14,7 @@ export default defineConfig({
       services: '/src/services',
       models: '/src/models',
       assets: '/src/assets',
+      '@': path.resolve(__dirname, 'src'),
     },
   },
   css: {

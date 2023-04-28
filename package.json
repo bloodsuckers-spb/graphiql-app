@@ -4,7 +4,7 @@
   "description": "",
   "scripts": {
     "dev": "vite",
-    "build": "npm run lint && tsc && vite build",
+    "build": "npm run lint && tsc && vite build --base=./",
     "lint": "npx eslint ./src"
   },
   "keywords": [],
@@ -22,6 +22,7 @@
     "uuid": "^9.0.0"
   },
   "devDependencies": {
+    "@types/node": "^18.16.2",
     "@types/react": "^18.2.0",
     "@types/react-dom": "^18.2.1",
     "@types/react-router-dom": "^5.3.3",

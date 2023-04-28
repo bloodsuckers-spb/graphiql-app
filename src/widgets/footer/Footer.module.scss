@@ -1,7 +1,57 @@
 .footer {
-  height: 70px;
-  line-height: 70px;
+  font-family: 'Reaver', serif;
   background-color: var(--color-dark);
-  color: #fff;
+  color: var(--color-white);
   text-align: center;
+}
+
+.bounding {
+  @extend %container;
+}
+
+.inner {
+  @extend %content;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.authors {
+  display: flex;
+  gap: 20px;
+}
+
+.links {
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 29px;
+  color: var(--color-white);
+  @extend %standart-animation;
+  transition-property: color;
+  &:hover{
+    color: var(--color-accent);
+  }
+}
+
+.year{
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 29px;
+}
+
+.logo{
+  width: 134px;
+  height: 50px;
+}
+
+.icon{
+  width: 100%;
+  height: 100%;
+  fill: var(--color-white);
+  @extend %standart-animation;
+  transition-property: fill;
+  &:hover{
+    fill: var(--color-accent);
+  }
 }

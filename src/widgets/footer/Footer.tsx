@@ -12,7 +12,7 @@ export const Footer = () => (
                 <span className={styles.year}>2023</span>
                 <a className={styles.logo} href="https://rs.school/js/">
                     <svg className={styles.icon}>
-                        <use href="src/assets/img/sprite.svg#rss-logo"></use>
+                        <use href="./sprite.svg#rss-logo"></use>
                     </svg>
                 </a>
             </div>

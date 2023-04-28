@@ -1,4 +1,4 @@
-import { WelcomeLazy, EditorLazy } from '../../pages';
+import { WelcomeLazy, EditorLazy } from 'pages';
 
 export const routesConfig = [
   {

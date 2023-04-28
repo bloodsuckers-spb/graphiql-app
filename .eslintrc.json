@@ -30,7 +30,26 @@
     "import/no-default-export": "error",
     "func-style": ["error", "expression", { "allowArrowFunctions": true }],
     "react-hooks/rules-of-hooks": "error",
-    "react-hooks/exhaustive-deps": "warn"
+    "react-hooks/exhaustive-deps": "warn",
+    "import/order": [
+      2,
+      {
+        "groups": [
+          "external",
+          "builtin",
+          "index",
+          "sibling",
+          "parent",
+          "internal",
+          "type"
+        ],
+        "alphabetize": {
+          "order": "asc",
+          "caseInsensitive": true
+        },
+        "newlines-between": "always-and-inside-groups"
+      }
+    ]
   },
   "ignorePatterns": ["dist/**/*.js", "vite.config.ts"]
 }

@@ -1,8 +1,8 @@
-import { Header, Footer } from '../../../widgets';
+import { Header, Footer } from 'widgets';
 
 import styles from './Layout.module.scss';
 
-import { Props } from './Layout.models';
+import type { Props } from './Layout.models';
 
 export const Layout = ({ children }: Props) => (
   <div className={styles.app}>

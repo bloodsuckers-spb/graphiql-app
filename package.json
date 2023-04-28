@@ -4,7 +4,7 @@
   "description": "",
   "scripts": {
     "dev": "vite",
-    "build": "npm run lint && tsc && vite build",
+    "build": "npm run lint && tsc && vite build --base=./",
     "lint": "npx eslint ./src"
   },
   "keywords": [],

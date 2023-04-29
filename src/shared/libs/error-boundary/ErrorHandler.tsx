@@ -11,7 +11,7 @@ export const Fallback = ({ error, resetErrorBoundary }: fallbackProps) => {
 };
 
 export const logError = (error: Error, info: errorInfo) => {
-  console.group('Something went wrong');
+  console.group('Something went wrong...');
   console.log(error);
   console.log(`Info: ${info}`);
   console.groupEnd();

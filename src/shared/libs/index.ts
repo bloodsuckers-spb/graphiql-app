@@ -1,2 +1,2 @@
 export { classNames } from './classNames';
-export { fallbackRender, logError } from './errorBoundary';
+export { Fallback, logError } from './error-boundary/errorHandler';

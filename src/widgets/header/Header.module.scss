@@ -1,7 +1,6 @@
 .header {
-  font-family: 'Reaver', serif;
   background-color: var(--bg-main);
-  color: #fff;
+  color: var(--color-white);
 }
 
 .bounding {
@@ -14,17 +13,19 @@
 
 .logo {
   display: flex;
+  height: 100%;
+  gap: 10px;
 
   &__img {
     width: 60px;
-    margin-right: 10px;
+    fill: var(--color-accent);
   }
 
   &__title {
     display: flex;
-    align-items: flex-end;
-    width: 110px;
+    align-items: center;
     line-height: 27px;
+    font-family: 'Reaver', serif;
     font-weight: 700;
     font-size: 21px;
   }
@@ -38,26 +39,25 @@
 
 .localization {
   display: flex;
-  font-family: 'Inter', sans-serif;
   font-weight: 700;
   font-size: 14px;
   cursor: pointer;
 
-  &__ru {
-    padding-right: 5px;
-    border-right: 1px solid #fff;
-    transition: all 0.3s ease;
+  &__ru, &__en {
+    @extend %standart-animation;
+    transition-property: color;
     &:hover {
-      opacity: 0.5;
+      color: var(--color-secondary);
     }
   }
 
+  &__ru {
+    padding-right: 3px;
+    border-right: 1px solid var(--color-white);
+  }
+
   &__en {
-    padding-left: 5px;
-    transition: all 0.3s ease;
-    &:hover {
-      opacity: 0.5;
-    }
+    padding-left: 3px;
   }
 }
 
@@ -65,19 +65,17 @@
   font-family: 'Reaver', 'serif';
   font-weight: 600;
   cursor: pointer;
-}
 
-.sign__in {
-  color: #5d6798;
-  transition: all 0.3s ease;
-  &:hover {
-    opacity: 0.5;
+  &__slash {
+    color: var(--color-secondary);
   }
 }
 
-.sign__up {
-  transition: all 0.3s ease;
+.sign__in, .sign__up {
+  color: var(--color-secondary);
+  @extend %standart-animation;
+  transition-property: color;
   &:hover {
-    opacity: 0.5;
+    color: var(--color-white);
   }
 }

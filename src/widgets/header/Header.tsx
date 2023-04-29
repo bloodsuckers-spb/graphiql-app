@@ -6,12 +6,14 @@ export const Header = () => {
       <div className={styles.bounding}>
         <div className={styles.inner}>
           <div className={styles.logo}>
-            <img
-              className={styles.logo__img}
-              src="apple-touch-icon.png"
-              alt="GraphiQL Logo"
-            />
-            <p className={styles.logo__title}>GraphiQL Clone</p>
+            <svg className={styles.logo__img}>
+              <use href="sprite.svg#logo"></use>
+            </svg>
+            <h1 className={styles.logo__title}>
+              GraphiQL
+              <br />
+              Clone
+            </h1>
           </div>
           <div className={styles.options}>
             <div className={styles.localization}>
@@ -19,9 +21,19 @@ export const Header = () => {
               <span className={styles.localization__en}>EN</span>
             </div>
             <div className={styles.auth}>
-              <span className={styles.sign__in}>Sign In</span>
-              <span> / </span>
-              <span className={styles.sign__up}>Sign Up</span>
+              <a
+                href="/login"
+                className={styles.sign__in}
+              >
+                Sign In
+              </a>
+              <span className={styles.auth__slash}> / </span>
+              <a
+                href="/login"
+                className={styles.sign__up}
+              >
+                Sign Up
+              </a>
             </div>
           </div>
         </div>

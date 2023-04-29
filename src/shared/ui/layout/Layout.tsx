@@ -17,16 +17,17 @@ export const Layout = ({ children }: Props) => (
       <Header />
     </ErrorBoundary>
 
-    <main>
-      <div className={styles.bounding}>
-        <div className={styles.inner}>{children}</div>
-      </div>
-    </main>
     <ErrorBoundary
       FallbackComponent={Fallback}
       onError={logError}
     >
-      <Footer />
+      <main>
+        <div className={styles.bounding}>
+          <div className={styles.inner}>{children}</div>
+        </div>
+      </main>
     </ErrorBoundary>
+
+    <Footer />
   </div>
 );

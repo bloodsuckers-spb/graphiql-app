@@ -43,7 +43,8 @@
   font-size: 14px;
   cursor: pointer;
 
-  &__ru, &__en {
+  &__ru,
+  &__en {
     @extend %standart-animation;
     transition-property: color;
     &:hover {
@@ -71,7 +72,8 @@
   }
 }
 
-.sign__in, .sign__up {
+.sign__in,
+.sign__up {
   color: var(--color-secondary);
   @extend %standart-animation;
   transition-property: color;

@@ -2,7 +2,7 @@ import { WelcomeLazy, EditorLazy } from 'pages';
 
 export enum AppRoutes {
   WELCOME = 'welcome',
-  EDITOR = 'editor'
+  EDITOR = 'editor',
 }
 
 export const routesConfig = [

@@ -1,1 +1,1 @@
-export { EditorLazy } from './Editor.lazy';
+export * from './Editor.lazy';

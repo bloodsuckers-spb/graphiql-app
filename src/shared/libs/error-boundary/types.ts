@@ -1,6 +1,6 @@
-export type fallbackProps = {
+export type FallbackProps = {
   error: Error;
   resetErrorBoundary: () => void;
 };
 
-export type errorInfo = { componentStack: string };
+export type ErrorInfo = { componentStack: string };

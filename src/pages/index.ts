@@ -1,3 +1,3 @@
-export { EditorLazy } from './editor';
-export { WelcomeLazy } from './welcome';
-export { NotFound } from './not-found';
+export * from './editor';
+export * from './welcome';
+export * from './not-found';

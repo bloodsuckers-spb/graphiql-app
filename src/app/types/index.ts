@@ -1,1 +1,5 @@
-export type Test = Record<string, string>;
+import { ReactNode } from 'react';
+
+export type FCProps = {
+  children: ReactNode;
+};

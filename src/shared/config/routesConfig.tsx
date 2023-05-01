@@ -19,7 +19,6 @@ export const routesConfig = [
     path: '/editor',
     content: <EditorLazy />,
   },
-
   {
     id: [AppRoutes.LOGIN],
     path: '/login',

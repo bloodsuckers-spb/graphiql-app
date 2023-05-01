@@ -19,13 +19,29 @@
   gap: 10px;
 }
 
+%standart-animation {
+  transition-duration: 0.3s;
+  transition-timing-function: ease-in;
+}
+
+%flex-row-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 %flex-col-center {
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
-%standart-animation {
-  transition-duration: 0.3s;
-  transition-timing-function: ease-in;
+%flex-col-all-center {
+  @extend %flex-col-center;
+  align-items: center;
+}
+
+%w-h-100 {
+  width: 100%;
+  height: 100%;
 }

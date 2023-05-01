@@ -1,0 +1,9 @@
+@mixin InterFont($color) {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 21px;
+  line-height: 25px;
+  height: 78px;
+  color: $color;
+}

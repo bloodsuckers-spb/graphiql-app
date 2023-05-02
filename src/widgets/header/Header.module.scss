@@ -65,19 +65,35 @@
 .auth {
   font-family: 'Reaver', 'serif';
   font-weight: 600;
-  cursor: pointer;
-
-  &__slash {
-    color: var(--color-secondary);
-  }
-}
-
-.sign__in,
-.sign__up {
   color: var(--color-secondary);
   @extend %standart-animation;
   transition-property: color;
   &:hover {
     color: var(--color-white);
+  }
+
+  &__slash {
+    color: var(--color-accent);
+  }
+}
+
+.nav {
+  display: flex;
+  gap: 20px;
+  &__link {
+    font-family: 'Reaver', 'serif';
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 24px;
+    color: var(--color-secondary);
+    @extend %standart-animation;
+    transition-property: color;
+    &:hover {
+      color: var(--color-white);
+    }
+
+    &_active {
+      color: var(--color-white);
+    }
   }
 }

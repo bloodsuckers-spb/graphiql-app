@@ -1,9 +1,11 @@
 .form {
   @extend %flex-col-all-center;
+  gap: 50px;
   background-color: var(--color-dark);
-  max-width: 684px;
+  max-width: 520px;
   width: 100%;
-  padding: 65px 122px 109px;
+  padding: 50px 60px;
+  border-radius: 15px;
 }
 
 .radioGroup {

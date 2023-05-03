@@ -18,7 +18,7 @@
   }
 
   .radio:checked + .radioLabel {
-    background-color: #303035;
+    background-color: var(--radio-checked);
     box-shadow: none;
   }
 

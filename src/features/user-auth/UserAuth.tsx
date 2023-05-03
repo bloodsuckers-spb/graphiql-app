@@ -9,8 +9,6 @@ enum UsersAuth {
 }
 
 export const UserAuth = () => {
-  const onClick = () => console.log('click');
-
   return (
     <Form className={styles.form}>
       <AppLogo />
@@ -58,12 +56,7 @@ export const UserAuth = () => {
             className={styles.textField}
           />
         </FormItem>
-        <Button
-          className={styles.btn}
-          onClick={onClick}
-        >
-          Enter
-        </Button>
+        <Button className={styles.btn}>Enter</Button>
       </div>
     </Form>
   );

@@ -35,7 +35,8 @@
     border: 1px solid transparent;
     border-radius: 10px;
     transition: all 0.1s ease-in-out;
-    width: 210px;
+    max-width: 210px;
+    width: 100%;
     line-height: 40px;
     border-radius: 10px;
   }

@@ -16,7 +16,6 @@ export const Layout = ({ children }: FCProps) => (
     >
       <Header />
     </ErrorBoundary>
-
     <ErrorBoundary
       FallbackComponent={Fallback}
       onError={logError}

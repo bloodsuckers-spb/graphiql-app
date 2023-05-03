@@ -4,14 +4,6 @@
   color: var(--color-white);
 }
 
-.bounding {
-  @extend %container;
-}
-
-.inner {
-  @extend %content;
-}
-
 .logo {
   display: flex;
   height: 100%;

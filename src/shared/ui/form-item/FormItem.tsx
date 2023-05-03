@@ -1,11 +1,7 @@
-import { ReactNode } from 'react';
-
 import styles from './FormItem.module.scss';
 
-type Props = {
-  children: ReactNode;
-};
+import type { FCProps } from 'app/types';
 
-export const FormItem: React.FC<Props> = ({ children }) => (
+export const FormItem = ({ children }: FCProps) => (
   <div className={styles.formItem}>{children}</div>
 );

@@ -3,19 +3,8 @@
   height: 100px;
   font-family: 'Reaver', serif;
   background-color: var(--color-dark);
-  color: var(--color-white);
   text-align: center;
-}
-
-.bounding {
-  @extend %container;
-}
-
-.inner {
-  @extend %content;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  color: var(--color-white);
 }
 
 .authors {
@@ -36,6 +25,7 @@
 }
 
 .year {
+  @extend %absolut-center;
   font-style: normal;
   font-weight: 600;
   font-size: 20px;
@@ -48,10 +38,9 @@
 }
 
 .icon {
-  width: 100%;
-  height: 100%;
-  fill: var(--color-white);
+  @extend %w-h-100;
   @extend %standart-animation;
+  fill: var(--color-white);
   transition-property: fill;
   &:hover {
     fill: var(--color-accent);

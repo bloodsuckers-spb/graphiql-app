@@ -6,9 +6,9 @@ import styles from './Layout.module.scss';
 
 import { Fallback, logError } from '../../libs';
 
-import type { Props } from './Layout.models';
+import type { FCProps } from 'app/types';
 
-export const Layout = ({ children }: Props) => (
+export const Layout = ({ children }: FCProps) => (
   <div className={styles.app}>
     <ErrorBoundary
       FallbackComponent={Fallback}
@@ -23,7 +23,6 @@ export const Layout = ({ children }: Props) => (
     >
       <main className={styles.main}>{children}</main>
     </ErrorBoundary>
-
     <Footer />
   </div>
 );

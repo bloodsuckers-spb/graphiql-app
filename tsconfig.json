@@ -30,6 +30,6 @@
       "widgets/*": ["widgets/*"]
     }
   },
-  "include": ["src"],
+  "include": ["src", "firebase.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

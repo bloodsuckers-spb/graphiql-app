@@ -1,0 +1,63 @@
+.form {
+  @extend %flex-col-all-center;
+  gap: 50px;
+  background-color: var(--color-dark);
+  max-width: 520px;
+  width: 100%;
+  padding: 50px 60px;
+  border-radius: 15px;
+}
+
+.radioGroup {
+  @extend %flex-row-center;
+  justify-content: space-between;
+  position: relative;
+  padding: 10px;
+
+  .radio {
+    position: absolute !important;
+    @extend %visually-hidden;
+  }
+
+  .radio:checked + .radioLabel {
+    background-color: var(--radio-checked);
+    box-shadow: none;
+  }
+
+  .radioLabel {
+    cursor: pointer;
+    background-color: transparent;
+    color: var(--color-white);
+    font-size: 21px;
+    text-align: center;
+    padding: 8px 16px;
+    margin-right: -1px;
+    border: 1px solid transparent;
+    border-radius: 10px;
+    transition: all 0.1s ease-in-out;
+    max-width: 210px;
+    width: 100%;
+    line-height: 40px;
+    border-radius: 10px;
+  }
+}
+
+.formContent {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.textField {
+  @include InterFont(var(--color-secondary));
+  background-color: transparent;
+}
+
+.btn {
+  @include InterFont(var(--color-white));
+  background-color: var(--form-btn-bg);
+  height: 78px;
+  border-radius: 10px;
+  border: 0;
+}

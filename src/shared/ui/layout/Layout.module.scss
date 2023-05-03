@@ -1,17 +1,7 @@
 .app {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-}
-
-.main {
-  flex: 1 0 auto;
-}
-
-.bounding {
-  @extend %container;
-}
-
-.inner {
-  @extend %content;
+  margin: 0 auto;
+  display: grid;
+  grid-template-rows: 90px 1fr 100px;
+  min-height: 100vh;
+  background-color: var(--bg-main);
 }

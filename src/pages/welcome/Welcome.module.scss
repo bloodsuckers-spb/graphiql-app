@@ -1,0 +1,78 @@
+.welcome {
+  height: 100%;
+  padding: 20px 0;
+  background-color: var(--bg-main);
+  color: var(--color-white);
+}
+
+.bounding {
+  @extend %container;
+  background-color: var(--bg-main);
+}
+
+.inner {
+  @extend %content;
+  flex-direction: column;
+  justify-content: start;
+  padding: 60px 40px;
+  background-color: var(--color-dark);
+}
+
+.title {
+  font-weight: 600;
+  font-size: 56px;
+  line-height: 68px;
+  margin-bottom: 85px;
+  & span {
+    color: var(--color-accent);
+  }
+}
+
+.intro {
+  @extend %list;
+  align-items: center;
+  width: 80%;
+  gap: 50px;
+  padding: 10px 0;
+  background-color: var(--bg-color);
+  background-image: url('graph-wash.png');
+}
+
+.logo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 5px;
+
+  &__img {
+    width: 150px;
+    fill: var(--color-accent);
+  }
+
+  &__title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    line-height: 27px;
+    font-weight: 300;
+    font-size: 30px;
+    & span {
+      color: var(--color-accent);
+    }
+  }
+}
+
+.block {
+  &__title {
+    margin-bottom: 0.8em;
+    font-size: 22px;
+    font-weight: 300;
+  }
+  &__code {
+    font-size: 13px;
+    line-height: 17px;
+  }
+}

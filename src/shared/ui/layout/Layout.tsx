@@ -21,11 +21,7 @@ export const Layout = ({ children }: Props) => (
       FallbackComponent={Fallback}
       onError={logError}
     >
-      <main>
-        <div className={styles.bounding}>
-          <div className={styles.inner}>{children}</div>
-        </div>
-      </main>
+      <main className={styles.main}>{children}</main>
     </ErrorBoundary>
 
     <Footer />

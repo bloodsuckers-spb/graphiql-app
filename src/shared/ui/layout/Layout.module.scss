@@ -1,8 +1,11 @@
 .app {
-  margin: 0 auto;
-  display: grid;
-  grid-template-rows: 90px 1fr 100px;
-  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.main {
+  flex: 1 0 auto;
 }
 
 .bounding {

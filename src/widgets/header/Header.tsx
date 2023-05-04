@@ -37,6 +37,7 @@ export const Header = () => {
             className={({ isActive }) => getActiveClass(isActive)}
             to="/"
           >
+            Welcome
           </NavLink>
           {isLogin && (
             <NavLink

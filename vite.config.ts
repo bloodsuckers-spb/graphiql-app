@@ -6,16 +6,6 @@ import tsconfigPaths from 'vite-tsconfig-paths';
 
 export default defineConfig({
   plugins: [react(), tsconfigPaths()],
-  // resolve: {
-  //   alias: {
-  //     app: '/src/app',
-  //     entities: '/src/entities',
-  //     features: '/src/features',
-  //     pages: '/src/pages',
-  //     shared: '/src/shared',
-  //     widgets: '/src/widgets',
-  //   },
-  // },
   css: {
     preprocessorOptions: {
       scss: {

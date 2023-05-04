@@ -1,0 +1,11 @@
+.btn {
+  @include InterFont(var(--color-white));
+  background-color: var(--form-btn-bg);
+  height: 78px;
+  border-radius: 10px;
+  border: 0;
+  width: 100%;
+  &:hover {
+    opacity: 0.8;
+  }
+}

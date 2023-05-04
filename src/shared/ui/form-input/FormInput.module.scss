@@ -1,9 +1,11 @@
 .input {
   @include InterFont(var(--color-secondary));
   background-color: transparent;
+  width: 100%;
+  border: 0;
 
   &:hover {
-    border-color: transparent;
+    border-color: var(--color-accent);
   }
 
   &:focus {

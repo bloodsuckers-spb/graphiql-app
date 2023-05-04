@@ -1,26 +1,9 @@
 .welcome {
-  height: 100%;
+  @extend %flex-col-all-center;
+  width: 100%;
   padding: 20px 0;
   background-color: var(--bg-main);
   color: var(--color-white);
-}
-
-.bounding {
-  height: inherit;
-  margin: 0 auto;
-  max-width: 1920px;
-  padding: 0 20px;
-  background-color: var(--bg-main);
-}
-
-.inner {
-  display: flex;
-  height: inherit;
-  flex-direction: column;
-  align-items: center;
-  justify-content: start;
-  padding: 60px 40px;
-  background-color: var(--color-dark);
 }
 
 .title {
@@ -38,9 +21,8 @@
   align-items: center;
   width: 80%;
   gap: 50px;
+  margin-bottom: 100px;
   padding: 10px 0;
-  background-color: var(--bg-color);
-  background-image: url('graph-wash.png');
 }
 
 .logo {
@@ -50,6 +32,7 @@
   align-items: center;
   text-align: center;
   gap: 5px;
+  animation: move 1s ease-in-out 0.5s both;
 
   &__img {
     width: 150px;
@@ -70,14 +53,85 @@
   }
 }
 
+@keyframes move {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.blocks {
+  @extend %list;
+  gap: 50px;
+}
+
 .block {
+  &:nth-child(1) {
+    animation: move 1s ease-in-out 1s both;
+  }
+
+  &:nth-child(2) {
+    animation: move 1s ease-in-out 1.5s both;
+  }
+
+  &:nth-child(3) {
+    animation: move 1s ease-in-out 2s both;
+  }
+
   &__title {
     margin-bottom: 0.8em;
     font-size: 22px;
     font-weight: 300;
   }
   &__code {
-    font-size: 13px;
+    font-size: 14px;
     line-height: 17px;
+  }
+}
+
+.about {
+  @extend %flex-col-all-center;
+
+  &__title {
+    margin-bottom: 40px;
+    font-weight: 600;
+    font-size: 38px;
+    line-height: 46px;
+    text-align: center;
+  }
+  &__text {
+    width: 760px;
+    margin-bottom: 100px;
+    font-weight: 400;
+    font-size: 21px;
+    line-height: 25px;
+    text-align: center;
+  }
+}
+
+.description {
+  @extend %flex-row-center;
+  gap: 100px;
+}
+
+.describe {
+  @extend %flex-col-all-center;
+  &__title {
+    margin-bottom: 40px;
+    font-weight: 600;
+    font-size: 38px;
+    line-height: 46px;
+    text-align: center;
+  }
+  &__text {
+    width: 760px;
+    font-weight: 400;
+    font-size: 21px;
+    line-height: 25px;
+    text-align: center;
   }
 }

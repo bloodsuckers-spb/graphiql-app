@@ -5,6 +5,14 @@
   color: var(--color-white);
 }
 
+.inner__footer {
+  @include media-tablet {
+    flex-direction: column;
+    gap: 20px;
+    padding: 15px 0px;
+  }
+}
+
 .authors {
   display: flex;
   gap: 20px;
@@ -30,6 +38,9 @@
   font-weight: 600;
   font-size: 20px;
   line-height: 29px;
+  @include media-tablet {
+    order: 1;
+  }
 }
 
 .logo {

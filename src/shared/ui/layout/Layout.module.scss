@@ -4,4 +4,7 @@
   grid-template-rows: 90px 1fr 100px;
   min-height: 100vh;
   background-color: var(--bg-main);
+  @include media-tablet {
+    grid-template-rows: 90px 1fr minmax(100px, max-content);
+  }
 }

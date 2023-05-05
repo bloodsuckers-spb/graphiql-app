@@ -12,7 +12,9 @@ export const Footer = () => (
           target="_blank"
           rel="noopener noreferrer"
         >
-          Author I
+          <svg className={styles.authors__icon}>
+            <use href="./sprite.svg#github"></use>
+          </svg>
         </a>
         <a
           className={styles.links}
@@ -20,7 +22,9 @@ export const Footer = () => (
           target="_blank"
           rel="noopener noreferrer"
         >
-          Author II
+          <svg className={styles.authors__icon}>
+            <use href="./sprite.svg#github"></use>
+          </svg>
         </a>
         <a
           className={styles.links}
@@ -28,7 +32,9 @@ export const Footer = () => (
           target="_blank"
           rel="noopener noreferrer"
         >
-          Author III
+          <svg className={styles.authors__icon}>
+            <use href="./sprite.svg#github"></use>
+          </svg>
         </a>
       </div>
       <span className={styles.year}>2023</span>

@@ -6,7 +6,7 @@ import { Wrapper } from '../../shared/ui';
 import { Example } from '../../widgets/query-example';
 
 const Welcome = () => (
-  <Wrapper direction="column">
+  <Wrapper className={''}>
     <div className={styles.welcome}>
       <h2 className={styles.title}>
         <span>Please</span>, Sign In to start exploring

@@ -4,7 +4,7 @@
   overflow: hidden;
   position: relative;
   width: 450px;
-  height: 100%;
+  height: 400px;
   font-size: 14px;
   line-height: 17px;
   color: var(--color-dark);
@@ -27,8 +27,11 @@
     padding-top: 30px;
     padding-bottom: 10px;
 
-    & .line:hover {
-      background-color: var(--code-hover);
+    & .line {
+      z-index: 2;
+      &:hover {
+        background-color: var(--code-hover);
+      }
     }
   }
   &__border {
@@ -36,4 +39,28 @@
     height: inherit;
     background-color: var(--code-border);
   }
+}
+
+.query__pointer {
+  position: absolute;
+  top: 47px;
+  left: 0;
+  z-index: 0;
+  width: 49%;
+  height: 17px;
+  background-color: var(--code-hover);
+}
+
+.types__pointer {
+  position: absolute;
+  top: 47px;
+  right: 0;
+  z-index: 0;
+  width: 49%;
+  height: 17px;
+  background-color: var(--code-hover);
+}
+
+.line {
+  position: relative;
 }

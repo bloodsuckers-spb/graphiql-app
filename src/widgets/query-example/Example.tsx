@@ -1,8 +1,45 @@
+import { useEffect, useState } from 'react';
+
 import styles from './Example.module.scss';
 
 export const Example = () => {
+  const [queryHighlight, setQueryHighlight] = useState(1);
+  const [typesHighlight, setTypesHighlight] = useState(1);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      queryHighlight === 7
+        ? setQueryHighlight(queryHighlight + 2)
+        : setQueryHighlight(queryHighlight + 1);
+      if (queryHighlight === 13) setQueryHighlight(1);
+    }, 1000);
+
+    if (queryHighlight === 1) setTypesHighlight(1); // hero
+    if (queryHighlight === 2) setTypesHighlight(5); // name
+    if (queryHighlight === 3) setTypesHighlight(6); // friends
+    if (queryHighlight === 4) setTypesHighlight(5); // name
+    if (queryHighlight === 5) setTypesHighlight(7); // homeWorld
+    if (queryHighlight === 6) setTypesHighlight(12); // name
+    if (queryHighlight === 7) setTypesHighlight(13); // climate
+    if (queryHighlight === 9) setTypesHighlight(8); // species
+    if (queryHighlight === 10) setTypesHighlight(17); // name
+    if (queryHighlight === 11) setTypesHighlight(18); // lifespan
+    if (queryHighlight === 12) setTypesHighlight(19); // origin
+    if (queryHighlight === 13) setTypesHighlight(12); // name
+
+    return () => clearInterval(interval);
+  }, [queryHighlight]);
+
   return (
     <div className={styles.example}>
+      <div
+        style={{ top: `${30 + 17 * queryHighlight}px` }}
+        className={styles.query__pointer}
+      ></div>
+      <div
+        style={{ top: `${30 + 17 * typesHighlight}px` }}
+        className={styles.types__pointer}
+      ></div>
       <pre className={styles.example__query}>
         <div className={styles.line}>
           <span>{` `}</span>

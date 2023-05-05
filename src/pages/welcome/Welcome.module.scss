@@ -116,6 +116,7 @@
 .description {
   @extend %flex-row-center;
   gap: 100px;
+  height: 100%;
 }
 
 .describe {

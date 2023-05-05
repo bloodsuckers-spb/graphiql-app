@@ -5,6 +5,7 @@
   --color-secondary: #5d6798;
   --color-white: #ffffff;
   --color-warning: #ff5729;
+  --color-focus: #036fc7;
   --bg-main: #11131c;
   --bg-secondary: #171a26;
   --form-btn-bg: #47224f;
@@ -15,4 +16,11 @@
   --code-blue: #1f61a0;
   --code-yellow: #ca9800;
   --code-grey: #555555;
+  --header-height: 90px;
+  --footer-height: 100px;
 }
+
+$content-width: 1197px;
+$tablet-width: 768px;
+$mobile-big-width: 414px;
+$mobile-small-width: 320px;

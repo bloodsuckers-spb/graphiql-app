@@ -1,35 +1,28 @@
 import { Wrapper } from 'shared/ui';
 
+import { authors } from './authors';
+
 import styles from './Footer.module.scss';
 
 export const Footer = () => (
   <footer className={styles.footer}>
-    <Wrapper>
+    <Wrapper className={styles.innerFooter}>
       <div className={styles.authors}>
-        <a
-          className={styles.links}
-          href="https://github.com/bloodsuckers-spb"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Author I
-        </a>
-        <a
-          className={styles.links}
-          href="https://github.com/timothy7310"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Author II
-        </a>
-        <a
-          className={styles.links}
-          href="https://github.com/criphood"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Author III
-        </a>
+        {authors.map((author) => {
+          return (
+            <a
+              className={styles.links}
+              href={author.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              key={author.id}
+            >
+              <svg className={styles.authorsIcon}>
+                <use href="./sprite.svg#github"></use>
+              </svg>
+            </a>
+          );
+        })}
       </div>
       <span className={styles.year}>2023</span>
       <a

@@ -6,7 +6,7 @@ import styles from './Footer.module.scss';
 
 export const Footer = () => (
   <footer className={styles.footer}>
-    <Wrapper className={styles.inner__footer}>
+    <Wrapper className={styles.innerFooter}>
       <div className={styles.authors}>
         {authors.map((author) => {
           return (
@@ -17,7 +17,7 @@ export const Footer = () => (
               rel="noopener noreferrer"
               key={author.id}
             >
-              <svg className={styles.authors__icon}>
+              <svg className={styles.authorsIcon}>
                 <use href="./sprite.svg#github"></use>
               </svg>
             </a>

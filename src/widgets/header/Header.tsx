@@ -23,7 +23,7 @@ export const Header = () => {
 
   return (
     <header className={styles.header}>
-      <Wrapper>
+      <Wrapper className={styles.inner__header}>
         <div className={styles.logo}>
           <AppLogo />
           <h1 className={styles.logo__title}>

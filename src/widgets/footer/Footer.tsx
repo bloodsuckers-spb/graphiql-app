@@ -4,7 +4,7 @@ import styles from './Footer.module.scss';
 
 export const Footer = () => (
   <footer className={styles.footer}>
-    <Wrapper>
+    <Wrapper className={styles.inner__footer}>
       <div className={styles.authors}>
         <a
           className={styles.links}

@@ -117,19 +117,22 @@ const Welcome = () => (
         </div>
       </section>
       <section className={styles.about}>
-        <h2 className={styles.about__title}>A query language for your API</h2>
-        <p className={styles.about__text}>
-          GraphQL is a query language for APIs and a runtime for fulfilling
-          those queries with your existing data. GraphQL provides a complete and
-          understandable description of the data in your API, gives clients the
-          power to ask for exactly what they need and nothing more, makes it
-          easier to evolve APIs over time, and enables powerful developer tools.
-        </p>
+        <div className={styles.lang}>
+          <h2 className={styles.about__title}>A query language for your API</h2>
+          <p className={styles.about__text}>
+            GraphQL is a query language for APIs and a runtime for fulfilling
+            those queries with your existing data. GraphQL provides a complete
+            and understandable description of the data in your API, gives
+            clients the power to ask for exactly what they need and nothing
+            more, makes it easier to evolve APIs over time, and enables powerful
+            developer tools.
+          </p>
+        </div>
         <div className={styles.description}>
           <Example />
           <div className={styles.describe}>
             <h2 className={styles.describe__title}>
-              Describe what’s possible with a type system
+              Describe what’s possible <br /> with a type system
             </h2>
             <p className={styles.describe__text}>
               GraphQL APIs are organized in terms of types and fields, not
@@ -138,6 +141,69 @@ const Welcome = () => (
               possible and provide clear and helpful errors. Apps can use types
               to avoid writing manual parsing code.
             </p>
+          </div>
+        </div>
+        <div className={styles.tools}>
+          <h2 className={styles.tools__title}>
+            Move faster with powerful <br /> developer tools
+          </h2>
+          <p className={styles.about__text}>
+            Know exactly what data you can request from your API without leaving
+            your editor, highlight potential issues before sending a query, and
+            take advantage of improved code intelligence. GraphQL makes it easy
+            to build powerful tools like{' '}
+            <span className={styles.about__text__accent}>QraphiQL</span> by
+            leveraging your API’s type system.
+          </p>
+        </div>
+      </section>
+      <section className={styles.team}>
+        <h2 className={styles.team__title}>Our Team</h2>
+        <div className={styles.team__members}>
+          <div className={styles.member}>
+            <img
+              className={styles.member__avatar}
+              src="avatar-vitaly.jpg"
+              alt="avatar.jpg"
+            />
+            <p className={styles.member__name}>Vitaly</p>
+            <a
+              className={styles.member__github}
+              href="https://github.com/bloodsuckers-spb"
+              target="blank"
+            >
+              GitHub
+            </a>
+          </div>
+          <div className={styles.member}>
+            <img
+              className={styles.member__avatar}
+              src="avatar-timofey.jpg"
+              alt="avatar.jpg"
+            />
+            <p className={styles.member__name}>Timofey</p>
+            <a
+              className={styles.member__github}
+              href="https://github.com/Timothy7310"
+              target="blank"
+            >
+              GitHub
+            </a>
+          </div>
+          <div className={styles.member}>
+            <img
+              className={styles.member__avatar}
+              src="avatar-artem.jpg"
+              alt="avatar.jpg"
+            />
+            <p className={styles.member__name}>Artem</p>
+            <a
+              className={styles.member__github}
+              href="https://github.com/criphood"
+              target="blank"
+            >
+              GitHub
+            </a>
           </div>
         </div>
       </section>

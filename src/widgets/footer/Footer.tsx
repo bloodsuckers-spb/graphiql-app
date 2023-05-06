@@ -25,14 +25,16 @@ export const Footer = () => (
         })}
       </div>
       <span className={styles.year}>2023</span>
-      <a
-        className={styles.logo}
-        href="https://rs.school/js/"
-      >
-        <svg className={styles.icon}>
-          <use href="./sprite.svg#rss-logo"></use>
-        </svg>
-      </a>
+      <div className={styles.logo}>
+        <a
+          className={styles.logo__href}
+          href="https://rs.school/js/"
+        >
+          <svg className={styles.icon}>
+            <use href="./sprite.svg#rss-logo"></use>
+          </svg>
+        </a>
+      </div>
     </Wrapper>
   </footer>
 );

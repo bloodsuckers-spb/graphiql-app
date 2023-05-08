@@ -1,13 +1,17 @@
 .header {
+  width: 100%;
   height: 90px;
   background-color: var(--bg-main);
   color: var(--color-white);
+  position: relative;
+  z-index: 1;
 }
 
 .logo {
   display: flex;
   align-items: center;
   height: 100%;
+  width: 33.3%;
   gap: 10px;
 
   &__img {
@@ -22,72 +26,18 @@
     font-family: 'Reaver', serif;
     font-weight: 700;
     font-size: 21px;
-  }
-}
-
-.options {
-  display: flex;
-  gap: 30px;
-  line-height: 1em;
-}
-
-.localization {
-  display: flex;
-  font-weight: 700;
-  font-size: 14px;
-  cursor: pointer;
-
-  &__ru,
-  &__en {
-    @extend %standart-animation;
-    transition-property: color;
-    &:hover {
-      color: var(--color-secondary);
+    @include media-tablet {
+      font-size: 16px;
     }
   }
-
-  &__ru {
-    padding-right: 3px;
-    border-right: 1px solid var(--color-white);
-  }
-
-  &__en {
-    padding-left: 3px;
-  }
 }
 
-.auth {
-  font-family: 'Reaver', 'serif';
-  font-weight: 600;
-  color: var(--color-secondary);
-  @extend %standart-animation;
-  transition-property: color;
-  &:hover {
-    color: var(--color-white);
-  }
-
-  &__slash {
-    color: var(--color-accent);
-  }
-}
-
-.nav {
+.menu__desktop {
   display: flex;
-  gap: 20px;
-  &__link {
-    font-family: 'Reaver', 'serif';
-    font-weight: 600;
-    font-size: 18px;
-    line-height: 24px;
-    color: var(--color-secondary);
-    @extend %standart-animation;
-    transition-property: color;
-    &:hover {
-      color: var(--color-white);
-    }
-
-    &_active {
-      color: var(--color-white);
-    }
+  align-items: center;
+  height: inherit;
+  width: 66.66%;
+  @include media-tablet {
+    display: none;
   }
 }

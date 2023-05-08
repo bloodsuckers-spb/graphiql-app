@@ -1,13 +1,18 @@
-import { MenuContext, MenuContextProvider } from 'app/providers';
-import { useContext } from 'react';
-import { slide as Menu } from 'react-burger-menu';
-
+import { action as toggleMenu } from 'redux-burger-menu';
+import { useAppSelector, useAppDispatch } from 'shared/hooks/redux';
 import { Options } from 'widgets/header-options';
 
 import styles from './Burger.module.scss';
+import { Menu } from './BurgerRedux';
+
+type MenuReducer = { isOpen: boolean };
 
 export const Burger = () => {
-  const context = useContext(MenuContext);
+  const isOpen = useAppSelector((state) => {
+    const reducer = state.burgerMenu as MenuReducer;
+    return reducer.isOpen;
+  });
+  const dispatch = useAppDispatch();
 
   return (
     <Menu
@@ -19,8 +24,10 @@ export const Burger = () => {
       menuClassName={styles.menu}
       itemListClassName={styles.item__list}
       overlayClassName={styles.overlay}
-      isOpen={context.isMenuOpen}
-      onStateChange={(state) => context.stateChangeHandler(state)}
+      isOpen={isOpen}
+      onStateChange={(state: MenuReducer) => {
+        dispatch(toggleMenu(state.isOpen));
+      }}
     >
       <Options />
     </Menu>

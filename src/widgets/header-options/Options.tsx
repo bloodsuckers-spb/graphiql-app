@@ -1,7 +1,6 @@
-import { MenuContext, MenuContextProvider } from 'app/providers';
 import { loginSlice } from 'app/providers/StoreProvider/config/reducers';
-import { useContext } from 'react';
 import { Link, NavLink } from 'react-router-dom';
+import { action as toggleMenu } from 'redux-burger-menu';
 import { useAppSelector, useAppDispatch } from 'shared/hooks/redux';
 
 import styles from './Options.module.scss';
@@ -21,12 +20,10 @@ export const Options = () => {
       : `${styles.nav__link}`;
   };
 
-  const context = useContext(MenuContext);
-
   return (
     <div
       className={styles.menu}
-      onClick={context.toggleMenu}
+      onClick={() => dispatch(toggleMenu(false))}
     >
       <nav className={styles.nav}>
         <NavLink

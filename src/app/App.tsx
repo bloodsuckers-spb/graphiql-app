@@ -1,19 +1,24 @@
 import { auth } from 'app/firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { ToastContainer } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 
 import './index.scss';
 import 'react-toastify/dist/ReactToastify.css';
 
-import { Layout } from 'shared/ui';
-import { Spinner } from 'shared/ui/spinner';
+import { Layout, Spinner } from 'shared/ui';
 
-import { toastContainerOptions } from './constants';
+import { Header } from 'widgets';
+
+import { toastOptions } from './constants';
 import { Routing } from './routing';
 
 export const App = () => {
   const [user, loading, error] = useAuthState(auth);
-  console.log(user);
+
+  if (error) {
+    toast('Server Error', { ...toastOptions });
+  }
+
   return (
     <>
       {loading ? (
@@ -23,7 +28,7 @@ export const App = () => {
           <Routing />
         </Layout>
       )}
-      <ToastContainer {...toastContainerOptions} />
+      <ToastContainer {...toastOptions} />
     </>
   );
 };

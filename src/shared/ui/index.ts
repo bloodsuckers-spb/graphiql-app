@@ -4,4 +4,4 @@ export * from './app-logo';
 export * from './wrapper';
 export * from './form-btn';
 export * from './auth-form';
-export * from './form-input';
+export * from './spinner';

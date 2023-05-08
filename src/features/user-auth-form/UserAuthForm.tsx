@@ -4,23 +4,33 @@ import {
   signInWithEmailAndPassword,
 } from 'firebase/auth';
 
-import { FormEvent, useRef } from 'react';
+import { useForm, SubmitHandler } from 'react-hook-form';
 
-import { useAuthState } from 'react-firebase-hooks/auth';
+import { UserAuthField, FormBtn } from 'shared/ui';
 
-import { UserAuthField, FormBtn, FormInput } from 'shared/ui';
-
-import styles from './UserAuthFrom.module.scss';
+import styles from './UserAuthForm.module.scss';
 
 type Props = {
   isSignUp: boolean;
 };
 
-export const UserAuthForm = ({ isSignUp }: Props) => {
-  const emailRef = useRef<HTMLInputElement>(null);
-  const passwordRef = useRef<HTMLInputElement>(null);
+type FormFields = {
+  email: string;
+  password: string;
+};
 
-  const signIn = async (email: string, password: string) => {
+export const UserAuthForm = ({ isSignUp }: Props) => {
+  const {
+    register,
+    handleSubmit,
+    // formState: { errors },
+  } = useForm<FormFields>();
+
+  const onSubmit: SubmitHandler<FormFields> = (data) => {
+    isSignUp ? signUp(data) : signIn(data);
+  };
+
+  const signIn = async ({ email, password }: FormFields) => {
     try {
       await signInWithEmailAndPassword(auth, email, password);
     } catch (error: unknown) {
@@ -30,7 +40,7 @@ export const UserAuthForm = ({ isSignUp }: Props) => {
     }
   };
 
-  const signUp = async (email: string, password: string) => {
+  const signUp = async ({ email, password }: FormFields) => {
     try {
       await createUserWithEmailAndPassword(auth, email, password);
     } catch (error) {
@@ -40,31 +50,23 @@ export const UserAuthForm = ({ isSignUp }: Props) => {
     }
   };
 
-  const handleSignIn = (event: FormEvent) => {
-    event.preventDefault();
-    signIn('vtlk.spb@gmail.com', 'test');
-  };
-
-  const handleSignUp = (event: FormEvent) => {
-    event.preventDefault();
-    signUp('vtlk.spb@gmail.com', 'test');
-  };
-
   return (
     <form
       className={styles.form}
-      onSubmit={isSignUp ? handleSignUp : handleSignIn}
+      onSubmit={handleSubmit(onSubmit)}
     >
       <UserAuthField>
-        <FormInput
+        <input
+          className={styles.input}
           type="email"
-          ref={emailRef}
+          {...register('email')}
         />
       </UserAuthField>
       <UserAuthField>
-        <FormInput
+        <input
+          className={styles.input}
           type="password"
-          ref={passwordRef}
+          {...register('password')}
         />
       </UserAuthField>
       <FormBtn />

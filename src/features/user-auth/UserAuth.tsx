@@ -1,9 +1,3 @@
-import {
-  signInWithEmailAndPassword,
-  createUserWithEmailAndPassword,
-} from 'firebase/auth';
-
-import { Auth } from 'firebase/auth';
 import { useState } from 'react';
 
 import { UserAuthField, AppLogo } from 'shared/ui';
@@ -16,12 +10,6 @@ enum UsersAuth {
   LOGIN = 'Log In',
   SIGNUP = 'Sign Up',
 }
-
-const signIn = (email: string, password: string, auth: Auth) =>
-  signInWithEmailAndPassword(auth, email, password);
-
-const signUp = (email: string, password: string, auth: Auth) =>
-  createUserWithEmailAndPassword(auth, email, password);
 
 export const UserAuth = () => {
   const [isSignUp, setIsSignUp] = useState(false);

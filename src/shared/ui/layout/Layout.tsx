@@ -9,7 +9,7 @@ import { Fallback, logError } from '../../libs';
 import type { FCProps } from 'app/types';
 
 export const Layout = ({ children }: FCProps) => (
-  <div className={styles.app}>
+  <div className={styles.wrapper}>
     <ErrorBoundary
       FallbackComponent={Fallback}
       onError={logError}

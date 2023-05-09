@@ -1,33 +1,15 @@
-import { loginSlice } from 'app/providers/StoreProvider/config/reducers';
 import { useEffect, useRef, useState } from 'react';
-import { Link, NavLink } from 'react-router-dom';
-import { useAppSelector, useAppDispatch } from 'shared/hooks/redux';
 
 import { classNames } from 'shared/libs';
-import { Wrapper, AppLogo } from 'shared/ui';
-import { Burger } from 'shared/ui/burger-menu';
+import { Wrapper, AppLogo, Burger } from 'shared/ui';
+
 import { Options } from 'widgets/header-options';
 
 import styles from './Header.module.scss';
 
 export const Header = () => {
-  const dispatch = useAppDispatch();
-  const isLogin = useAppSelector((state) => state.loginReducer.value);
-
   const [isSticky, setSticky] = useState(false);
-
-  const headerRef = useRef(null);
-
-  const signOut = () => {
-    dispatch(loginSlice.actions.signOut());
-    window.localStorage.setItem('isLogin', 'false');
-  };
-
-  const getActiveClass = (isActive: boolean) => {
-    return isActive
-      ? `${styles.nav__link} ${styles.nav__link_active}`
-      : `${styles.nav__link}`;
-  };
+  const headerRef = useRef<HTMLElement>(null);
 
   const handleScroll = (elTopOffset: number, elHeight: number) => {
     if (window.pageYOffset > elTopOffset + elHeight) {
@@ -38,9 +20,11 @@ export const Header = () => {
   };
 
   useEffect(() => {
-    const header = (
-      headerRef?.current as unknown as HTMLElement
-    ).getBoundingClientRect();
+    if (!headerRef || !headerRef.current) {
+      return;
+    }
+
+    const header = headerRef.current.getBoundingClientRect();
 
     window.addEventListener('scroll', () =>
       handleScroll(header.top, header.height)

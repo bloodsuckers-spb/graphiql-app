@@ -7,8 +7,6 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import { Layout, Spinner } from 'shared/ui';
 
-import { Header } from 'widgets';
-
 import { toastOptions } from './constants';
 import { Routing } from './routing';
 

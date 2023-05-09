@@ -2,6 +2,16 @@
   height: 90px;
   background-color: var(--bg-main);
   color: var(--color-white);
+  position: sticky;
+  top: 0;
+  border-bottom: 1px solid transparent;
+  @extend %standart-animation;
+  transition-property: background-color border-bottom;
+}
+
+.headerActive {
+  background-color: var(--color-dark);
+  border-bottom: 1px solid var(--color-secondary);
 }
 
 .logo {

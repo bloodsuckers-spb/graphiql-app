@@ -1,4 +1,7 @@
-import { useState } from 'react';
+import { auth } from 'app/firebase';
+import { useState, useEffect } from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { UserAuthField, AppLogo } from 'shared/ui';
 
@@ -13,6 +16,14 @@ enum UsersAuth {
 
 export const UserAuth = () => {
   const [isSignUp, setIsSignUp] = useState(false);
+  const [user, loading] = useAuthState(auth);
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (loading) {
+      return;
+    }
+    if (user) navigate('/');
+  }, [user, loading, navigate]);
   return (
     <div className={styles.userAuth}>
       <div className={styles.userAuthHeading}>

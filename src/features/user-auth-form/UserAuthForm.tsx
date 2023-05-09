@@ -8,15 +8,28 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 
 import { UserAuthField, FormBtn } from 'shared/ui';
 
+import { Props, FormFields } from './types';
+
 import styles from './UserAuthForm.module.scss';
 
-type Props = {
-  isSignUp: boolean;
+const signIn = async ({ email, password }: FormFields) => {
+  try {
+    await signInWithEmailAndPassword(auth, email, password);
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      console.log(error.message);
+    }
+  }
 };
 
-type FormFields = {
-  email: string;
-  password: string;
+const signUp = async ({ email, password }: FormFields) => {
+  try {
+    await createUserWithEmailAndPassword(auth, email, password);
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      console.log(error.message);
+    }
+  }
 };
 
 export const UserAuthForm = ({ isSignUp }: Props) => {
@@ -28,26 +41,6 @@ export const UserAuthForm = ({ isSignUp }: Props) => {
 
   const onSubmit: SubmitHandler<FormFields> = (data) => {
     isSignUp ? signUp(data) : signIn(data);
-  };
-
-  const signIn = async ({ email, password }: FormFields) => {
-    try {
-      await signInWithEmailAndPassword(auth, email, password);
-    } catch (error: unknown) {
-      if (error instanceof Error) {
-        console.log(error.message);
-      }
-    }
-  };
-
-  const signUp = async ({ email, password }: FormFields) => {
-    try {
-      await createUserWithEmailAndPassword(auth, email, password);
-    } catch (error) {
-      if (error instanceof Error) {
-        console.log(error.message);
-      }
-    }
   };
 
   return (

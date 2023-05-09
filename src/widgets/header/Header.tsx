@@ -4,8 +4,9 @@ import { Link, NavLink } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from 'shared/hooks/redux';
 
 import { classNames } from 'shared/libs';
-
 import { Wrapper, AppLogo } from 'shared/ui';
+import { Burger } from 'shared/ui/burger-menu';
+import { Options } from 'widgets/header-options';
 
 import styles from './Header.module.scss';
 
@@ -70,46 +71,10 @@ export const Header = () => {
             Clone
           </h1>
         </div>
-        <nav className={styles.nav}>
-          <NavLink
-            className={({ isActive }) => getActiveClass(isActive)}
-            to="/"
-          >
-            Welcome
-          </NavLink>
-          {isLogin && (
-            <NavLink
-              className={({ isActive }) => getActiveClass(isActive)}
-              to={'/editor'}
-            >
-              Editor
-            </NavLink>
-          )}
-        </nav>
-        <div className={styles.options}>
-          <div className={styles.localization}>
-            <span className={styles.localization__ru}>RU</span>
-            <span className={styles.localization__en}>EN</span>
-          </div>
-          <div className={styles.auth}>
-            {isLogin ? (
-              <Link
-                to="/"
-                onClick={signOut}
-                className={styles.auth}
-              >
-                Sign out
-              </Link>
-            ) : (
-              <Link
-                to="/login"
-                className={styles.auth}
-              >
-                Sign In <span className={styles.auth__slash}> / </span> Sign Up
-              </Link>
-            )}
-          </div>
+        <div className={styles.menu__desktop}>
+          <Options />
         </div>
+        <Burger />
       </Wrapper>
     </header>
   );

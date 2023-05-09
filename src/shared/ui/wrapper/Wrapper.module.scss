@@ -3,6 +3,9 @@
   max-width: 1920px;
   padding: 0 20px;
   height: 100%;
+  @include media-mobile {
+    padding: 0 10px;
+  }
 }
 
 .inner {

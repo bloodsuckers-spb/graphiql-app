@@ -1,0 +1,94 @@
+.menu {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  @include media-tablet {
+    height: 100%;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+}
+
+.options {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  width: 50%;
+  gap: 30px;
+  line-height: 1em;
+  @include media-tablet {
+    flex-direction: column-reverse;
+    width: 100%;
+    gap: 15px;
+  }
+}
+
+.localization {
+  display: flex;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+
+  &__ru,
+  &__en {
+    @extend %standart-animation;
+    transition-property: color;
+    &:hover {
+      color: var(--color-secondary);
+    }
+  }
+
+  &__ru {
+    padding-right: 3px;
+    border-right: 1px solid var(--color-white);
+  }
+
+  &__en {
+    padding-left: 3px;
+  }
+}
+
+.auth {
+  font-family: 'Reaver', 'serif';
+  font-weight: 600;
+  color: var(--color-secondary);
+  @extend %standart-animation;
+  transition-property: color;
+  &:hover {
+    color: var(--color-white);
+  }
+
+  &__slash {
+    color: var(--color-accent);
+  }
+}
+
+.nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 50%;
+  gap: 20px;
+  &__link {
+    font-family: 'Reaver', 'serif';
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 24px;
+    color: var(--color-secondary);
+    @extend %standart-animation;
+    transition-property: color;
+    &:hover {
+      color: var(--color-white);
+    }
+
+    &_active {
+      color: var(--color-white);
+    }
+  }
+
+  @include media-tablet {
+    width: 100%;
+    font-size: 16px;
+  }
+}

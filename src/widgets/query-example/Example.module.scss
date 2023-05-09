@@ -11,6 +11,9 @@
   background-color: var(--color-white);
   border-radius: 6px 6px 0 0;
   pointer-events: none;
+  @include media-tablet {
+    width: 290px;
+  }
   &::before {
     background: linear-gradient(#f0f0f0, #dedede);
     box-shadow: inset 0 2px 2px -2px #fff, 0 1px rgba(0, 0, 0, 0.4);
@@ -24,12 +27,18 @@
 
   &__query,
   &__types {
-    width: 49%;
+    width: 49.5%;
     padding-top: 30px;
     padding-bottom: 10px;
   }
+
+  &__query {
+    @include media-tablet {
+      width: 48%;
+    }
+  }
   &__border {
-    width: 1%;
+    width: 0.5%;
     height: inherit;
     background-color: var(--code-border);
   }
@@ -39,18 +48,24 @@
   position: absolute;
   top: 47px;
   left: 0;
-  width: 49%;
+  width: 49.5%;
   height: 17px;
   background-color: var(--code-hover);
+  @include media-tablet {
+    width: 48%;
+  }
 }
 
 .types__pointer {
   position: absolute;
   top: 47px;
   right: 0;
-  width: 49%;
+  width: 50%;
   height: 17px;
   background-color: var(--code-hover);
+  @include media-tablet {
+    width: 51.5%;
+  }
 }
 
 .line {

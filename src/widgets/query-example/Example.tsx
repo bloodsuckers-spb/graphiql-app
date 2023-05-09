@@ -180,10 +180,10 @@ export const Example = () => {
         </div>
         <div className={styles.line}>
           <span>{` `}</span>
-          <span>{`  `}</span>
+          <span>{` `}</span>
           <span style={{ color: 'var(--code-blue)' }}>hero</span>
           <span>: </span>
-          <span style={{ color: 'var(--code-yellow)' }}>Character</span>
+          <span style={{ color: 'var(--code-yellow)' }}>Person</span>
         </div>
         <div className={styles.line}>
           <span>{` `}</span>
@@ -195,35 +195,35 @@ export const Example = () => {
         <div className={styles.line}>
           <span>{` `}</span>
           <span style={{ color: 'var(--code-red)' }}>type </span>
-          <span>Character</span>
+          <span>Person</span>
           <span>{` {`}</span>
         </div>
         <div className={styles.line}>
           <span>{` `}</span>
-          <span>{`  `}</span>
+          <span>{` `}</span>
           <span style={{ color: 'var(--code-blue)' }}>name</span>
           <span>: </span>
           <span style={{ color: 'var(--code-yellow)' }}>String</span>
         </div>
         <div className={styles.line}>
           <span>{` `}</span>
-          <span>{`  `}</span>
+          <span>{` `}</span>
           <span style={{ color: 'var(--code-blue)' }}>friends</span>
           <span>: </span>
           <span>[</span>
-          <span style={{ color: 'var(--code-yellow)' }}>Character</span>
+          <span style={{ color: 'var(--code-yellow)' }}>Person</span>
           <span>]</span>
         </div>
         <div className={styles.line}>
           <span>{` `}</span>
-          <span>{`  `}</span>
+          <span>{` `}</span>
           <span style={{ color: 'var(--code-blue)' }}>homeWorld</span>
           <span>: </span>
           <span style={{ color: 'var(--code-yellow)' }}>Planet</span>
         </div>
         <div className={styles.line}>
           <span>{` `}</span>
-          <span>{`  `}</span>
+          <span>{` `}</span>
           <span style={{ color: 'var(--code-blue)' }}>species</span>
           <span>: </span>
           <span style={{ color: 'var(--code-yellow)' }}>Species</span>
@@ -243,14 +243,14 @@ export const Example = () => {
         </div>
         <div className={styles.line}>
           <span>{` `}</span>
-          <span>{`  `}</span>
+          <span>{` `}</span>
           <span style={{ color: 'var(--code-blue)' }}>name</span>
           <span>: </span>
           <span style={{ color: 'var(--code-yellow)' }}>String</span>
         </div>
         <div className={styles.line}>
           <span>{` `}</span>
-          <span>{`  `}</span>
+          <span>{` `}</span>
           <span style={{ color: 'var(--code-blue)' }}>climate</span>
           <span>: </span>
           <span style={{ color: 'var(--code-yellow)' }}>String</span>
@@ -270,21 +270,21 @@ export const Example = () => {
         </div>
         <div className={styles.line}>
           <span>{` `}</span>
-          <span>{`  `}</span>
+          <span>{` `}</span>
           <span style={{ color: 'var(--code-blue)' }}>name</span>
           <span>: </span>
           <span style={{ color: 'var(--code-yellow)' }}>String</span>
         </div>
         <div className={styles.line}>
           <span>{` `}</span>
-          <span>{`  `}</span>
+          <span>{` `}</span>
           <span style={{ color: 'var(--code-blue)' }}>lifespan</span>
           <span>: </span>
           <span style={{ color: 'var(--code-yellow)' }}>Int</span>
         </div>
         <div className={styles.line}>
           <span>{` `}</span>
-          <span>{`  `}</span>
+          <span>{` `}</span>
           <span style={{ color: 'var(--code-blue)' }}>origin</span>
           <span>: </span>
           <span style={{ color: 'var(--code-yellow)' }}>Planet</span>

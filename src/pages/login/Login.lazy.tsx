@@ -1,3 +1,3 @@
 import { lazy } from 'react';
 
-export const LoginLazy = lazy(() => import('./LoginPrivate'));
+export const LoginLazy = lazy(() => import('./Login'));

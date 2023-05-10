@@ -1,30 +1,43 @@
-.form {
+$baseName: 'userAuth';
+
+.#{$baseName} {
   @extend %flex-col-all-center;
-  gap: 50px;
   background-color: var(--color-dark);
+  gap: 30px;
   max-width: 520px;
   width: 100%;
-  padding: 50px 60px;
+  padding: 60px;
   border-radius: 15px;
 }
 
-.radioGroup {
+.#{$baseName}Heading {
+  @extend %flex-col-all-center;
+  width: inherit;
+  gap: 50px;
+}
+
+.#{$baseName}Radios {
   @extend %flex-row-center;
   justify-content: space-between;
   position: relative;
   padding: 10px;
 
-  .radio {
+  .#{$baseName}Radio {
     position: absolute !important;
     @extend %visually-hidden;
   }
 
-  .radio:checked + .radioLabel {
+  .#{$baseName}Radio:checked + .#{$baseName}Label {
     background-color: var(--radio-checked);
     box-shadow: none;
   }
 
-  .radioLabel {
+  .#{$baseName}Radio:focus-visible + .#{$baseName}Label {
+    outline: 3px solid var(--color-focus);
+    outline-offset: 2px;
+  }
+
+  .#{$baseName}Label {
     cursor: pointer;
     background-color: transparent;
     color: var(--color-white);
@@ -40,24 +53,4 @@
     line-height: 40px;
     border-radius: 10px;
   }
-}
-
-.formContent {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
-}
-
-.textField {
-  @include InterFont(var(--color-secondary));
-  background-color: transparent;
-}
-
-.btn {
-  @include InterFont(var(--color-white));
-  background-color: var(--form-btn-bg);
-  height: 78px;
-  border-radius: 10px;
-  border: 0;
 }

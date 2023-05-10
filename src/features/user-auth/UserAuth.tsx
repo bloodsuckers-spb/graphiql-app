@@ -1,7 +1,12 @@
-import { Form, Input, Button } from 'antd';
-import { FormItem, AppLogo } from 'shared/ui';
+import { auth } from 'app/firebase';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+import { UserAuthField, AppLogo } from 'shared/ui';
 
 import styles from './UserAuth.module.scss';
+
+import { UserAuthForm } from '..';
 
 enum UsersAuth {
   LOGIN = 'Log In',
@@ -9,55 +14,55 @@ enum UsersAuth {
 }
 
 export const UserAuth = () => {
+  const user = auth.currentUser;
+  const [isSignUp, setIsSignUp] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (user) {
+      navigate('/editor');
+    }
+  }, [user, navigate]);
+
   return (
-    <Form className={styles.form}>
-      <AppLogo />
-      <div className={styles.formContent}>
-        <FormItem>
-          <div className={styles.radioGroup}>
+    <div className={styles.userAuth}>
+      <div className={styles.userAuthHeading}>
+        <AppLogo />
+        <UserAuthField>
+          <div className={styles.userAuthRadios}>
             <input
-              className={styles.radio}
+              className={styles.userAuthRadio}
               id="radio-login"
               type="radio"
               name="user-auth"
               value={UsersAuth.LOGIN}
               defaultChecked
+              onClick={() => setIsSignUp(!isSignUp)}
             />
             <label
-              className={styles.radioLabel}
+              className={styles.userAuthLabel}
               htmlFor="radio-login"
             >
               {UsersAuth.LOGIN}
             </label>
             <input
-              className={styles.radio}
+              className={styles.userAuthRadio}
               id="radio-signup"
               type="radio"
               name="user-auth"
               value={UsersAuth.SIGNUP}
+              onClick={() => setIsSignUp(!isSignUp)}
             />
             <label
-              className={styles.radioLabel}
+              className={styles.userAuthLabel}
               htmlFor="radio-signup"
             >
               {UsersAuth.SIGNUP}
             </label>
           </div>
-        </FormItem>
-        <FormItem>
-          <Input
-            type="email"
-            className={styles.textField}
-          />
-        </FormItem>
-        <FormItem>
-          <Input
-            type="password"
-            className={styles.textField}
-          />
-        </FormItem>
-        <Button className={styles.btn}>Enter</Button>
+        </UserAuthField>
       </div>
-    </Form>
+      <UserAuthForm isSignUp={isSignUp} />
+    </div>
   );
 };

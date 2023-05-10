@@ -1,18 +1,22 @@
-import { loginSlice } from 'app/providers/StoreProvider/config/reducers';
+import { auth } from 'app/firebase';
+import { signOut } from 'firebase/auth';
+import { useCallback } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { action as toggleMenu } from 'redux-burger-menu';
-import { useAppSelector, useAppDispatch } from 'shared/hooks/redux';
+import { useAppDispatch } from 'shared/hooks/redux';
 
 import styles from './Options.module.scss';
 
 export const Options = () => {
   const dispatch = useAppDispatch();
-  const isLogin = useAppSelector((state) => state.loginReducer.value);
+  const user = auth.currentUser;
 
-  const signOut = () => {
-    dispatch(loginSlice.actions.signOut());
-    window.localStorage.setItem('isLogin', 'false');
-  };
+  const logout = useCallback(() => signOut(auth), []);
+
+  const handleClick = useCallback(
+    () => dispatch(toggleMenu(false)),
+    [dispatch]
+  );
 
   const getActiveClass = (isActive: boolean) => {
     return isActive
@@ -23,7 +27,7 @@ export const Options = () => {
   return (
     <div
       className={styles.menu}
-      onClick={() => dispatch(toggleMenu(false))}
+      onClick={handleClick}
     >
       <nav className={styles.nav}>
         <NavLink
@@ -32,10 +36,10 @@ export const Options = () => {
         >
           Welcome
         </NavLink>
-        {isLogin && (
+        {user && (
           <NavLink
             className={({ isActive }) => getActiveClass(isActive)}
-            to={'/editor'}
+            to="/editor"
           >
             Editor
           </NavLink>
@@ -47,10 +51,10 @@ export const Options = () => {
           <span className={styles.localization__en}>EN</span>
         </div>
         <div className={styles.auth}>
-          {isLogin ? (
+          {user ? (
             <Link
               to="/"
-              onClick={signOut}
+              onClick={logout}
               className={styles.auth}
             >
               Sign out

@@ -1,0 +1,25 @@
+.form {
+  @extend %flex-col-all-center;
+  width: 100%;
+  gap: 35px;
+}
+
+.input {
+  @include InterFont(var(--color-white));
+  background-color: transparent;
+  width: 100%;
+  border: 0;
+  padding: 0px 15px;
+
+  &::placeholder {
+    color: var(--color-secondary);
+  }
+
+  &:hover {
+    border-color: var(--color-accent);
+  }
+
+  &:focus {
+    border: 1px solid var(--color-accent);
+  }
+}

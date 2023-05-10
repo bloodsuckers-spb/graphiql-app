@@ -42,6 +42,10 @@ body {
   font-family: 'Inter', sans-serif;
 }
 
+button {
+  cursor: pointer;
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;

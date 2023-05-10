@@ -32,6 +32,11 @@ $baseName: 'userAuth';
     box-shadow: none;
   }
 
+  .#{$baseName}Radio:focus-visible + .#{$baseName}Label {
+    outline: 3px solid var(--color-focus);
+    outline-offset: 2px;
+  }
+
   .#{$baseName}Label {
     cursor: pointer;
     background-color: transparent;

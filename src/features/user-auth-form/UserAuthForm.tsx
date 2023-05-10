@@ -52,6 +52,7 @@ export const UserAuthForm = ({ isSignUp }: Props) => {
         <input
           className={styles.input}
           type="email"
+          placeholder="E-mail"
           {...register('email')}
         />
       </UserAuthField>
@@ -59,6 +60,7 @@ export const UserAuthForm = ({ isSignUp }: Props) => {
         <input
           className={styles.input}
           type="password"
+          placeholder="Password"
           {...register('password')}
         />
       </UserAuthField>

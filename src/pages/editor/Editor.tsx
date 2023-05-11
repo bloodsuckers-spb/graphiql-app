@@ -6,6 +6,7 @@ import { Wrapper } from 'shared/ui';
 import EditorCode from 'shared/ui/editor/EditorCode';
 import { extensions } from 'shared/ui/editor/settings/extensions';
 import { reqTheme, resTheme } from 'shared/ui/editor/settings/themes';
+import EditorApi from 'shared/ui/editorApi/EditorApi';
 import EditorControls from 'shared/ui/editorControls/EditorControls';
 
 import styles from './Editor.module.scss';
@@ -22,6 +23,7 @@ const Editor = () => {
 
   return (
     <Wrapper className={styles.innerEditor}>
+      <EditorApi />
       <div className={styles.wrapper}>
         <div className={styles.content}>
           <div className={styles.playGround}>

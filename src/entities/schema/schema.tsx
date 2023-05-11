@@ -15,4 +15,4 @@ const getRemoteSchema = async (url: string) => {
   return buildClientSchema(json.data);
 };
 
-export const remoteSchema = await getRemoteSchema(url);
+export const remoteSchema = getRemoteSchema(url);

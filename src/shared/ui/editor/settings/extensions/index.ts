@@ -12,7 +12,7 @@ export const extensions = [
   lineNumbers(),
   oneDark,
   syntaxHighlighting(oneDarkHighlightStyle),
-  graphql(remoteSchema, {
+  graphql(await remoteSchema, {
     onShowInDocs(field, type, parentType) {
       alert(
         `Showing in docs.: Field: ${field}, Type: ${type}, ParentType: ${parentType}`

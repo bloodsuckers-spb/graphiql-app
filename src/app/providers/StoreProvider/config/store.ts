@@ -1,12 +1,13 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { reducer as burgerMenu } from 'redux-burger-menu';
 
-import { userReducer, loginReducer } from './reducers';
+import { userReducer, loginReducer, editorReducer } from './reducers';
 
 const rootReducer = combineReducers({
   userReducer,
   loginReducer,
   burgerMenu,
+  editorReducer,
 });
 
 export const setupStore = () => {

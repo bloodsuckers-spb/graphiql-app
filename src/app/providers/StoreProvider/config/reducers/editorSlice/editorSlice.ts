@@ -17,10 +17,6 @@ export const editorSlice = createSlice({
     setRequest(state, action: PayloadAction<string>) {
       state.request = action.payload;
     },
-
-    test(state) {
-      state.apiURL = 'sss';
-    },
   },
 });
 

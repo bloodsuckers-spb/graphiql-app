@@ -2,6 +2,7 @@
 import { auth } from 'app/firebase';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAppSelector } from 'shared/hooks';
 import { Wrapper } from 'shared/ui';
 import EditorCode from 'shared/ui/editor/EditorCode';
 import { extensions } from 'shared/ui/editor/settings/extensions';
@@ -14,6 +15,11 @@ import styles from './Editor.module.scss';
 const Editor = () => {
   const user = auth.currentUser;
   const navigate = useNavigate();
+
+  const requestString = useAppSelector((state) => state.editorReducer.request);
+  const responseString = useAppSelector(
+    (state) => state.editorReducer.response
+  );
 
   useEffect(() => {
     if (!user) {
@@ -31,6 +37,7 @@ const Editor = () => {
               theme={reqTheme}
               extensions={extensions}
               type="request"
+              value={requestString}
             />
             <EditorControls />
           </div>
@@ -38,6 +45,7 @@ const Editor = () => {
             theme={resTheme}
             extensions={[]}
             type="response"
+            value={responseString}
           />
         </div>
       </div>

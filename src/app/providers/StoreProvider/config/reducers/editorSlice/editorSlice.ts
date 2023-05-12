@@ -1,11 +1,13 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { GraphQLSchema } from 'graphql';
+
+import { defaultSchema, defaultURL } from './default';
+// import { GraphQLSchema, buildClientSchema } from 'graphql';
 
 export const editorSlice = createSlice({
   name: 'editor',
   initialState: {
-    apiURL: 'https://rickandmortyapi.com/graphql',
-    schema: {},
+    apiURL: defaultURL,
+    schema: defaultSchema,
     response: '',
     request: '',
   },
@@ -13,7 +15,8 @@ export const editorSlice = createSlice({
     setApiURL(state, action: PayloadAction<string>) {
       state.apiURL = action.payload;
     },
-    setSchema(state, action: PayloadAction<GraphQLSchema>) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    setSchema(state, action: PayloadAction<any>) {
       state.schema = action.payload;
     },
     setResponse(state, action: PayloadAction<string>) {

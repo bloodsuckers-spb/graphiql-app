@@ -6,14 +6,17 @@ import { userReducer, loginReducer, editorReducer } from './reducers';
 const rootReducer = combineReducers({
   userReducer,
   loginReducer,
-  burgerMenu,
   editorReducer,
+  burgerMenu,
 });
 
 export const setupStore = () => {
   return configureStore({
     reducer: rootReducer,
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
+    middleware: (getDefaultMiddleware) =>
+      getDefaultMiddleware({
+        serializableCheck: false,
+      }),
   });
 };
 

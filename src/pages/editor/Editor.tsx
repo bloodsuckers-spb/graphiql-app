@@ -13,13 +13,14 @@ import EditorControls from 'shared/ui/editorControls/EditorControls';
 import styles from './Editor.module.scss';
 
 const Editor = () => {
-  const user = auth.currentUser;
-  const navigate = useNavigate();
-
+  const storeApiSchema = useAppSelector((state) => state.editorReducer.schema);
   const requestString = useAppSelector((state) => state.editorReducer.request);
   const responseString = useAppSelector(
     (state) => state.editorReducer.response
   );
+  const user = auth.currentUser;
+  const navigate = useNavigate();
+  const exts = extensions(storeApiSchema);
 
   useEffect(() => {
     if (!user) {
@@ -35,7 +36,7 @@ const Editor = () => {
           <div className={styles.playGround}>
             <EditorCode
               theme={reqTheme}
-              extensions={extensions}
+              extensions={exts}
               type="request"
               value={requestString}
             />

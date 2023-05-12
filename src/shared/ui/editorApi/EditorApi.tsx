@@ -1,7 +1,7 @@
 /* eslint-disable import/no-default-export */
 import { editorSlice } from 'app/providers/StoreProvider/config/reducers';
 import { getRemoteSchema } from 'entities/schema';
-import { ChangeEvent, useState, FormEvent, useRef } from 'react';
+import { FormEvent, useRef } from 'react';
 import { useAppDispatch, useAppSelector } from 'shared/hooks';
 
 import styles from './EditorApi.module.scss';
@@ -11,24 +11,22 @@ const EditorApi = () => {
 
   const storeApiURL = useAppSelector((state) => state.editorReducer.apiURL);
 
-  const apiURL = useRef<HTMLInputElement>(null);
+  const inputURL = useRef<HTMLInputElement>(null);
 
-  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const value = event?.target.value;
-    dispatch(editorSlice.actions.setApiURL(value));
-  };
-
-  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    if (apiURL.current) {
-      dispatch(editorSlice.actions.setApiURL(apiURL.current.value));
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    if (inputURL.current) {
+      dispatch(editorSlice.actions.setApiURL(inputURL.current.value));
     }
     const schema = await getRemoteSchema(storeApiURL);
     dispatch(editorSlice.actions.setSchema(schema));
   };
 
-  const restValue = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+  const resetValue = (e: FormEvent) => {
+    e.preventDefault();
+    if (inputURL.current) {
+      inputURL.current.value = '';
+    }
     dispatch(editorSlice.actions.setApiURL(''));
   };
 
@@ -36,17 +34,21 @@ const EditorApi = () => {
     <form
       action=""
       className={styles.form}
-      onSubmit={(event) => handleSubmit(event)}
-      onReset={(event) => restValue(event)}
+      onReset={(event) => resetValue(event)}
     >
       <div className={styles.inputWrapper}>
         <input
           type="text"
           placeholder="api"
-          value={storeApiURL}
-          ref={apiURL}
+          defaultValue={storeApiURL}
+          ref={inputURL}
+          onBlur={handleSubmit}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+              handleSubmit(e);
+            }
+          }}
           className={styles.input}
-          onChange={handleChange}
         />
         <button
           type="reset"
@@ -58,12 +60,6 @@ const EditorApi = () => {
           </svg>
         </button>
       </div>
-      <button
-        type="submit"
-        className={styles.submit}
-      >
-        send
-      </button>
     </form>
   );
 };

@@ -2,7 +2,7 @@ import { getIntrospectionQuery, buildClientSchema } from 'graphql';
 
 const url = 'https://rickandmortyapi.com/graphql';
 
-const getRemoteSchema = async (url: string) => {
+export const getRemoteSchema = async (url: string) => {
   const response = await fetch(url, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },

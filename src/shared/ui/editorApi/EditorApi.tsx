@@ -1,6 +1,7 @@
 /* eslint-disable import/no-default-export */
 import { editorSlice } from 'app/providers/StoreProvider/config/reducers';
-import { ChangeEvent, useState, FormEvent } from 'react';
+import { getRemoteSchema } from 'entities/schema';
+import { ChangeEvent, useState, FormEvent, useRef } from 'react';
 import { useAppDispatch, useAppSelector } from 'shared/hooks';
 
 import styles from './EditorApi.module.scss';
@@ -10,37 +11,42 @@ const EditorApi = () => {
 
   const storeApiURL = useAppSelector((state) => state.editorReducer.apiURL);
 
-  const [apiURL, setApiURL] = useState(storeApiURL ?? '');
+  const apiURL = useRef<HTMLInputElement>(null);
 
-  const handelChange = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const value = event?.target.value;
-    setApiURL(value);
+    dispatch(editorSlice.actions.setApiURL(value));
   };
 
-  const handelSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    dispatch(editorSlice.actions.setApiURL(apiURL));
+    if (apiURL.current) {
+      dispatch(editorSlice.actions.setApiURL(apiURL.current.value));
+    }
+    const schema = await getRemoteSchema(storeApiURL);
+    dispatch(editorSlice.actions.setSchema(schema));
   };
 
   const restValue = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setApiURL('');
+    dispatch(editorSlice.actions.setApiURL(''));
   };
 
   return (
     <form
       action=""
       className={styles.form}
-      onSubmit={(event) => handelSubmit(event)}
+      onSubmit={(event) => handleSubmit(event)}
       onReset={(event) => restValue(event)}
     >
       <div className={styles.inputWrapper}>
         <input
           type="text"
           placeholder="api"
-          value={apiURL}
+          value={storeApiURL}
+          ref={apiURL}
           className={styles.input}
-          onChange={handelChange}
+          onChange={handleChange}
         />
         <button
           type="reset"

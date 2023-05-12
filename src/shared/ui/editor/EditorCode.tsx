@@ -17,6 +17,7 @@ type Props = {
 const EditorCode = ({ theme, extensions, type, value }: Props) => {
   const dispatch = useAppDispatch();
   const requestString = useAppSelector((state) => state.editorReducer.request);
+  const storeApiSchema = useAppSelector((state) => state.editorReducer.schema);
 
   const [requestValue, setRequestValue] = useState(requestString ?? '');
 

@@ -1,9 +1,10 @@
 /* eslint-disable import/no-default-export */
 import { auth } from 'app/firebase';
+import { useGetSchemaQuery } from 'app/providers/StoreProvider/config/reducers';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAppSelector } from 'shared/hooks';
-import { Wrapper } from 'shared/ui';
+import { Spinner, Wrapper } from 'shared/ui';
 import EditorCode from 'shared/ui/editor/EditorCode';
 import { extensions } from 'shared/ui/editor/settings/extensions';
 import { reqTheme, resTheme } from 'shared/ui/editor/settings/themes';
@@ -18,9 +19,11 @@ const Editor = () => {
   const responseString = useAppSelector(
     (state) => state.editorReducer.response
   );
+  const storeApiURL = useAppSelector((state) => state.editorReducer.apiURL);
   const user = auth.currentUser;
   const navigate = useNavigate();
   const exts = extensions(storeApiSchema);
+  const { data, isFetching } = useGetSchemaQuery(storeApiURL);
 
   useEffect(() => {
     if (!user) {
@@ -30,26 +33,34 @@ const Editor = () => {
 
   return (
     <Wrapper className={styles.innerEditor}>
-      <EditorApi />
-      <div className={styles.wrapper}>
-        <div className={styles.content}>
-          <div className={styles.playGround}>
+      <EditorApi
+        storeApiURL={storeApiURL}
+        data={data}
+      />
+
+      {isFetching ? (
+        <Spinner />
+      ) : (
+        <div className={styles.wrapper}>
+          <div className={styles.content}>
+            <div className={styles.playGround}>
+              <EditorCode
+                theme={reqTheme}
+                extensions={exts}
+                type="request"
+                value={requestString}
+              />
+              <EditorControls />
+            </div>
             <EditorCode
-              theme={reqTheme}
-              extensions={exts}
-              type="request"
-              value={requestString}
+              theme={resTheme}
+              extensions={[]}
+              type="response"
+              value={responseString}
             />
-            <EditorControls />
           </div>
-          <EditorCode
-            theme={resTheme}
-            extensions={[]}
-            type="response"
-            value={responseString}
-          />
         </div>
-      </div>
+      )}
     </Wrapper>
   );
 };

@@ -1,21 +1,15 @@
-import {
-  editorSlice,
-  useGetSchemaQuery,
-} from 'app/providers/StoreProvider/config/reducers';
+import { editorSlice } from 'app/providers/StoreProvider/config/reducers';
 import { buildClientSchema } from 'graphql';
 import { FormEvent, useEffect, useRef } from 'react';
-import { useAppDispatch, useAppSelector } from 'shared/hooks';
+import { useAppDispatch } from 'shared/hooks';
 
 import styles from './EditorApi.module.scss';
 
-export const EditorApi = () => {
+import type { EditorProps } from 'app/types';
+
+export const EditorApi = ({ storeApiURL, data }: EditorProps) => {
   const dispatch = useAppDispatch();
-
-  const storeApiURL = useAppSelector((state) => state.editorReducer.apiURL);
-
   const inputURL = useRef<HTMLInputElement>(null);
-
-  const { data } = useGetSchemaQuery(storeApiURL);
 
   useEffect(() => {
     if (data) {

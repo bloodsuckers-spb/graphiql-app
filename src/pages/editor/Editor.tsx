@@ -1,12 +1,6 @@
 /* eslint-disable import/no-default-export */
-import { autocompletion, closeBrackets } from '@codemirror/autocomplete';
-import { bracketMatching, syntaxHighlighting } from '@codemirror/language';
-import { oneDarkHighlightStyle, oneDark } from '@codemirror/theme-one-dark';
-import { lineNumbers } from '@codemirror/view';
 import { auth } from 'app/firebase';
-import { graphql } from 'cm6-graphql';
-import { GraphQLSchema } from 'graphql';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAppSelector } from 'shared/hooks';
 import { Wrapper } from 'shared/ui';
@@ -26,31 +20,13 @@ const Editor = () => {
   );
   const user = auth.currentUser;
   const navigate = useNavigate();
+  const exts = extensions(storeApiSchema);
 
-  const [extensions, setExtensions] = useState([]);
   useEffect(() => {
     if (!user) {
       navigate('/');
     }
-    setExtensions([
-      bracketMatching(),
-      closeBrackets(),
-      autocompletion(),
-      lineNumbers(),
-      oneDark,
-      syntaxHighlighting(oneDarkHighlightStyle),
-      graphql(storeApiSchema as GraphQLSchema, {
-        onShowInDocs(field, type, parentType) {
-          alert(
-            `Showing in docs.: Field: ${field}, Type: ${type}, ParentType: ${parentType}`
-          );
-        },
-        onFillAllFields(view, schema, _query, cursor, token) {
-          alert(`Filling all fields. Token: ${token}`);
-        },
-      }),
-    ]);
-  }, [user, navigate, storeApiSchema]);
+  }, [user, navigate]);
 
   return (
     <Wrapper className={styles.innerEditor}>
@@ -60,7 +36,7 @@ const Editor = () => {
           <div className={styles.playGround}>
             <EditorCode
               theme={reqTheme}
-              extensions={extensions}
+              extensions={exts}
               type="request"
               value={requestString}
             />

@@ -1,19 +1,25 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { reducer as burgerMenu } from 'redux-burger-menu';
 
+import { schemaApi } from './reducers';
+
 import { userReducer, loginReducer, editorReducer } from './reducers';
 
 const rootReducer = combineReducers({
   userReducer,
   loginReducer,
-  burgerMenu,
   editorReducer,
+  burgerMenu,
+  [schemaApi.reducerPath]: schemaApi.reducer,
 });
 
 export const setupStore = () => {
   return configureStore({
     reducer: rootReducer,
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
+    middleware: (getDefaultMiddleware) =>
+      getDefaultMiddleware({
+        serializableCheck: false,
+      }).concat(schemaApi.middleware),
   });
 };
 

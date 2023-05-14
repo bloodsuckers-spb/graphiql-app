@@ -18,8 +18,6 @@ import {
   GraphQLUnionType,
 } from 'graphql';
 
-// Test Schema
-
 export const TestEnum = new GraphQLEnumType({
   name: 'TestEnum',
   values: {
@@ -165,7 +163,7 @@ const OnAllDefsDirective = new GraphQLDirective({
   ],
 });
 
-export const TestSchema = new GraphQLSchema({
+export const DefaultSchema = new GraphQLSchema({
   query: TestType,
   mutation: TestMutationType,
   subscription: TestSubscriptionType,
@@ -177,3 +175,5 @@ export const TestSchema = new GraphQLSchema({
     OnAllDefsDirective,
   ],
 });
+
+export const DefaultURL = 'https://rickandmortyapi.com/graphql';

@@ -14,5 +14,5 @@ export type IntrospectionResponse = {
 
 export type EditorProps = {
   storeApiURL: string;
-  data: IntrospectionResponse;
+  data?: IntrospectionResponse;
 };

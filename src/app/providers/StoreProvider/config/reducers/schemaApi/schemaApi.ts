@@ -9,6 +9,7 @@ export const schemaApi = createApi({
   endpoints: (build) => ({
     getSchema: build.query({
       query: (url) => {
+        if (!url) return '';
         return {
           url: url,
           method: 'POST',

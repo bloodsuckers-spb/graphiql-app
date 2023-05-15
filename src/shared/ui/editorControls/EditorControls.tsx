@@ -10,18 +10,16 @@ const EditorControls = () => {
   const apiURL = useAppSelector((state) => state.editorReducer.apiURL);
   const requestString = useAppSelector((state) => state.editorReducer.request);
 
-  const makeReq = (query: string) => {
-    return fetch(apiURL, {
+  const makeReq = async (query: string) => {
+    const res = await fetch(apiURL, {
       method: 'POST',
       headers: {
         'Content-type': 'application/json',
       },
       body: JSON.stringify({ query }),
-    })
-      .then((res) => res.json())
-      .then((data) =>
-        dispatch(editorSlice.actions.setResponse(JSON.stringify(data)))
-      );
+    });
+    const data = await res.json();
+    return dispatch(editorSlice.actions.setResponse(JSON.stringify(data)));
   };
 
   return (

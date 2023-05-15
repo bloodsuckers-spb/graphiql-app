@@ -9,7 +9,7 @@ export const schemaApi = createApi({
   endpoints: (build) => ({
     getSchema: build.query({
       query: (url) => {
-        if (!url) return '';
+        // if (!url) return '';
         return {
           url: url,
           method: 'POST',
@@ -24,4 +24,4 @@ export const schemaApi = createApi({
   }),
 });
 
-export const { useGetSchemaQuery } = schemaApi;
+export const { useGetSchemaQuery, useLazyGetSchemaQuery } = schemaApi;

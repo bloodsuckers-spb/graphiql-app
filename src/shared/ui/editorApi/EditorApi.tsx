@@ -1,36 +1,26 @@
 import { editorSlice } from 'app/providers/StoreProvider/config/reducers';
-import { buildClientSchema } from 'graphql';
-import { FormEvent, useEffect, useRef } from 'react';
+import { GraphQLSchema } from 'graphql';
+import { FormEvent, useState } from 'react';
 import { useAppDispatch } from 'shared/hooks';
 
 import styles from './EditorApi.module.scss';
 
 import type { EditorProps } from 'app/types';
 
-export const EditorApi = ({ storeApiURL, data }: EditorProps) => {
+export const EditorApi = ({ storeApiURL }: EditorProps) => {
   const dispatch = useAppDispatch();
-  const inputURL = useRef<HTMLInputElement>(null);
+  const [inputURL, setInputURL] = useState(storeApiURL);
 
-  useEffect(() => {
-    if (data) {
-      const schema = buildClientSchema(data.data);
-      dispatch(editorSlice.actions.setSchema(schema));
-    }
-  }, [data, dispatch]);
-
-  const handleSubmit = async (e: FormEvent) => {
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    if (inputURL.current) {
-      dispatch(editorSlice.actions.setApiURL(inputURL.current.value));
-    }
+    if (inputURL) dispatch(editorSlice.actions.setApiURL(inputURL));
   };
 
   const resetValue = (e: FormEvent) => {
     e.preventDefault();
-    if (inputURL.current) {
-      inputURL.current.value = '';
-      dispatch(editorSlice.actions.setApiURL(inputURL.current.value));
-    }
+    setInputURL('');
+    dispatch(editorSlice.actions.setApiURL(''));
+    dispatch(editorSlice.actions.setSchema(new GraphQLSchema({})));
   };
 
   return (
@@ -43,8 +33,8 @@ export const EditorApi = ({ storeApiURL, data }: EditorProps) => {
         <input
           type="text"
           placeholder="api"
-          defaultValue={storeApiURL}
-          ref={inputURL}
+          value={inputURL}
+          onChange={(e) => setInputURL(e.target.value)}
           onBlur={handleSubmit}
           onKeyDown={(e) => {
             if (e.key === 'Enter') {

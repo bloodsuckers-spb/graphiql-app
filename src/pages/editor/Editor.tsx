@@ -1,9 +1,14 @@
 /* eslint-disable import/no-default-export */
+import { Extension } from '@codemirror/state';
 import { auth } from 'app/firebase';
-import { useGetSchemaQuery } from 'app/providers/StoreProvider/config/reducers';
-import { useEffect } from 'react';
+import {
+  editorSlice,
+  useGetSchemaQuery,
+} from 'app/providers/StoreProvider/config/reducers';
+import { buildClientSchema } from 'graphql';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAppSelector } from 'shared/hooks';
+import { useAppDispatch, useAppSelector } from 'shared/hooks';
 import { Spinner, Wrapper } from 'shared/ui';
 import EditorCode from 'shared/ui/editor/EditorCode';
 import { extensions } from 'shared/ui/editor/settings/extensions';
@@ -14,6 +19,7 @@ import EditorControls from 'shared/ui/editorControls/EditorControls';
 import styles from './Editor.module.scss';
 
 const Editor = () => {
+  const dispatch = useAppDispatch();
   const storeApiSchema = useAppSelector((state) => state.editorReducer.schema);
   const requestString = useAppSelector((state) => state.editorReducer.request);
   const responseString = useAppSelector(
@@ -22,7 +28,7 @@ const Editor = () => {
   const storeApiURL = useAppSelector((state) => state.editorReducer.apiURL);
   const user = auth.currentUser;
   const navigate = useNavigate();
-  const exts = extensions(storeApiSchema);
+  const [exts, setExts] = useState<Extension[]>([]);
   const { data, isFetching } = useGetSchemaQuery(storeApiURL);
 
   useEffect(() => {
@@ -31,17 +37,24 @@ const Editor = () => {
     }
   }, [user, navigate]);
 
+  useEffect(() => {
+    if (data) {
+      const schema = buildClientSchema(data.data);
+      dispatch(editorSlice.actions.setSchema(schema));
+    }
+  }, [data, dispatch]);
+
+  useEffect(() => {
+    setExts(extensions(storeApiSchema));
+  }, [storeApiSchema]);
+
   return (
     <Wrapper className={styles.innerEditor}>
-      <EditorApi
-        storeApiURL={storeApiURL}
-        data={data}
-      />
-
-      {isFetching ? (
-        <Spinner />
-      ) : (
-        <div className={styles.wrapper}>
+      <EditorApi storeApiURL={storeApiURL} />
+      <div className={styles.wrapper}>
+        {isFetching ? (
+          <Spinner />
+        ) : (
           <div className={styles.content}>
             <div className={styles.playGround}>
               <EditorCode
@@ -59,8 +72,8 @@ const Editor = () => {
               value={responseString}
             />
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </Wrapper>
   );
 };

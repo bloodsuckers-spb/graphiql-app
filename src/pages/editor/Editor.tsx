@@ -1,14 +1,11 @@
 /* eslint-disable import/no-default-export */
-import { Extension } from '@codemirror/state';
 import { auth } from 'app/firebase';
-import {
-  editorSlice,
-  useGetSchemaQuery,
-} from 'app/providers/StoreProvider/config/reducers';
+import { useLazyGetSchemaQuery } from 'app/providers/StoreProvider/config/reducers';
+import { EditorApiDocs } from 'features';
 import { buildClientSchema } from 'graphql';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from 'shared/hooks';
+import { useAppSelector } from 'shared/hooks';
 import { Spinner, Wrapper } from 'shared/ui';
 import EditorCode from 'shared/ui/editor/EditorCode';
 import { extensions } from 'shared/ui/editor/settings/extensions';
@@ -19,8 +16,6 @@ import EditorControls from 'shared/ui/editorControls/EditorControls';
 import styles from './Editor.module.scss';
 
 const Editor = () => {
-  const dispatch = useAppDispatch();
-  const storeApiSchema = useAppSelector((state) => state.editorReducer.schema);
   const requestString = useAppSelector((state) => state.editorReducer.request);
   const responseString = useAppSelector(
     (state) => state.editorReducer.response
@@ -28,8 +23,8 @@ const Editor = () => {
   const storeApiURL = useAppSelector((state) => state.editorReducer.apiURL);
   const user = auth.currentUser;
   const navigate = useNavigate();
-  const [exts, setExts] = useState<Extension[]>([]);
-  const { data, isFetching } = useGetSchemaQuery(storeApiURL);
+  const [trigger, results] = useLazyGetSchemaQuery();
+  const { isUninitialized, data, isFetching } = results;
 
   useEffect(() => {
     if (!user) {
@@ -38,18 +33,13 @@ const Editor = () => {
   }, [user, navigate]);
 
   useEffect(() => {
-    if (data) {
-      const schema = buildClientSchema(data.data);
-      dispatch(editorSlice.actions.setSchema(schema));
-    }
-  }, [data, dispatch]);
-
-  useEffect(() => {
-    setExts(extensions(storeApiSchema));
-  }, [storeApiSchema]);
+    if (!storeApiURL) return;
+    trigger(storeApiURL);
+  }, [storeApiURL, trigger]);
 
   return (
     <Wrapper className={styles.innerEditor}>
+      {!isUninitialized && <EditorApiDocs />}
       <EditorApi storeApiURL={storeApiURL} />
       <div className={styles.wrapper}>
         {isFetching ? (
@@ -59,7 +49,9 @@ const Editor = () => {
             <div className={styles.playGround}>
               <EditorCode
                 theme={reqTheme}
-                extensions={exts}
+                extensions={
+                  data ? extensions(buildClientSchema(data.data)) : []
+                }
                 type="request"
                 value={requestString}
               />

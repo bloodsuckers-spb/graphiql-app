@@ -9,6 +9,7 @@ export const editorSlice = createSlice({
     schema: DefaultSchema,
     response: '',
     request: '',
+    variables: '',
   },
   reducers: {
     setApiURL(state, action: PayloadAction<string>) {
@@ -23,6 +24,9 @@ export const editorSlice = createSlice({
     },
     setRequest(state, action: PayloadAction<string>) {
       state.request = action.payload;
+    },
+    setVariables(state, action: PayloadAction<string>) {
+      state.variables = action.payload;
     },
   },
 });

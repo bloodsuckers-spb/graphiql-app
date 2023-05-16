@@ -9,14 +9,17 @@ const EditorControls = () => {
 
   const apiURL = useAppSelector((state) => state.editorReducer.apiURL);
   const requestString = useAppSelector((state) => state.editorReducer.request);
+  const requestVariables = useAppSelector(
+    (state) => state.editorReducer.variables
+  );
 
-  const makeReq = async (query: string) => {
+  const makeReq = async (query: string, variables: string) => {
     const res = await fetch(apiURL, {
       method: 'POST',
       headers: {
         'Content-type': 'application/json',
       },
-      body: JSON.stringify({ query }),
+      body: JSON.stringify({ query, variables }),
     });
     const data = await res.json();
     return dispatch(editorSlice.actions.setResponse(JSON.stringify(data)));
@@ -26,7 +29,7 @@ const EditorControls = () => {
     <div className={styles.wrapper}>
       <button
         className={styles.play}
-        onClick={() => makeReq(requestString)}
+        onClick={() => makeReq(requestString, requestVariables)}
       >
         <svg className={styles.playIcon}>
           <use href="sprite.svg#play"></use>

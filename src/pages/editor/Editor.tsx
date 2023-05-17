@@ -1,15 +1,21 @@
 /* eslint-disable import/no-default-export */
 import { auth } from 'app/firebase';
+
 import {
   editorSlice,
-  useLazyGetSchemaQuery,
+  useGetSchemaQuery,
 } from 'app/providers/StoreProvider/config/reducers';
+
 import { EditorApiDocs } from 'features';
-import { buildClientSchema } from 'graphql';
+
+import { buildClientSchema, GraphQLSchema } from 'graphql';
+
 import { useCallback, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from 'shared/hooks';
+
 import { Spinner, Wrapper } from 'shared/ui';
+
 import EditorCode from 'shared/ui/editor/EditorCode';
 import { extensions } from 'shared/ui/editor/settings/extensions';
 import {
@@ -17,13 +23,20 @@ import {
   resTheme,
   varsTheme,
 } from 'shared/ui/editor/settings/themes';
+
 import { EditorApi } from 'shared/ui/editorApi/EditorApi';
 import EditorControls from 'shared/ui/editorControls/EditorControls';
+
+import { defaultSchema } from './constants';
 
 import styles from './Editor.module.scss';
 
 const Editor = () => {
+  const navigate = useNavigate();
+  const user = auth.currentUser;
+
   const dispatch = useAppDispatch();
+
   const requestString = useAppSelector((state) => state.editorReducer.request);
   const responseString = useAppSelector(
     (state) => state.editorReducer.response
@@ -32,10 +45,9 @@ const Editor = () => {
     (state) => state.editorReducer.variables
   );
   const storeApiURL = useAppSelector((state) => state.editorReducer.apiURL);
-  const user = auth.currentUser;
-  const navigate = useNavigate();
-  const [trigger, results] = useLazyGetSchemaQuery();
-  const { isUninitialized, data, isFetching } = results;
+
+  const { data, error, isFetching } = useGetSchemaQuery(storeApiURL);
+  const [schema, setSchema] = useState<GraphQLSchema>(defaultSchema);
 
   const [requestValue, setRequestValue] = useState(requestString);
   const [variablesValue, setVariabllesValue] = useState(variablesString);
@@ -49,25 +61,28 @@ const Editor = () => {
   }, []);
 
   useEffect(() => {
-    dispatch(editorSlice.actions.setRequest(requestValue));
-    dispatch(editorSlice.actions.setVariables(variablesValue));
-  }, [dispatch, requestValue, variablesValue]);
-
-  useEffect(() => {
     if (!user) {
       navigate('/');
     }
   }, [user, navigate]);
 
   useEffect(() => {
-    if (!storeApiURL) return;
-    trigger(storeApiURL);
-  }, [storeApiURL, trigger]);
+    setSchema(error || !data ? defaultSchema : buildClientSchema(data.data));
+  }, [error, data]);
+
+  useEffect(() => {
+    const { setRequest, setVariables } = editorSlice.actions;
+    dispatch(setRequest(requestValue));
+    dispatch(setVariables(variablesValue));
+  }, [dispatch, requestValue, variablesValue]);
 
   return (
     <Wrapper className={styles.innerEditor}>
-      {!isUninitialized && <EditorApiDocs />}
-      <EditorApi storeApiURL={storeApiURL} />
+      {data && <EditorApiDocs />}
+      <EditorApi
+        storeApiURL={storeApiURL}
+        setSchema={(schema: GraphQLSchema) => setSchema(schema)}
+      />
       <div className={styles.wrapper}>
         {isFetching ? (
           <Spinner />
@@ -76,11 +91,9 @@ const Editor = () => {
             <div className={styles.content}>
               <div className={styles.playGround}>
                 <EditorCode
-                  theme={reqTheme}
-                  extensions={
-                    data ? extensions(buildClientSchema(data.data)) : []
-                  }
                   type="request"
+                  theme={reqTheme}
+                  extensions={extensions(schema)}
                   value={requestString}
                   onChange={handleRequest}
                 />

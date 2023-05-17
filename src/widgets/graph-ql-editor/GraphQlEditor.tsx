@@ -24,7 +24,7 @@ import { defaultSchema } from './constants';
 
 import styles from './GraphQlEditor.module.scss';
 
-import { EditorApiDocs } from './modules';
+import { EditorApiDocs, RequestEditor } from './modules';
 
 export const GraphQlEditor = () => {
   const dispatch = useAppDispatch();
@@ -75,6 +75,7 @@ export const GraphQlEditor = () => {
           <>
             <div className={styles.content}>
               <div className={styles.playGround}>
+                {/* <RequestEditor /> */}
                 <EditorCode
                   type="request"
                   theme={reqTheme}

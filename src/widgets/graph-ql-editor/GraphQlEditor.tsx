@@ -11,7 +11,7 @@ import { useAppDispatch, useAppSelector } from 'shared/hooks';
 import { Spinner, Wrapper } from 'shared/ui';
 
 import EditorCode from 'shared/ui/editor/EditorCode';
-import { resTheme, varsTheme } from 'shared/ui/editor/settings/themes';
+import { varsTheme } from 'shared/ui/editor/settings/themes';
 
 import { EditorApi } from 'shared/ui/editorApi/EditorApi';
 import EditorControls from 'shared/ui/editorControls/EditorControls';
@@ -20,14 +20,11 @@ import { defaultSchema } from './constants';
 
 import styles from './GraphQlEditor.module.scss';
 
-import { EditorApiDocs, RequestEditor } from './modules';
+import { EditorApiDocs, RequestEditor, ResponseOutput } from './modules';
 
 export const GraphQlEditor = () => {
   const dispatch = useAppDispatch();
 
-  const responseString = useAppSelector(
-    (state) => state.editorReducer.response
-  );
   const variablesString = useAppSelector(
     (state) => state.editorReducer.variables
   );
@@ -67,12 +64,7 @@ export const GraphQlEditor = () => {
                 <RequestEditor />
                 <EditorControls />
               </div>
-              <EditorCode
-                theme={resTheme}
-                type="response"
-                value={responseString}
-                onChange={undefined}
-              />
+              <ResponseOutput />
             </div>
             <div className={styles.variables}>
               <EditorCode

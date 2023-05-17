@@ -1,8 +1,4 @@
 .requestEditor {
-  width: 100%;
-  height: 500px;
-  border-radius: 15px;
-  overflow: hidden;
-  padding: 10px;
+  @extend %editor-field;
   background-color: var(--bg-main);
 }

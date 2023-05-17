@@ -7,8 +7,9 @@ import styles from './EditorApi.module.scss';
 
 import type { EditorProps } from 'app/types';
 
-export const EditorApi = ({ storeApiURL, setSchema }: EditorProps) => {
+export const EditorApi = ({ storeApiURL }: EditorProps) => {
   const dispatch = useAppDispatch();
+  const { setSchema } = editorSlice.actions;
   const searchInputRef = useRef<HTMLInputElement>(null);
 
   const handleSubmit = (event: FormEvent) => {

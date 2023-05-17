@@ -8,7 +8,7 @@ import {
 
 import { EditorApiDocs } from 'features';
 
-import { buildClientSchema, GraphQLSchema } from 'graphql';
+import { buildClientSchema } from 'graphql';
 
 import { useCallback, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -17,7 +17,6 @@ import { useAppDispatch, useAppSelector } from 'shared/hooks';
 import { Spinner, Wrapper } from 'shared/ui';
 
 import EditorCode from 'shared/ui/editor/EditorCode';
-import { extensions } from 'shared/ui/editor/settings/extensions';
 import {
   reqTheme,
   resTheme,
@@ -47,7 +46,6 @@ const Editor = () => {
   const storeApiURL = useAppSelector((state) => state.editorReducer.apiURL);
 
   const { data, error, isFetching } = useGetSchemaQuery(storeApiURL);
-  const [schema, setSchema] = useState<GraphQLSchema>(defaultSchema);
 
   const [requestValue, setRequestValue] = useState(requestString);
   const [variablesValue, setVariabllesValue] = useState(variablesString);
@@ -67,8 +65,11 @@ const Editor = () => {
   }, [user, navigate]);
 
   useEffect(() => {
-    setSchema(error || !data ? defaultSchema : buildClientSchema(data.data));
-  }, [error, data]);
+    const { setSchema } = editorSlice.actions;
+    dispatch(
+      setSchema(error || !data ? defaultSchema : buildClientSchema(data.data))
+    );
+  }, [error, data, dispatch]);
 
   useEffect(() => {
     const { setRequest, setVariables } = editorSlice.actions;
@@ -76,18 +77,10 @@ const Editor = () => {
     dispatch(setVariables(variablesValue));
   }, [dispatch, requestValue, variablesValue]);
 
-  useEffect(() => {
-    const { setSchema } = editorSlice.actions;
-    dispatch(setSchema(schema));
-  }, [schema, dispatch]);
-
   return (
     <Wrapper className={styles.innerEditor}>
       {data && <EditorApiDocs />}
-      <EditorApi
-        storeApiURL={storeApiURL}
-        setSchema={(schema: GraphQLSchema) => setSchema(schema)}
-      />
+      <EditorApi storeApiURL={storeApiURL} />
       <div className={styles.wrapper}>
         {isFetching ? (
           <Spinner />
@@ -98,7 +91,6 @@ const Editor = () => {
                 <EditorCode
                   type="request"
                   theme={reqTheme}
-                  extensions={extensions(schema)}
                   value={requestString}
                   onChange={handleRequest}
                 />
@@ -106,7 +98,6 @@ const Editor = () => {
               </div>
               <EditorCode
                 theme={resTheme}
-                extensions={[]}
                 type="response"
                 value={responseString}
                 onChange={undefined}
@@ -115,7 +106,6 @@ const Editor = () => {
             <div className={styles.variables}>
               <EditorCode
                 theme={varsTheme}
-                extensions={[]}
                 type="variables"
                 value={variablesValue}
                 onChange={handleVariables}

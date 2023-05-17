@@ -15,6 +15,5 @@ export type IntrospectionResponse = {
 
 export type EditorProps = {
   storeApiURL: string;
-  setSchema: (schema: GraphQLSchema) => void;
   data?: IntrospectionResponse;
 };

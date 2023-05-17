@@ -76,6 +76,11 @@ const Editor = () => {
     dispatch(setVariables(variablesValue));
   }, [dispatch, requestValue, variablesValue]);
 
+  useEffect(() => {
+    const { setSchema } = editorSlice.actions;
+    dispatch(setSchema(schema));
+  }, [schema, dispatch]);
+
   return (
     <Wrapper className={styles.innerEditor}>
       {data && <EditorApiDocs />}

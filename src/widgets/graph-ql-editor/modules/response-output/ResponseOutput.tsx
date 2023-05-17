@@ -1,8 +1,10 @@
+import { langs } from '@uiw/codemirror-extensions-langs';
+
+import { tokyoNight } from '@uiw/codemirror-themes-all';
+
 import CodeMirror from '@uiw/react-codemirror';
 
 import { useAppSelector } from 'shared/hooks';
-
-import { resTheme } from 'shared/ui/editor/settings/themes';
 
 import styles from './ResponseOutput.module.scss';
 
@@ -15,7 +17,8 @@ export const ResponseOutput = () => {
     <div className={styles.responseOutput}>
       <CodeMirror
         value={responseString}
-        theme={resTheme}
+        extensions={[langs.json()]}
+        theme={tokyoNight}
         editable={false}
         height="100%"
         width="100%"

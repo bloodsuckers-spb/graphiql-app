@@ -1,7 +1,7 @@
 /* eslint-disable import/no-default-export */
 import { Extension } from '@codemirror/state';
 import CodeMirror from '@uiw/react-codemirror';
-import { useAppDispatch, useAppSelector } from 'shared/hooks';
+import { useAppSelector } from 'shared/hooks';
 
 import { extensions } from 'shared/ui/editor/settings/extensions';
 

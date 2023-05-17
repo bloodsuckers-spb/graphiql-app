@@ -1,3 +1,4 @@
 export * from './user-auth';
 export * from './user-auth-form';
-export * from './api-docs';
+export * from '../widgets/graph-ql-editor/modules';
+export * from '../widgets/graph-ql-editor';

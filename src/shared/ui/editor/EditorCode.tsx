@@ -16,7 +16,6 @@ type Props = {
 
 const EditorCode = ({ theme, type, value, onChange }: Props) => {
   const schema = useAppSelector((state) => state.editorReducer.schema);
-  console.log(schema);
   return (
     <div
       className={[

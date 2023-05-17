@@ -67,7 +67,7 @@ export const GraphQlEditor = () => {
   return (
     <Wrapper className={styles.innerEditor}>
       {data && <EditorApiDocs />}
-      <EditorApi storeApiURL={storeApiURL} />
+      <EditorApi />
       <div className={styles.wrapper}>
         {isFetching ? (
           <Spinner />

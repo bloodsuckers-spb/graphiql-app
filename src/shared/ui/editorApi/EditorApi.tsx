@@ -1,16 +1,17 @@
 import { editorSlice } from 'app/providers/StoreProvider/config/reducers';
 import { FormEvent, useRef } from 'react';
-import { useAppDispatch } from 'shared/hooks';
+import { useAppDispatch, useAppSelector } from 'shared/hooks';
 import { defaultSchema } from 'widgets/graph-ql-editor/constants';
 
 import styles from './EditorApi.module.scss';
 
-import type { EditorProps } from 'app/types';
+// import type { EditorProps } from 'app/types';
 
-export const EditorApi = ({ storeApiURL }: EditorProps) => {
+export const EditorApi = () => {
   const dispatch = useAppDispatch();
   const { setSchema } = editorSlice.actions;
   const searchInputRef = useRef<HTMLInputElement>(null);
+  const storeApiURL = useAppSelector((state) => state.editorReducer.apiURL);
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();

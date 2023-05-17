@@ -13,7 +13,7 @@ export type IntrospectionResponse = {
   data: IntrospectionQuery;
 };
 
-export type EditorProps = {
-  storeApiURL: string;
-  data?: IntrospectionResponse;
-};
+// export type EditorProps = {
+//   // storeApiURL: string;
+//   data?: IntrospectionResponse;
+// };

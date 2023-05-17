@@ -11,11 +11,7 @@ import { useAppDispatch, useAppSelector } from 'shared/hooks';
 import { Spinner, Wrapper } from 'shared/ui';
 
 import EditorCode from 'shared/ui/editor/EditorCode';
-import {
-  reqTheme,
-  resTheme,
-  varsTheme,
-} from 'shared/ui/editor/settings/themes';
+import { resTheme, varsTheme } from 'shared/ui/editor/settings/themes';
 
 import { EditorApi } from 'shared/ui/editorApi/EditorApi';
 import EditorControls from 'shared/ui/editorControls/EditorControls';
@@ -29,7 +25,6 @@ import { EditorApiDocs, RequestEditor } from './modules';
 export const GraphQlEditor = () => {
   const dispatch = useAppDispatch();
 
-  const requestString = useAppSelector((state) => state.editorReducer.request);
   const responseString = useAppSelector(
     (state) => state.editorReducer.response
   );
@@ -40,12 +35,7 @@ export const GraphQlEditor = () => {
 
   const { data, error, isFetching } = useGetSchemaQuery(storeApiURL);
 
-  const [requestValue, setRequestValue] = useState(requestString);
   const [variablesValue, setVariabllesValue] = useState(variablesString);
-
-  const handleRequest = useCallback((requestValue: string) => {
-    setRequestValue(requestValue);
-  }, []);
 
   const handleVariables = useCallback((requestValue: string) => {
     setVariabllesValue(requestValue);
@@ -59,10 +49,9 @@ export const GraphQlEditor = () => {
   }, [error, data, dispatch]);
 
   useEffect(() => {
-    const { setRequest, setVariables } = editorSlice.actions;
-    dispatch(setRequest(requestValue));
+    const { setVariables } = editorSlice.actions;
     dispatch(setVariables(variablesValue));
-  }, [dispatch, requestValue, variablesValue]);
+  }, [dispatch, variablesValue]);
 
   return (
     <Wrapper className={styles.innerEditor}>
@@ -75,13 +64,7 @@ export const GraphQlEditor = () => {
           <>
             <div className={styles.content}>
               <div className={styles.playGround}>
-                {/* <RequestEditor /> */}
-                <EditorCode
-                  type="request"
-                  theme={reqTheme}
-                  value={requestString}
-                  onChange={handleRequest}
-                />
+                <RequestEditor />
                 <EditorControls />
               </div>
               <EditorCode

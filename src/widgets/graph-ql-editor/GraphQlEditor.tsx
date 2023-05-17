@@ -5,13 +5,10 @@ import {
 
 import { buildClientSchema } from 'graphql';
 
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from 'shared/hooks';
 
 import { Spinner, Wrapper } from 'shared/ui';
-
-import EditorCode from 'shared/ui/editor/EditorCode';
-import { varsTheme } from 'shared/ui/editor/settings/themes';
 
 import { EditorApi } from 'shared/ui/editorApi/EditorApi';
 import EditorControls from 'shared/ui/editorControls/EditorControls';
@@ -20,23 +17,18 @@ import { defaultSchema } from './constants';
 
 import styles from './GraphQlEditor.module.scss';
 
-import { EditorApiDocs, RequestEditor, ResponseOutput } from './modules';
+import {
+  EditorApiDocs,
+  RequestEditor,
+  ResponseOutput,
+  VariablesEditor,
+} from './modules';
 
 export const GraphQlEditor = () => {
   const dispatch = useAppDispatch();
-
-  const variablesString = useAppSelector(
-    (state) => state.editorReducer.variables
-  );
   const storeApiURL = useAppSelector((state) => state.editorReducer.apiURL);
 
   const { data, error, isFetching } = useGetSchemaQuery(storeApiURL);
-
-  const [variablesValue, setVariabllesValue] = useState(variablesString);
-
-  const handleVariables = useCallback((requestValue: string) => {
-    setVariabllesValue(requestValue);
-  }, []);
 
   useEffect(() => {
     const { setSchema } = editorSlice.actions;
@@ -44,11 +36,6 @@ export const GraphQlEditor = () => {
       setSchema(error || !data ? defaultSchema : buildClientSchema(data.data))
     );
   }, [error, data, dispatch]);
-
-  useEffect(() => {
-    const { setVariables } = editorSlice.actions;
-    dispatch(setVariables(variablesValue));
-  }, [dispatch, variablesValue]);
 
   return (
     <Wrapper className={styles.innerEditor}>
@@ -67,12 +54,7 @@ export const GraphQlEditor = () => {
               <ResponseOutput />
             </div>
             <div className={styles.variables}>
-              <EditorCode
-                theme={varsTheme}
-                type="variables"
-                value={variablesValue}
-                onChange={handleVariables}
-              />
+              <VariablesEditor />
             </div>
           </>
         )}

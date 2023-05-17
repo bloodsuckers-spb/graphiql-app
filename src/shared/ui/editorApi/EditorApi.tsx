@@ -1,7 +1,7 @@
 import { editorSlice } from 'app/providers/StoreProvider/config/reducers';
-import { defaultSchema } from 'pages/editor/constants';
 import { FormEvent, useRef } from 'react';
 import { useAppDispatch } from 'shared/hooks';
+import { defaultSchema } from 'widgets/graph-ql-editor/constants';
 
 import styles from './EditorApi.module.scss';
 

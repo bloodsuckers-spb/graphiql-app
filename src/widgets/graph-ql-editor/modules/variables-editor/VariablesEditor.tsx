@@ -1,10 +1,10 @@
+import { langs } from '@uiw/codemirror-extensions-langs';
+import { tokyoNight } from '@uiw/codemirror-themes-all';
 import CodeMirror from '@uiw/react-codemirror';
 
 import { editorSlice } from 'app/providers/StoreProvider/config/reducers';
 
 import { useAppDispatch, useAppSelector } from 'shared/hooks';
-
-import { varsTheme } from 'shared/ui/editor/settings/themes';
 
 import styles from './VariablesEditor.module.scss';
 
@@ -22,8 +22,9 @@ export const VariablesEditor = () => {
   return (
     <div className={styles.variablesEditor}>
       <CodeMirror
+        extensions={[langs.json()]}
         value={variablesString}
-        theme={varsTheme}
+        theme={tokyoNight}
         onChange={onChange}
         editable={true}
         height="100%"

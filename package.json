@@ -16,7 +16,6 @@
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",
     "@uiw/codemirror-extensions-langs": "^4.19.16",
-    "@uiw/codemirror-themes": "^4.19.16",
     "@uiw/codemirror-themes-all": "^4.19.16",
     "@uiw/react-codemirror": "^4.19.16",
     "antd": "^5.4.6",

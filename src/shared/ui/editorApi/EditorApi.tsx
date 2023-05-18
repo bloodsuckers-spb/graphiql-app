@@ -1,15 +1,15 @@
 import { editorSlice } from 'app/providers/StoreProvider/config/reducers';
 import { FormEvent, useRef } from 'react';
 import { useAppDispatch, useAppSelector } from 'shared/hooks';
-import { defaultSchema } from 'widgets/graph-ql-editor/constants';
 
 import styles from './EditorApi.module.scss';
 
-// import type { EditorProps } from 'app/types';
+type Props = {
+  isError: boolean;
+};
 
-export const EditorApi = () => {
+export const EditorApi = ({ isError }: Props) => {
   const dispatch = useAppDispatch();
-  const { setSchema } = editorSlice.actions;
   const searchInputRef = useRef<HTMLInputElement>(null);
   const storeApiURL = useAppSelector((state) => state.editorReducer.apiURL);
 
@@ -21,17 +21,9 @@ export const EditorApi = () => {
     dispatch(setApiURL(value));
   };
 
-  const resetValue = (event: FormEvent) => {
-    event.preventDefault();
-    const { setApiURL } = editorSlice.actions;
-    setSchema(defaultSchema);
-    dispatch(setApiURL(''));
-  };
-
   return (
     <form
       className={styles.form}
-      onReset={resetValue}
       onSubmit={handleSubmit}
     >
       <div className={styles.inputWrapper}>
@@ -43,16 +35,8 @@ export const EditorApi = () => {
           type="text"
           placeholder="Please enter API url"
         />
-        <button
-          type="reset"
-          className={styles.close}
-          aria-label="erase text"
-        >
-          <svg className={styles.closeIcon}>
-            <use href="sprite.svg#close"></use>
-          </svg>
-        </button>
       </div>
+      {isError && <p className={styles.error}>Server cannot be reached</p>}
     </form>
   );
 };

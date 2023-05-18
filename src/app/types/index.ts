@@ -1,5 +1,6 @@
-import { IntrospectionQuery } from 'graphql';
-import { ReactNode } from 'react';
+import type { IntrospectionQuery } from 'graphql';
+import type { GraphQLSchema } from 'graphql';
+import type { ReactNode } from 'react';
 
 type FlexDirection = 'column' | 'row' | 'inherit';
 
@@ -12,7 +13,7 @@ export type IntrospectionResponse = {
   data: IntrospectionQuery;
 };
 
-export type EditorProps = {
-  storeApiURL: string;
-  data?: IntrospectionResponse;
-};
+// export type EditorProps = {
+//   // storeApiURL: string;
+//   data?: IntrospectionResponse;
+// };

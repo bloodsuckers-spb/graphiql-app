@@ -1,47 +1,47 @@
 import { editorSlice } from 'app/providers/StoreProvider/config/reducers';
-import { GraphQLSchema } from 'graphql';
-import { FormEvent, useState } from 'react';
-import { useAppDispatch } from 'shared/hooks';
+import { FormEvent, useRef } from 'react';
+import { useAppDispatch, useAppSelector } from 'shared/hooks';
+import { defaultSchema } from 'widgets/graph-ql-editor/constants';
 
 import styles from './EditorApi.module.scss';
 
-import type { EditorProps } from 'app/types';
+// import type { EditorProps } from 'app/types';
 
-export const EditorApi = ({ storeApiURL }: EditorProps) => {
+export const EditorApi = () => {
   const dispatch = useAppDispatch();
-  const [inputURL, setInputURL] = useState(storeApiURL);
+  const { setSchema } = editorSlice.actions;
+  const searchInputRef = useRef<HTMLInputElement>(null);
+  const storeApiURL = useAppSelector((state) => state.editorReducer.apiURL);
 
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    if (inputURL) dispatch(editorSlice.actions.setApiURL(inputURL));
+  const handleSubmit = (event: FormEvent) => {
+    event.preventDefault();
+    if (!searchInputRef.current) return;
+    const { value } = searchInputRef.current;
+    const { setApiURL } = editorSlice.actions;
+    dispatch(setApiURL(value));
   };
 
-  const resetValue = (e: FormEvent) => {
-    e.preventDefault();
-    setInputURL('');
-    dispatch(editorSlice.actions.setApiURL(''));
-    dispatch(editorSlice.actions.setSchema(new GraphQLSchema({})));
+  const resetValue = (event: FormEvent) => {
+    event.preventDefault();
+    const { setApiURL } = editorSlice.actions;
+    setSchema(defaultSchema);
+    dispatch(setApiURL(''));
   };
 
   return (
     <form
-      action=""
       className={styles.form}
-      onReset={(event) => resetValue(event)}
+      onReset={resetValue}
+      onSubmit={handleSubmit}
     >
       <div className={styles.inputWrapper}>
         <input
-          type="text"
-          placeholder="api"
-          value={inputURL}
-          onChange={(e) => setInputURL(e.target.value)}
-          onBlur={handleSubmit}
-          onKeyDown={(e) => {
-            if (e.key === 'Enter') {
-              handleSubmit(e);
-            }
-          }}
           className={styles.input}
+          ref={searchInputRef}
+          defaultValue={storeApiURL}
+          onBlur={handleSubmit}
+          type="text"
+          placeholder="Please enter API url"
         />
         <button
           type="reset"

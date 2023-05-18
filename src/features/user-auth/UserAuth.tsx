@@ -1,6 +1,4 @@
-import { auth } from 'app/firebase';
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 
 import { UserAuthField, AppLogo } from 'shared/ui';
 
@@ -14,15 +12,7 @@ enum UsersAuth {
 }
 
 export const UserAuth = () => {
-  const user = auth.currentUser;
   const [isSignUp, setIsSignUp] = useState(false);
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (user) {
-      navigate('/editor');
-    }
-  }, [user, navigate]);
 
   return (
     <div className={styles.userAuth}>

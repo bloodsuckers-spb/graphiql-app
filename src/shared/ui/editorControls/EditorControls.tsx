@@ -22,7 +22,9 @@ const EditorControls = () => {
       body: JSON.stringify({ query, variables }),
     });
     const data = await res.json();
-    return dispatch(editorSlice.actions.setResponse(JSON.stringify(data)));
+    return dispatch(
+      editorSlice.actions.setResponse(JSON.stringify(data, null, 2))
+    );
   };
 
   return (

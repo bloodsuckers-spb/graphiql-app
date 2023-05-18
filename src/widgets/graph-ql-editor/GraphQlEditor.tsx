@@ -18,7 +18,7 @@ import { defaultSchema } from './constants';
 import styles from './GraphQlEditor.module.scss';
 
 import {
-  EditorApiDocs,
+  EditorMenu,
   RequestEditor,
   ResponseOutput,
   VariablesEditor,
@@ -39,7 +39,7 @@ export const GraphQlEditor = () => {
 
   return (
     <Wrapper className={styles.innerEditor}>
-      {data && <EditorApiDocs />}
+      <EditorMenu />
       <EditorApi />
       <div className={styles.wrapper}>
         {isFetching ? (

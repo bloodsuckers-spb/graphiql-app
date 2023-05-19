@@ -2,7 +2,7 @@ import CodeMirror from '@uiw/react-codemirror';
 import { editorSlice } from 'app/providers/StoreProvider/config/reducers';
 
 import { buildClientSchema } from 'graphql';
-import { useEffect, useMemo } from 'react';
+import { useMemo } from 'react';
 import { useAppSelector, useAppDispatch } from 'shared/hooks';
 
 import { extensions } from 'shared/ui/editor/settings/extensions';
@@ -12,12 +12,12 @@ import styles from './RequestEditor.module.scss';
 
 import type { ResponseData } from 'app/types';
 
-type Props = {
+export type RequestEditorProps = {
   data?: ResponseData;
   editable: boolean;
 };
 
-export const RequestEditor = ({ data, editable }: Props) => {
+export const RequestEditor = ({ data, editable }: RequestEditorProps) => {
   const { setRequest } = editorSlice.actions;
   const requestString = useAppSelector((state) => state.editorReducer.request);
   const dispatch = useAppDispatch();
@@ -31,10 +31,10 @@ export const RequestEditor = ({ data, editable }: Props) => {
     dispatch(setRequest(requestValue));
   };
 
-  useEffect(() => {
-    const { setSchema } = editorSlice.actions;
-    dispatch(setSchema(schema));
-  }, [schema, dispatch]);
+  // useEffect(() => {
+  //   const { setSchema } = editorSlice.actions;
+  //   dispatch(setSchema(schema));
+  // }, [schema, dispatch]);
 
   return (
     <div className={styles.requestEditor}>

@@ -14,6 +14,7 @@ import {
   RequestEditor,
   ResponseOutput,
   VariablesEditor,
+  EditorApiDocs,
 } from './modules';
 
 export const GraphQlEditor = () => {
@@ -43,6 +44,7 @@ export const GraphQlEditor = () => {
             <div className={styles.variables}>
               <VariablesEditor />
             </div>
+            {data && !isError && <EditorApiDocs data={data} />}
           </>
         )}
       </div>

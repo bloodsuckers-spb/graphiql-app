@@ -8,15 +8,23 @@ import { useAppSelector } from 'shared/hooks';
 
 import styles from './ResponseOutput.module.scss';
 
-export const ResponseOutput = () => {
+type Props = {
+  isError: boolean;
+};
+
+export const ResponseOutput = ({ isError }: Props) => {
   const responseString = useAppSelector(
     (state) => state.editorReducer.response
   );
 
+  const errorMessage = `{
+    "error": "Unexpected end of JSON input"
+  }`;
+
   return (
     <div className={styles.responseOutput}>
       <CodeMirror
-        value={responseString}
+        value={isError ? errorMessage : responseString}
         extensions={[langs.json()]}
         theme={tokyoNight}
         editable={false}

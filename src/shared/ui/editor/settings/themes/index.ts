@@ -10,25 +10,3 @@ export const reqTheme = createTheme({
   },
   styles: [],
 });
-
-export const resTheme = createTheme({
-  theme: 'dark',
-  settings: {
-    background: 'transparent',
-    lineHighlight: '#8a91991a',
-    gutterBackground: 'transparent',
-    gutterForeground: '#8a919966',
-  },
-  styles: [],
-});
-
-export const varsTheme = createTheme({
-  theme: 'dark',
-  settings: {
-    background: '#0b1924',
-    lineHighlight: '#8a91991a',
-    gutterBackground: 'transparent',
-    gutterForeground: '#8a919966',
-  },
-  styles: [],
-});

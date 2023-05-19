@@ -1,7 +1,9 @@
+import { useAppSelector } from 'shared/hooks';
+
 export const EditorApiDocs = () => {
-  return (
-    <section>
-      <h2>EditorApiDocs</h2>
-    </section>
-  );
+  const schema = useAppSelector((state) => state.editorReducer.schema);
+
+  // console.log(schema);
+
+  return <div>EditorApiDocs</div>;
 };

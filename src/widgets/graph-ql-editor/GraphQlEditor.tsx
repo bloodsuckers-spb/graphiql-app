@@ -1,46 +1,30 @@
-import {
-  editorSlice,
-  useGetSchemaQuery,
-} from 'app/providers/StoreProvider/config/reducers';
+import { useGetSchemaQuery } from 'app/providers/StoreProvider/config/reducers';
 
-import { buildClientSchema } from 'graphql';
-
-import { useEffect } from 'react';
-import { useAppDispatch, useAppSelector } from 'shared/hooks';
+import { useAppSelector } from 'shared/hooks';
 
 import { Spinner, Wrapper } from 'shared/ui';
 
 import { EditorApi } from 'shared/ui/editorApi/EditorApi';
 import EditorControls from 'shared/ui/editorControls/EditorControls';
 
-import { defaultSchema } from './constants';
-
 import styles from './GraphQlEditor.module.scss';
 
 import {
-  EditorApiDocs,
+  EditorMenu,
   RequestEditor,
   ResponseOutput,
   VariablesEditor,
 } from './modules';
 
 export const GraphQlEditor = () => {
-  const dispatch = useAppDispatch();
   const storeApiURL = useAppSelector((state) => state.editorReducer.apiURL);
 
-  const { data, error, isFetching } = useGetSchemaQuery(storeApiURL);
-
-  useEffect(() => {
-    const { setSchema } = editorSlice.actions;
-    dispatch(
-      setSchema(error || !data ? defaultSchema : buildClientSchema(data.data))
-    );
-  }, [error, data, dispatch]);
+  const { data, isFetching, isError } = useGetSchemaQuery(storeApiURL);
 
   return (
     <Wrapper className={styles.innerEditor}>
-      {data && <EditorApiDocs />}
-      <EditorApi />
+      <EditorMenu />
+      <EditorApi isError={isError} />
       <div className={styles.wrapper}>
         {isFetching ? (
           <Spinner />
@@ -48,10 +32,13 @@ export const GraphQlEditor = () => {
           <>
             <div className={styles.content}>
               <div className={styles.playGround}>
-                <RequestEditor />
-                <EditorControls />
+                <RequestEditor
+                  editable={!isError}
+                  data={data}
+                />
+                <EditorControls isError={isError} />
               </div>
-              <ResponseOutput />
+              <ResponseOutput isError={isError} />
             </div>
             <div className={styles.variables}>
               <VariablesEditor />

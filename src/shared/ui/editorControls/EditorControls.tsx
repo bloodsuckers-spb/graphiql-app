@@ -4,7 +4,11 @@ import { useAppDispatch, useAppSelector } from 'shared/hooks';
 
 import styles from './EditorControls.module.scss';
 
-const EditorControls = () => {
+type Props = {
+  isError: boolean;
+};
+
+const EditorControls = ({ isError }: Props) => {
   const dispatch = useAppDispatch();
 
   const apiURL = useAppSelector((state) => state.editorReducer.apiURL);
@@ -30,8 +34,10 @@ const EditorControls = () => {
   return (
     <div className={styles.wrapper}>
       <button
+        aria-label="run code"
         className={styles.play}
         onClick={() => makeReq(requestString, requestVariables)}
+        disabled={isError}
       >
         <svg className={styles.playIcon}>
           <use href="sprite.svg#play"></use>

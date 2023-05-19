@@ -1,4 +1,6 @@
 .form {
+  position: relative;
+  margin-top: 20px;
   width: 100%;
   display: flex;
   gap: 30px;
@@ -65,4 +67,11 @@
   fill: var(--color-white);
   @extend %standart-animation;
   transition-property: fill;
+}
+
+.error {
+  position: absolute;
+  top: 8px;
+  right: 15px;
+  color: var(--color-accent);
 }

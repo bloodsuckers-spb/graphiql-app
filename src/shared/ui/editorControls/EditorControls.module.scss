@@ -19,12 +19,18 @@
   background-color: var(--editor-play-bg);
   @extend %standart-animation;
   transition-property: background-color, border-color;
-  &:hover {
+  &:hover:not([disabled]) {
     background-color: transparent;
     border-color: var(--editor-play-bg);
     & .playIcon {
       fill: var(--editor-play-bg);
     }
+  }
+
+  &:disabled {
+    cursor: default;
+    background-color: var(----code-grey);
+    border-color: var(--color-secondary);
   }
 }
 

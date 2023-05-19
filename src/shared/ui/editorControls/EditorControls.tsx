@@ -34,6 +34,7 @@ const EditorControls = ({ isError }: Props) => {
   return (
     <div className={styles.wrapper}>
       <button
+        aria-label="run code"
         className={styles.play}
         onClick={() => makeReq(requestString, requestVariables)}
         disabled={isError}

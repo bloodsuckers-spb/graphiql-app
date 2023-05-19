@@ -8,13 +8,6 @@
   color: $color;
 }
 
-@mixin editor-menu-icons($width, $height) {
-  stroke: var(--color-secondary);
-  fill: transparent;
-  width: $width + 'px';
-  height: $height + 'px';
-}
-
 @mixin media-laptop {
   @media (max-width: $content-width) {
     @content;

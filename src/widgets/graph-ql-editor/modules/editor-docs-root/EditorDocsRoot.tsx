@@ -1,14 +1,14 @@
 import { TypeOfOutput } from '../types';
 
 import type { EditorDocsItemProps } from '../types';
+import type { GraphQLSchema } from 'graphql';
 
-export const EditorDocsRoot = ({
-  fieldsType,
-  handleClick,
-}: EditorDocsItemProps) => {
-  if (!fieldsType || !fieldsType.name) {
-    throw new Error();
-  }
+type Props = {
+  schema: GraphQLSchema;
+} & EditorDocsItemProps;
+
+export const EditorDocsRoot = ({ schema, handleClick }: Props) => {
+  const name = schema.getQueryType()?.name ?? '';
 
   return (
     <div>
@@ -17,17 +17,16 @@ export const EditorDocsRoot = ({
         A GraphQL schema provides a root type for each kind of operation.
       </div>
       <div>Root type</div>
-
       <span>query: </span>
       <button
         onClick={() =>
           handleClick({
             typeOfOutput: TypeOfOutput.TYPE,
-            name: fieldsType.name,
+            name,
           })
         }
       >
-        {fieldsType.name}
+        {name}
       </button>
     </div>
   );

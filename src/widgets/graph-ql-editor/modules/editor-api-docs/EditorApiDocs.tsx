@@ -4,7 +4,6 @@ import {
   GraphQLObjectType,
   GraphQLScalarType,
   GraphQLInputObjectType,
-  GraphQLNamedType,
 } from 'graphql';
 import { useState } from 'react';
 
@@ -16,19 +15,17 @@ import { EditorDocsRoot } from '../editor-docs-root';
 import { TypeOfOutput } from '../types';
 
 import type { ResponseData } from 'app/types';
-import type { Maybe } from 'graphql/jsutils/Maybe';
 
 type Props = {
   data: ResponseData;
 };
 
 export type CurrentDocData = {
-  name: string;
-  type?: string;
-  fieldsType?: Maybe<GraphQLObjectType<unknown, unknown>> | GraphQLNamedType;
-  fields?: Array<[string, FieldsData]>;
-  description: string;
   typeOfOutput: TypeOfOutput;
+  name: string;
+  description: string;
+  type?: string;
+  fields?: Array<[string, FieldsData]>;
 };
 
 type FieldsData = {
@@ -54,7 +51,6 @@ export const EditorApiDocs = ({ data: { data } }: Props) => {
   const schema = buildClientSchema(data);
   const rootData: CurrentDocData = {
     name: '',
-    fieldsType: schema.getQueryType(),
     description: '',
     typeOfOutput: TypeOfOutput.ROOT,
   };
@@ -74,19 +70,16 @@ export const EditorApiDocs = ({ data: { data } }: Props) => {
   };
 
   const handleClick = ({ type, name, typeOfOutput, args }: OnClickProps) => {
+    const fields: Array<[string, FieldsData]> = [];
     const currentState = {
       name,
       type,
-      fieldsType: schema.getType(name),
       description: '',
     };
-
-    const fields: Array<[string, FieldsData]> = [];
+    const currentType = schema.getType(name);
 
     switch (typeOfOutput) {
       case TypeOfOutput.TYPE: {
-        const currentType = schema.getType(name);
-        console.log(currentType);
         if (currentType instanceof GraphQLScalarType) {
           currentState.description = currentType.description ?? '';
         } else {
@@ -125,6 +118,7 @@ export const EditorApiDocs = ({ data: { data } }: Props) => {
   return !history.length ? (
     <EditorDocsRoot
       {...rootData}
+      schema={schema}
       handleClick={handleClick}
     />
   ) : (

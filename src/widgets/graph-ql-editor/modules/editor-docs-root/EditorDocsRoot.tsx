@@ -1,12 +1,11 @@
-import { OnClickProps, CurrentDocData } from '../editor-api-docs';
-
 import { TypeOfOutput } from '../types';
 
-type Props = {
-  onClick: (data: OnClickProps) => void;
-} & CurrentDocData;
+import type { EditorDocsItemProps } from '../types';
 
-export const EditorDocsRoot = ({ fieldsType, onClick }: Props) => {
+export const EditorDocsRoot = ({
+  fieldsType,
+  handleClick,
+}: EditorDocsItemProps) => {
   if (!fieldsType || !fieldsType.name) {
     throw new Error();
   }
@@ -18,13 +17,17 @@ export const EditorDocsRoot = ({ fieldsType, onClick }: Props) => {
         A GraphQL schema provides a root type for each kind of operation.
       </div>
       <div>Root type</div>
+
+      <span>query: </span>
       <button
         onClick={() =>
-          onClick({ typeOfOutput: TypeOfOutput.TYPE, name: fieldsType.name })
+          handleClick({
+            typeOfOutput: TypeOfOutput.TYPE,
+            name: fieldsType.name,
+          })
         }
       >
-        <span>query: </span>
-        <span>{fieldsType.name}</span>
+        {fieldsType.name}
       </button>
     </div>
   );

@@ -32,7 +32,7 @@ export type CurrentDocData = {
 };
 
 type FieldsData = {
-  args: Array<FieldArgs>;
+  args: FieldArgs[];
   name: string;
   type: string;
   description: string;
@@ -73,34 +73,40 @@ export const EditorApiDocs = ({ data: { data } }: Props) => {
     });
   };
 
-  const onClick = ({ type, name, typeOfOutput, args }: OnClickProps) => {
+  const handleClick = ({ type, name, typeOfOutput, args }: OnClickProps) => {
     const currentState = {
       name,
       type,
       fieldsType: schema.getType(name),
       description: '',
     };
+
+    const fields: Array<[string, FieldsData]> = [];
+
     switch (typeOfOutput) {
       case TypeOfOutput.TYPE: {
         const currentType = schema.getType(name);
+        console.log(currentType);
         if (currentType instanceof GraphQLScalarType) {
-          currentData.description = currentType.description ?? '';
+          currentState.description = currentType.description ?? '';
         } else {
           if (
             currentType instanceof GraphQLObjectType ||
             currentType instanceof GraphQLInputObjectType
           ) {
-            const fields = Object.entries(
-              JSON.parse(JSON.stringify(currentType?.getFields()))
-            ) as Array<[string, FieldsData]>;
-            setCurrentData({
-              ...currentState,
-              fields,
-              typeOfOutput: TypeOfOutput.TYPE,
-            });
-            addToHistory(currentData);
+            fields.push(
+              ...(Object.entries(
+                JSON.parse(JSON.stringify(currentType?.getFields()))
+              ) as Array<[string, FieldsData]>)
+            );
           }
         }
+        setCurrentData({
+          ...currentState,
+          fields,
+          typeOfOutput: TypeOfOutput.TYPE,
+        });
+        addToHistory(currentData);
         break;
       }
 
@@ -119,9 +125,12 @@ export const EditorApiDocs = ({ data: { data } }: Props) => {
   return !history.length ? (
     <EditorDocsRoot
       {...rootData}
-      onClick={onClick}
+      handleClick={handleClick}
     />
   ) : (
-    <EditorDocsNonRoot />
+    <EditorDocsNonRoot
+      {...currentData}
+      handleClick={handleClick}
+    />
   );
 };

@@ -5,8 +5,10 @@ export const EditorDocsNonRoot = ({
   description,
   fields,
   handleClick,
+  type,
+  args,
 }: EditorDocsItemProps) => {
-  return (
+  return !type ? (
     <div>
       <h2>{name}</h2>
       <p>{description}</p>
@@ -53,6 +55,35 @@ export const EditorDocsNonRoot = ({
           );
         })}
       </ul>
+    </div>
+  ) : (
+    <div>
+      <h2>{name}</h2>
+      <h3>Type</h3>
+      <button
+        onClick={() =>
+          handleClick({
+            typeOfOutput: TypeOfOutput.TYPE,
+            name: type,
+          })
+        }
+      >
+        {type}
+      </button>
+      <h3>Arguments</h3>
+      <div>
+        {args?.name}:
+        <button
+          onClick={() =>
+            handleClick({
+              typeOfOutput: TypeOfOutput.TYPE,
+              name: args?.type ?? '',
+            })
+          }
+        >
+          {args?.type}
+        </button>
+      </div>
     </div>
   );
 };

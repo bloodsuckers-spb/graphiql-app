@@ -26,6 +26,7 @@ export type CurrentDocData = {
   description: string;
   type?: string;
   fields?: Array<[string, FieldsData]>;
+  args?: FieldArgs;
 };
 
 type FieldsData = {
@@ -69,12 +70,13 @@ export const EditorApiDocs = ({ data: { data } }: Props) => {
     });
   };
 
-  const handleClick = ({ type, name, typeOfOutput, args }: OnClickProps) => {
+  const handleClick = ({ name, typeOfOutput, type, args }: OnClickProps) => {
     const fields: Array<[string, FieldsData]> = [];
     const currentState = {
       name,
-      type,
       description: '',
+      type,
+      args,
     };
     const currentType = schema.getType(name);
 

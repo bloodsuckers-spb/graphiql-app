@@ -1,64 +1,136 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { buildClientSchema } from 'graphql';
+import {
+  GraphQLObjectType,
+  GraphQLScalarType,
+  GraphQLInputObjectType,
+  GraphQLNamedType,
+} from 'graphql';
 import { useState } from 'react';
 
 import styles from './EditorApiDocs.module.scss';
 
 import type { ResponseData } from 'app/types';
 
+import type { Maybe } from 'graphql/jsutils/Maybe';
+
 type Props = {
   data: ResponseData;
 };
 
-type HistoryItem = {
-  title: string;
+type HelperType = 'root' | 'type' | 'name';
+
+type CurrentDocData = {
+  name: string;
+  type?: string;
+  fieldsType?: Maybe<GraphQLObjectType<unknown, unknown>> | GraphQLNamedType;
+  fields?: Array<[string, FieldsData]>;
+  description: string;
+  helperType: HelperType;
+};
+
+type FieldsData = {
+  args: Array<FieldArgs>;
+  name: string;
+  type: string;
+  description: string;
+};
+
+type FieldArgs = {
+  name: string;
+  type: string;
+};
+
+type HandleClickProps = {
+  type?: string;
+  args?: { name: string; type: string };
+  name: string;
+  helperType: HelperType;
 };
 
 export const EditorApiDocs = ({ data: { data } }: Props) => {
-  const [history, setHistory] = useState<Array<HistoryItem>>([]);
-  const title = !history.length ? 'Docs' : history[history.length - 1].title;
   const schema = buildClientSchema(data);
-  // const allSchemaTypes = schema.getTypeMap();
-  const queryType = schema.getQueryType();
-  const currentTypes = queryType?.toConfig().fields;
+  const rootData: CurrentDocData = {
+    name: 'Docs',
+    fieldsType: schema.getQueryType(),
+    description:
+      'A GraphQL schema provides a root type for each kind of operation.',
+    helperType: 'root',
+  };
 
-  console.log(currentTypes);
-  // console.log(allSchemaTypes);
+  const [history, setHistory] = useState<Array<CurrentDocData>>([]);
+  const [currentData, setCurrentData] = useState<CurrentDocData>(rootData);
 
-  const addToHistory = () => setHistory((history) => [...history, { title }]);
+  const { name, fieldsType, description, type } = currentData;
 
-  return !history.length ? (
-    <div>
-      <h2>{title}</h2>
-      <p>A GraphQL schema provides a root type for each kind of operation.</p>
-      <div>
-        <h3>Root Types</h3>
-        <p>
-          query:
-          <button
-            className={styles.btn}
-            onClick={addToHistory}
-          >
-            Query
-          </button>
-        </p>
-      </div>
-      <div>
-        <h3>All Schema Types</h3>
-      </div>
-    </div>
-  ) : (
-    <div>
-      <button
-        onClick={() =>
-          setHistory(([...history]) => {
-            history.pop();
-            return history;
-          })
+  const addToHistory = (item: CurrentDocData) => {
+    setHistory((history) => [...history, item]);
+  };
+
+  const removeFromHistory = () => {
+    setHistory(([...history]) => {
+      history.pop();
+      return history;
+    });
+  };
+
+  const handleClick = ({ type, name, helperType, args }: HandleClickProps) => {
+    const currentState = {
+      name,
+      type,
+      fieldsType: schema.getType(name),
+      description: '',
+    };
+    switch (helperType) {
+      case 'type': {
+        const currentType = schema.getType(name);
+        if (currentType instanceof GraphQLScalarType) {
+          currentData.description = currentType.description ?? '';
+        } else {
+          if (
+            currentType instanceof GraphQLObjectType ||
+            currentType instanceof GraphQLInputObjectType
+          ) {
+            const fields = Object.entries(
+              JSON.parse(JSON.stringify(currentType?.getFields()))
+            ) as Array<[string, FieldsData]>;
+            setCurrentData({ ...currentState, fields, helperType: 'type' });
+            addToHistory(currentData);
+          }
         }
-      >
-        {title}
-      </button>
-      <h1>something else</h1>
+        break;
+      }
+
+      case 'name': {
+        setCurrentData({
+          ...currentState,
+          helperType: 'name',
+        });
+        break;
+      }
+
+      default:
+        setCurrentData(rootData);
+    }
+  };
+  return (
+    <div>
+      {history.length ? <button>Back</button> : null}
+      <h2>{currentData.name}</h2>
+      {description && <p>{currentData.description}</p>}
+      <p>
+        query:
+        <button
+          onClick={() =>
+            handleClick({
+              helperType: 'type',
+              name: 'Query',
+            })
+          }
+        >
+          {'Query'}
+        </button>
+      </p>
     </div>
   );
 };

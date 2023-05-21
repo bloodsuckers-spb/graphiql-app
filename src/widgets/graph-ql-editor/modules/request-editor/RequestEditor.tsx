@@ -31,11 +31,6 @@ export const RequestEditor = ({ data, editable }: RequestEditorProps) => {
     dispatch(setRequest(requestValue));
   };
 
-  // useEffect(() => {
-  //   const { setSchema } = editorSlice.actions;
-  //   dispatch(setSchema(schema));
-  // }, [schema, dispatch]);
-
   return (
     <div className={styles.requestEditor}>
       <CodeMirror

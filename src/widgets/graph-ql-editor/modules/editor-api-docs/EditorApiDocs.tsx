@@ -10,23 +10,25 @@ import { useState } from 'react';
 
 import styles from './EditorApiDocs.module.scss';
 
-import type { ResponseData } from 'app/types';
+import { EditorDocsNonRoot } from '../editor-docs-non-root';
+import { EditorDocsRoot } from '../editor-docs-root';
 
+import { TypeOfOutput } from '../types';
+
+import type { ResponseData } from 'app/types';
 import type { Maybe } from 'graphql/jsutils/Maybe';
 
 type Props = {
   data: ResponseData;
 };
 
-type HelperType = 'root' | 'type' | 'name';
-
-type CurrentDocData = {
+export type CurrentDocData = {
   name: string;
   type?: string;
   fieldsType?: Maybe<GraphQLObjectType<unknown, unknown>> | GraphQLNamedType;
   fields?: Array<[string, FieldsData]>;
   description: string;
-  helperType: HelperType;
+  typeOfOutput: TypeOfOutput;
 };
 
 type FieldsData = {
@@ -41,27 +43,24 @@ type FieldArgs = {
   type: string;
 };
 
-type HandleClickProps = {
+export type OnClickProps = {
+  name: string;
+  typeOfOutput: TypeOfOutput;
   type?: string;
   args?: { name: string; type: string };
-  name: string;
-  helperType: HelperType;
 };
 
 export const EditorApiDocs = ({ data: { data } }: Props) => {
   const schema = buildClientSchema(data);
   const rootData: CurrentDocData = {
-    name: 'Docs',
+    name: '',
     fieldsType: schema.getQueryType(),
-    description:
-      'A GraphQL schema provides a root type for each kind of operation.',
-    helperType: 'root',
+    description: '',
+    typeOfOutput: TypeOfOutput.ROOT,
   };
 
   const [history, setHistory] = useState<Array<CurrentDocData>>([]);
   const [currentData, setCurrentData] = useState<CurrentDocData>(rootData);
-
-  const { name, fieldsType, description, type } = currentData;
 
   const addToHistory = (item: CurrentDocData) => {
     setHistory((history) => [...history, item]);
@@ -74,15 +73,15 @@ export const EditorApiDocs = ({ data: { data } }: Props) => {
     });
   };
 
-  const handleClick = ({ type, name, helperType, args }: HandleClickProps) => {
+  const onClick = ({ type, name, typeOfOutput, args }: OnClickProps) => {
     const currentState = {
       name,
       type,
       fieldsType: schema.getType(name),
       description: '',
     };
-    switch (helperType) {
-      case 'type': {
+    switch (typeOfOutput) {
+      case TypeOfOutput.TYPE: {
         const currentType = schema.getType(name);
         if (currentType instanceof GraphQLScalarType) {
           currentData.description = currentType.description ?? '';
@@ -94,17 +93,21 @@ export const EditorApiDocs = ({ data: { data } }: Props) => {
             const fields = Object.entries(
               JSON.parse(JSON.stringify(currentType?.getFields()))
             ) as Array<[string, FieldsData]>;
-            setCurrentData({ ...currentState, fields, helperType: 'type' });
+            setCurrentData({
+              ...currentState,
+              fields,
+              typeOfOutput: TypeOfOutput.TYPE,
+            });
             addToHistory(currentData);
           }
         }
         break;
       }
 
-      case 'name': {
+      case TypeOfOutput.NAME: {
         setCurrentData({
           ...currentState,
-          helperType: 'name',
+          typeOfOutput: TypeOfOutput.NAME,
         });
         break;
       }
@@ -113,24 +116,12 @@ export const EditorApiDocs = ({ data: { data } }: Props) => {
         setCurrentData(rootData);
     }
   };
-  return (
-    <div>
-      {history.length ? <button>Back</button> : null}
-      <h2>{currentData.name}</h2>
-      {description && <p>{currentData.description}</p>}
-      <p>
-        query:
-        <button
-          onClick={() =>
-            handleClick({
-              helperType: 'type',
-              name: 'Query',
-            })
-          }
-        >
-          {'Query'}
-        </button>
-      </p>
-    </div>
+  return !history.length ? (
+    <EditorDocsRoot
+      {...rootData}
+      onClick={onClick}
+    />
+  ) : (
+    <EditorDocsNonRoot />
   );
 };

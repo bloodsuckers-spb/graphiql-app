@@ -12,20 +12,25 @@ export const EditorDocsNonRoot = ({
     <div>
       <h2>{name}</h2>
       <p>{description}</p>
-      <h3>Fields</h3>
+      {fields?.length ? <h3>Fields</h3> : null}
       <ul>
         {fields?.map(([fieldName, { type, args }]) => {
           return (
             <li key={fieldName}>
               <button
                 onClick={() =>
-                  handleClick({ name: '', typeOfOutput: TypeOfOutput.NAME })
+                  handleClick({
+                    name: fieldName,
+                    typeOfOutput: TypeOfOutput.NAME,
+                    type,
+                    args,
+                  })
                 }
               >
                 {fieldName}
               </button>
               (
-              {args.map(({ name, type }) => (
+              {args?.map(({ name, type }, index) => (
                 <span key={name}>
                   <span>{name}: </span>
                   <button
@@ -38,14 +43,15 @@ export const EditorDocsNonRoot = ({
                   >
                     {type}
                   </button>
+                  {index < args.length - 1 ? ', ' : null}
                 </span>
               ))}
               ):{' '}
               <button
                 onClick={() =>
                   handleClick({
-                    typeOfOutput: TypeOfOutput.TYPE,
                     name: type,
+                    typeOfOutput: TypeOfOutput.TYPE,
                   })
                 }
               >
@@ -70,19 +76,23 @@ export const EditorDocsNonRoot = ({
       >
         {type}
       </button>
-      <h3>Arguments</h3>
+      {args?.length ? <h3>Arguments</h3> : null}
       <div>
-        {args?.name}:
-        <button
-          onClick={() =>
-            handleClick({
-              typeOfOutput: TypeOfOutput.TYPE,
-              name: args?.type ?? '',
-            })
-          }
-        >
-          {args?.type}
-        </button>
+        {args?.map(({ name, type }) => (
+          <div key={name}>
+            {`${name}: `}
+            <button
+              onClick={() =>
+                handleClick({
+                  typeOfOutput: TypeOfOutput.TYPE,
+                  name: type ?? '',
+                })
+              }
+            >
+              {type}
+            </button>
+          </div>
+        ))}
       </div>
     </div>
   );

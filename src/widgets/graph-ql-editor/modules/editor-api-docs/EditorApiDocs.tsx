@@ -26,7 +26,7 @@ export type CurrentDocData = {
   description: string;
   type?: string;
   fields?: Array<[string, FieldsData]>;
-  args?: FieldArgs;
+  args?: FieldArgs[];
 };
 
 type FieldsData = {
@@ -41,12 +41,7 @@ type FieldArgs = {
   type: string;
 };
 
-export type OnClickProps = {
-  name: string;
-  typeOfOutput: TypeOfOutput;
-  type?: string;
-  args?: { name: string; type: string };
-};
+export type OnClickProps = Omit<CurrentDocData, 'description' | 'fields'>;
 
 export const EditorApiDocs = ({ data: { data } }: Props) => {
   const schema = buildClientSchema(data);
@@ -63,23 +58,15 @@ export const EditorApiDocs = ({ data: { data } }: Props) => {
     setHistory((history) => [...history, item]);
   };
 
-  const removeFromHistory = () => {
-    setHistory(([...history]) => {
-      history.pop();
-      return history;
-    });
-  };
-
   const handleClick = ({ name, typeOfOutput, type, args }: OnClickProps) => {
     const fields: Array<[string, FieldsData]> = [];
     const currentState = {
-      name,
+      name: name.match(/[A-Z]+/i)?.toString() ?? '',
       description: '',
       type,
       args,
     };
-    const currentType = schema.getType(name);
-
+    const currentType = schema.getType(currentState.name);
     switch (typeOfOutput) {
       case TypeOfOutput.TYPE: {
         if (currentType instanceof GraphQLScalarType) {
@@ -110,23 +97,48 @@ export const EditorApiDocs = ({ data: { data } }: Props) => {
           ...currentState,
           typeOfOutput: TypeOfOutput.NAME,
         });
+        addToHistory(currentData);
         break;
       }
 
       default:
         setCurrentData(rootData);
+        addToHistory(currentData);
     }
   };
-  return !history.length ? (
-    <EditorDocsRoot
-      {...rootData}
-      schema={schema}
-      handleClick={handleClick}
-    />
-  ) : (
-    <EditorDocsNonRoot
-      {...currentData}
-      handleClick={handleClick}
-    />
+
+  const removeFromHistory = (currentData: CurrentDocData) => {
+    setHistory(([...history]) => {
+      history.pop();
+      return history;
+    });
+    handleClick(currentData);
+  };
+
+  return (
+    <>
+      <div>
+        {history.length ? (
+          <button
+            onClick={() => removeFromHistory(history[history.length - 1])}
+          >
+            Back
+          </button>
+        ) : null}
+      </div>
+
+      {!history.length ? (
+        <EditorDocsRoot
+          {...rootData}
+          schema={schema}
+          handleClick={handleClick}
+        />
+      ) : (
+        <EditorDocsNonRoot
+          {...currentData}
+          handleClick={handleClick}
+        />
+      )}
+    </>
   );
 };

@@ -1,16 +1,17 @@
-import { CurrentDocData, OnClickProps } from '../editor-api-docs';
-
+import { SelectDataProps } from '../editor-api-docs';
 import { TypeOfOutput } from '../types';
 
+import type { CurrentDocData } from '../types';
+
 export type Props = {
-  handleClick: (data: OnClickProps) => void;
+  selectData: (data: SelectDataProps) => void;
 } & CurrentDocData;
 
 export const EditorDocsNonRoot = ({
   name,
   description,
   fields,
-  handleClick,
+  selectData,
   type,
   args,
 }: Props) => {
@@ -26,7 +27,7 @@ export const EditorDocsNonRoot = ({
             <li key={fieldName}>
               <button
                 onClick={() =>
-                  handleClick({
+                  selectData({
                     name: fieldName,
                     typeOfOutput: TypeOfOutput.NAME,
                     type,
@@ -43,7 +44,7 @@ export const EditorDocsNonRoot = ({
                     <span>{name}: </span>
                     <button
                       onClick={() =>
-                        handleClick({
+                        selectData({
                           name: type,
                           typeOfOutput: TypeOfOutput.TYPE,
                         })
@@ -59,7 +60,7 @@ export const EditorDocsNonRoot = ({
 
               <button
                 onClick={() =>
-                  handleClick({
+                  selectData({
                     name: type,
                     typeOfOutput: TypeOfOutput.TYPE,
                   })
@@ -78,7 +79,7 @@ export const EditorDocsNonRoot = ({
       <h3>Type</h3>
       <button
         onClick={() =>
-          handleClick({
+          selectData({
             typeOfOutput: TypeOfOutput.TYPE,
             name: type,
           })
@@ -93,7 +94,7 @@ export const EditorDocsNonRoot = ({
             {`${name}: `}
             <button
               onClick={() =>
-                handleClick({
+                selectData({
                   typeOfOutput: TypeOfOutput.TYPE,
                   name: type ?? '',
                 })

@@ -13,34 +13,14 @@ import { EditorDocsNonRoot } from '../editor-docs-non-root';
 
 import { TypeOfOutput } from '../types';
 
+import type { CurrentDocData, FieldsData, FieldArgs } from '../types';
 import type { ResponseData } from 'app/types';
 
 type Props = {
   data: ResponseData;
 };
 
-export type CurrentDocData = {
-  typeOfOutput: TypeOfOutput;
-  name: string;
-  description: string;
-  type?: string;
-  fields?: Array<[string, FieldsData]>;
-  args?: FieldArgs[];
-};
-
-type FieldsData = {
-  args: FieldArgs[];
-  name: string;
-  type: string;
-  description: string;
-};
-
-type FieldArgs = {
-  name: string;
-  type: string;
-};
-
-export type OnClickProps = Omit<CurrentDocData, 'description' | 'fields'>;
+export type SelectDataProps = Omit<CurrentDocData, 'description' | 'fields'>;
 
 export const EditorApiDocs = ({ data: { data } }: Props) => {
   const schema = buildClientSchema(data);
@@ -65,7 +45,7 @@ export const EditorApiDocs = ({ data: { data } }: Props) => {
     });
   };
 
-  const handleClick = ({ name, typeOfOutput, type, args }: OnClickProps) => {
+  const selectData = ({ name, typeOfOutput, type, args }: SelectDataProps) => {
     const fields: Array<[string, FieldsData]> = [];
     const currentState = {
       name: name.match(/[A-Z]+/i)?.toString() ?? '',
@@ -129,7 +109,7 @@ export const EditorApiDocs = ({ data: { data } }: Props) => {
           <span>query: </span>
           <button
             onClick={() =>
-              handleClick({
+              selectData({
                 typeOfOutput: TypeOfOutput.TYPE,
                 name: schema.getQueryType()?.name ?? '',
               })
@@ -141,7 +121,7 @@ export const EditorApiDocs = ({ data: { data } }: Props) => {
       ) : (
         <EditorDocsNonRoot
           {...currentData}
-          handleClick={handleClick}
+          selectData={selectData}
         />
       )}
     </>

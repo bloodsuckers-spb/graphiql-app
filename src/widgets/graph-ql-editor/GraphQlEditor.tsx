@@ -1,4 +1,5 @@
 import { useGetSchemaQuery } from 'app/providers/StoreProvider/config/reducers';
+import { useState } from 'react';
 
 import { useAppSelector } from 'shared/hooks';
 
@@ -22,9 +23,14 @@ export const GraphQlEditor = () => {
 
   const { data, isFetching, isError } = useGetSchemaQuery(storeApiURL);
 
+  const [isDocsOpen, setIsDocsOpen] = useState(false);
+
   return (
     <Wrapper className={styles.innerEditor}>
-      <EditorMenu />
+      {data && !isError && (
+        <EditorMenu setIsDocsOpen={() => setIsDocsOpen((prev) => !prev)} />
+      )}
+      {isDocsOpen && data ? <EditorApiDocs data={data} /> : null}
       <EditorApi isError={isError} />
       <div className={styles.wrapper}>
         {isFetching ? (
@@ -44,7 +50,6 @@ export const GraphQlEditor = () => {
             <div className={styles.variables}>
               <VariablesEditor />
             </div>
-            {data && !isError && <EditorApiDocs data={data} />}
           </>
         )}
       </div>

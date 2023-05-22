@@ -1,11 +1,16 @@
 import styles from './EditorMenu.module.scss';
 
-export const EditorMenu = () => {
+type Props = {
+  setIsDocsOpen: () => void;
+};
+
+export const EditorMenu = ({ setIsDocsOpen }: Props) => {
   return (
     <div className={styles.menu}>
       <button
         className={styles.button}
         aria-label="documentation"
+        onClick={setIsDocsOpen}
       >
         <svg className={styles.icon}>
           <use href={`sprite.svg#docs`}></use>

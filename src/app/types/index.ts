@@ -1,5 +1,4 @@
 import type { IntrospectionQuery } from 'graphql';
-import type { GraphQLSchema } from 'graphql';
 import type { ReactNode } from 'react';
 
 type FlexDirection = 'column' | 'row' | 'inherit';

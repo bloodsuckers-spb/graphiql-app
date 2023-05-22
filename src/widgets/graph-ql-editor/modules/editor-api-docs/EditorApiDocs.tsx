@@ -10,7 +10,6 @@ import { useState } from 'react';
 import styles from './EditorApiDocs.module.scss';
 
 import { EditorDocsNonRoot } from '../editor-docs-non-root';
-import { EditorDocsRoot } from '../editor-docs-root';
 
 import { TypeOfOutput } from '../types';
 
@@ -51,11 +50,19 @@ export const EditorApiDocs = ({ data: { data } }: Props) => {
     typeOfOutput: TypeOfOutput.ROOT,
   };
 
-  const [history, setHistory] = useState<Array<CurrentDocData>>([]);
-  const [currentData, setCurrentData] = useState<CurrentDocData>(rootData);
+  const [history, setHistory] = useState<Array<CurrentDocData>>([rootData]);
+
+  const currentData = history[history.length - 1];
 
   const addToHistory = (item: CurrentDocData) => {
     setHistory((history) => [...history, item]);
+  };
+
+  const removeFromHistory = () => {
+    setHistory(([...history]) => {
+      history.pop();
+      return history;
+    });
   };
 
   const handleClick = ({ name, typeOfOutput, type, args }: OnClickProps) => {
@@ -83,56 +90,54 @@ export const EditorApiDocs = ({ data: { data } }: Props) => {
             );
           }
         }
-        setCurrentData({
+        addToHistory({
           ...currentState,
           fields,
           typeOfOutput: TypeOfOutput.TYPE,
         });
-        addToHistory(currentData);
         break;
       }
 
       case TypeOfOutput.NAME: {
-        setCurrentData({
+        addToHistory({
           ...currentState,
           typeOfOutput: TypeOfOutput.NAME,
         });
-        addToHistory(currentData);
         break;
       }
 
       default:
-        setCurrentData(rootData);
-        addToHistory(currentData);
+        addToHistory(rootData);
     }
-  };
-
-  const removeFromHistory = (currentData: CurrentDocData) => {
-    setHistory(([...history]) => {
-      history.pop();
-      return history;
-    });
-    handleClick(currentData);
   };
 
   return (
     <>
       <div>
-        {history.length ? (
-          <button
-            onClick={() => removeFromHistory(history[history.length - 1])}
-          >
-            Back
-          </button>
+        {history.length > 1 ? (
+          <button onClick={removeFromHistory}>Back</button>
         ) : null}
       </div>
 
-      {!history.length ? (
-        <EditorDocsRoot
-          {...rootData}
-          schema={schema}
-          handleClick={handleClick}
-        />
+      {history.length === 1 ? (
+        <div>
+          <div>Docs</div>
+          <div>
+            A GraphQL schema provides a root type for each kind of operation.
+          </div>
+          <div>Root type</div>
+          <span>query: </span>
+          <button
+            onClick={() =>
+              handleClick({
+                typeOfOutput: TypeOfOutput.TYPE,
+                name: schema.getQueryType()?.name ?? '',
+              })
+            }
+          >
+            {schema.getQueryType()?.name}
+          </button>
+        </div>
       ) : (
         <EditorDocsNonRoot
           {...currentData}

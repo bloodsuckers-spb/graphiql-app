@@ -1,4 +1,10 @@
-import { EditorDocsItemProps, TypeOfOutput } from '../types';
+import { CurrentDocData, OnClickProps } from '../editor-api-docs';
+
+import { TypeOfOutput } from '../types';
+
+export type Props = {
+  handleClick: (data: OnClickProps) => void;
+} & CurrentDocData;
 
 export const EditorDocsNonRoot = ({
   name,
@@ -7,7 +13,8 @@ export const EditorDocsNonRoot = ({
   handleClick,
   type,
   args,
-}: EditorDocsItemProps) => {
+}: Props) => {
+  const componentPropsArgs = args;
   return !type ? (
     <div>
       <h2>{name}</h2>
@@ -23,30 +30,33 @@ export const EditorDocsNonRoot = ({
                     name: fieldName,
                     typeOfOutput: TypeOfOutput.NAME,
                     type,
-                    args,
+                    args: args,
                   })
                 }
               >
                 {fieldName}
               </button>
-              (
-              {args?.map(({ name, type }, index) => (
-                <span key={name}>
-                  <span>{name}: </span>
-                  <button
-                    onClick={() =>
-                      handleClick({
-                        name: type,
-                        typeOfOutput: TypeOfOutput.TYPE,
-                      })
-                    }
-                  >
-                    {type}
-                  </button>
-                  {index < args.length - 1 ? ', ' : null}
-                </span>
-              ))}
-              ):{' '}
+              <span>
+                {componentPropsArgs ? `(` : null}
+                {args?.map(({ name, type }, index) => (
+                  <span key={name}>
+                    <span>{name}: </span>
+                    <button
+                      onClick={() =>
+                        handleClick({
+                          name: type,
+                          typeOfOutput: TypeOfOutput.TYPE,
+                        })
+                      }
+                    >
+                      {type}
+                    </button>
+                    {index < args.length - 1 ? ', ' : null}
+                  </span>
+                ))}
+                {componentPropsArgs ? `): ` : ':'}
+              </span>
+
               <button
                 onClick={() =>
                   handleClick({

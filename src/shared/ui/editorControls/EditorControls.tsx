@@ -16,12 +16,18 @@ const EditorControls = ({ isError }: Props) => {
   const requestVariables = useAppSelector(
     (state) => state.editorReducer.variables
   );
+  const requestHeaders = useAppSelector((state) => state.editorReducer.headers);
 
-  const makeReq = async (query: string, variables: string) => {
+  const makeReq = async (
+    query: string,
+    variables: string,
+    requestHeaders: string
+  ) => {
     const res = await fetch(apiURL, {
       method: 'POST',
       headers: {
         'Content-type': 'application/json',
+        ...JSON.parse(requestHeaders),
       },
       body: JSON.stringify({ query, variables }),
     });
@@ -36,7 +42,7 @@ const EditorControls = ({ isError }: Props) => {
       <button
         aria-label="run code"
         className={styles.play}
-        onClick={() => makeReq(requestString, requestVariables)}
+        onClick={() => makeReq(requestString, requestVariables, requestHeaders)}
         disabled={isError}
       >
         <svg className={styles.playIcon}>

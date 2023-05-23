@@ -1,5 +1,5 @@
 .innerEditor {
-  margin-top: 40px;
+  margin: 40px 0px;
   flex-direction: column;
   justify-content: start;
   align-items: center;
@@ -10,6 +10,9 @@
   width: 100%;
   padding: 10px;
   border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .content {
@@ -30,4 +33,28 @@
   position: relative;
   padding-right: 90px;
   background-color: var(--bg-main);
+}
+
+.options {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.optionsButton {
+  font-size: 16px;
+  background-color: transparent;
+  padding: 10px;
+  border: none;
+  color: var(--color-secondary);
+  border-radius: 5px;
+  @extend %standart-animation;
+  transition-property: background-color, color;
+  &:hover {
+    color: var(--color-white);
+  }
+  &.active {
+    background-color: var(--bg-color);
+    color: var(--color-white);
+  }
 }

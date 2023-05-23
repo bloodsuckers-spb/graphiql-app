@@ -12,4 +12,6 @@ export type IntrospectionResponse = {
   data: IntrospectionQuery;
 };
 
+export type EditorOptions = 'variables' | 'headers' | null;
+
 export type ResponseData = { data: IntrospectionQuery };

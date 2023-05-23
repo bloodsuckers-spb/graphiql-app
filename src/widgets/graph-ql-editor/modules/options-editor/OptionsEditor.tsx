@@ -4,12 +4,13 @@ import CodeMirror from '@uiw/react-codemirror';
 
 import { editorSlice } from 'app/providers/StoreProvider/config/reducers';
 
+import { EditorOptions } from 'app/types';
 import { useAppDispatch, useAppSelector } from 'shared/hooks';
 
 import styles from './OptionsEditor.module.scss';
 
 type Props = {
-  type: 'variables' | 'headers' | null;
+  type: EditorOptions;
 };
 
 export const OptionsEditor = ({ type }: Props) => {

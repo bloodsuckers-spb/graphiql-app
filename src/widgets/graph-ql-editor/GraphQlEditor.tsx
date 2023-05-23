@@ -1,8 +1,7 @@
 import { useGetSchemaQuery } from 'app/providers/StoreProvider/config/reducers';
-import { useState } from 'react';
-
 import { EditorOptions } from 'app/types';
 import { useState } from 'react';
+
 import { useAppSelector } from 'shared/hooks';
 
 import { classNames } from 'shared/libs';
@@ -27,7 +26,7 @@ export const GraphQlEditor = () => {
   const { data, isFetching, isError } = useGetSchemaQuery(storeApiURL);
 
   const [isDocsOpen, setIsDocsOpen] = useState(false);
-  
+
   const [optionsType, setOptionsType] = useState<EditorOptions>(null);
   const [isOpenOptions, setIsOpenOptions] = useState(false);
 

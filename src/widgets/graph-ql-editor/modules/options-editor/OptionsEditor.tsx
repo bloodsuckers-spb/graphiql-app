@@ -6,24 +6,32 @@ import { editorSlice } from 'app/providers/StoreProvider/config/reducers';
 
 import { useAppDispatch, useAppSelector } from 'shared/hooks';
 
-import styles from './VariablesEditor.module.scss';
+import styles from './OptionsEditor.module.scss';
 
-export const VariablesEditor = () => {
+type Props = {
+  type: 'variables' | 'headers' | null;
+};
+
+export const OptionsEditor = ({ type }: Props) => {
   const dispatch = useAppDispatch();
-  const { setVariables } = editorSlice.actions;
+  const { setVariables, setHeaders } = editorSlice.actions;
   const variablesString = useAppSelector(
     (state) => state.editorReducer.variables
   );
 
+  const headersString = useAppSelector((state) => state.editorReducer.headers);
+
   const onChange = (requestValue: string) => {
-    dispatch(setVariables(requestValue));
+    type === 'variables'
+      ? dispatch(setVariables(requestValue))
+      : dispatch(setHeaders(requestValue));
   };
 
   return (
-    <div className={styles.variablesEditor}>
+    <div className={styles.optionsEditor}>
       <CodeMirror
         extensions={[langs.json()]}
-        value={variablesString}
+        value={type === 'variables' ? variablesString : headersString}
         theme={tokyoNight}
         onChange={onChange}
         editable={true}

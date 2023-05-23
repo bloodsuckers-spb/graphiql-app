@@ -1,7 +1,9 @@
 import { useGetSchemaQuery } from 'app/providers/StoreProvider/config/reducers';
 
+import { useState } from 'react';
 import { useAppSelector } from 'shared/hooks';
 
+import { classNames } from 'shared/libs';
 import { Spinner, Wrapper } from 'shared/ui';
 
 import { EditorApi } from 'shared/ui/editorApi/EditorApi';
@@ -13,13 +15,29 @@ import {
   EditorMenu,
   RequestEditor,
   ResponseOutput,
-  VariablesEditor,
+  OptionsEditor,
 } from './modules';
 
 export const GraphQlEditor = () => {
   const storeApiURL = useAppSelector((state) => state.editorReducer.apiURL);
 
   const { data, isFetching, isError } = useGetSchemaQuery(storeApiURL);
+
+  const [optionsType, setOptionsType] = useState<
+    'variables' | 'headers' | null
+  >(null);
+
+  const [isOpenOptions, setIsOpenOptions] = useState(false);
+
+  const toggleOptions = (type: 'headers' | 'variables') => {
+    if (optionsType === type) {
+      setIsOpenOptions(false);
+      setOptionsType(null);
+      return;
+    }
+    setIsOpenOptions(true);
+    setOptionsType(type);
+  };
 
   return (
     <Wrapper className={styles.innerEditor}>
@@ -40,9 +58,29 @@ export const GraphQlEditor = () => {
               </div>
               <ResponseOutput isError={isError} />
             </div>
-            <div className={styles.variables}>
-              <VariablesEditor />
+            <div className={styles.options}>
+              <button
+                onClick={() => toggleOptions('variables')}
+                className={classNames(styles.optionsButton, {}, [
+                  isOpenOptions && optionsType === 'variables'
+                    ? styles.active
+                    : '',
+                ])}
+              >
+                variables
+              </button>
+              <button
+                onClick={() => toggleOptions('headers')}
+                className={classNames(styles.optionsButton, {}, [
+                  isOpenOptions && optionsType === 'headers'
+                    ? styles.active
+                    : '',
+                ])}
+              >
+                headers
+              </button>
             </div>
+            {isOpenOptions && <OptionsEditor type={optionsType} />}
           </>
         )}
       </div>

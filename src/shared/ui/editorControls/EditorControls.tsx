@@ -27,9 +27,12 @@ const EditorControls = ({ isError }: Props) => {
       method: 'POST',
       headers: {
         'Content-type': 'application/json',
-        ...JSON.parse(requestHeaders),
+        ...JSON.parse(!requestHeaders ? '{}' : requestHeaders),
       },
-      body: JSON.stringify({ query, variables }),
+      body: JSON.stringify({
+        query,
+        variables: !variables ? {} : JSON.parse(variables),
+      }),
     });
     const data = await res.json();
     return dispatch(

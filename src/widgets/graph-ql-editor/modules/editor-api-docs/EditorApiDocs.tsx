@@ -13,7 +13,7 @@ import { EditorDocsNonRoot } from '../editor-docs-non-root';
 
 import { TypeOfOutput } from '../types';
 
-import type { CurrentDocData, FieldsData, FieldArgs } from '../types';
+import type { CurrentDocData, FieldsData, SelectDataProps } from '../types';
 import type { ResponseData } from 'app/types';
 
 type Props = {
@@ -21,8 +21,6 @@ type Props = {
   isFetching: boolean;
   isError: boolean;
 };
-
-export type SelectDataProps = Omit<CurrentDocData, 'description' | 'fields'>;
 
 const EditorApiDocs = ({ data: { data }, isFetching, isError }: Props) => {
   const schema = buildClientSchema(data);

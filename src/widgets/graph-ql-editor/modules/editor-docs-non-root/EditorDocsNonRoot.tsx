@@ -1,5 +1,4 @@
-import { SelectDataProps } from '../editor-api-docs';
-import { TypeOfOutput } from '../types';
+import { SelectDataProps, TypeOfOutput } from '../types';
 
 import type { CurrentDocData } from '../types';
 

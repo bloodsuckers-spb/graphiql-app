@@ -24,3 +24,5 @@ export type FieldArgs = {
   name: string;
   type: string;
 };
+
+export type SelectDataProps = Omit<CurrentDocData, 'description' | 'fields'>;

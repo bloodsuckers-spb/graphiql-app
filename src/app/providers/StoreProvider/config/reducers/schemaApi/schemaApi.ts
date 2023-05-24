@@ -12,7 +12,7 @@ export const schemaApi = createApi({
     getSchema: build.query<ResponseData, string>({
       query: (url) => {
         return {
-          url: url,
+          url,
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({

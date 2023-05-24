@@ -24,7 +24,7 @@ export const EditorApi = ({ isError }: Props) => {
   return (
     <form
       className={styles.form}
-      onSubmit={handleSubmit}
+      // onSubmit={handleSubmit}
     >
       <div className={styles.inputWrapper}>
         <input
@@ -34,6 +34,7 @@ export const EditorApi = ({ isError }: Props) => {
           onBlur={handleSubmit}
           type="text"
           placeholder="Please enter API url"
+          onChange={handleSubmit}
         />
       </div>
       {isError && <p className={styles.error}>Server cannot be reached</p>}

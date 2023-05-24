@@ -18,11 +18,13 @@ import type { ResponseData } from 'app/types';
 
 type Props = {
   data: ResponseData;
+  isFetching: boolean;
+  isError: boolean;
 };
 
 export type SelectDataProps = Omit<CurrentDocData, 'description' | 'fields'>;
 
-export const EditorApiDocs = ({ data: { data } }: Props) => {
+const EditorApiDocs = ({ data: { data }, isFetching, isError }: Props) => {
   const schema = buildClientSchema(data);
   const rootData: CurrentDocData = {
     name: '',
@@ -91,6 +93,10 @@ export const EditorApiDocs = ({ data: { data } }: Props) => {
     }
   };
 
+  if (isFetching || isError) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <>
       <div>
@@ -127,3 +133,6 @@ export const EditorApiDocs = ({ data: { data } }: Props) => {
     </>
   );
 };
+
+// eslint-disable-next-line import/no-default-export
+export default EditorApiDocs;

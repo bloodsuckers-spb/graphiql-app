@@ -7,7 +7,6 @@ import { useAppSelector } from 'shared/hooks';
 import { classNames } from 'shared/libs';
 import { Wrapper } from 'shared/ui';
 
-import { EditorApi } from 'shared/ui/editorApi/EditorApi';
 import EditorControls from 'shared/ui/editorControls/EditorControls';
 
 import styles from './GraphQlEditor.module.scss';
@@ -19,6 +18,7 @@ import {
   OptionsEditor,
   EditorApiDocs,
 } from './modules';
+import { EditorSearchBar } from './modules/editor-search-bar';
 
 export const GraphQlEditor = () => {
   const storeApiURL = useAppSelector((state) => state.editorReducer.apiURL);
@@ -49,7 +49,7 @@ export const GraphQlEditor = () => {
           data={data}
         />
       ) : null}
-      <EditorApi isError={isError} />
+      <EditorSearchBar isError={isError} />
       <div className={styles.wrapper}>
         <>
           <div className={styles.content}>

@@ -8,6 +8,7 @@ type Props = {
 
 export const EditorMenu = ({ setIsDocsOpen }: Props) => {
   const { t } = useTranslation();
+
   return (
     <div className={styles.menu}>
       <button

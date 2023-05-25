@@ -13,6 +13,7 @@ export const EditorSearchBar = ({ isError }: Props) => {
   const dispatch = useAppDispatch();
   const searchInputRef = useRef<HTMLInputElement>(null);
   const storeApiURL = useAppSelector((state) => state.editorReducer.apiURL);
+  const { t } = useTranslation();
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
@@ -21,8 +22,6 @@ export const EditorSearchBar = ({ isError }: Props) => {
     const { setApiURL } = editorSlice.actions;
     dispatch(setApiURL(value));
   };
-
-  const { t } = useTranslation();
 
   return (
     <div className={styles.serchBar}>

@@ -11,6 +11,7 @@ type Props = {
 
 const EditorControls = ({ isError }: Props) => {
   const dispatch = useAppDispatch();
+  const { t } = useTranslation();
 
   const apiURL = useAppSelector((state) => state.editorReducer.apiURL);
   const requestString = useAppSelector((state) => state.editorReducer.request);

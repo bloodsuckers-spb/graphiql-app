@@ -1,6 +1,8 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { reducer as burgerMenu } from 'redux-burger-menu';
 
+import { RTKQueryErrorLogger } from 'shared/ui';
+
 import { schemaApi } from './reducers';
 
 import { userReducer, loginReducer, editorReducer } from './reducers';
@@ -19,7 +21,7 @@ export const setupStore = () => {
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware({
         serializableCheck: false,
-      }).concat(schemaApi.middleware),
+      }).concat(schemaApi.middleware, RTKQueryErrorLogger),
   });
 };
 

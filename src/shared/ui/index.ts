@@ -6,3 +6,4 @@ export * from './form-btn';
 export * from './auth-form';
 export * from './spinner';
 export * from './burger-menu';
+export * from './RTK-query-error-logger';

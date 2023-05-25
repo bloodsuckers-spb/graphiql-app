@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { UserAuthField, AppLogo } from 'shared/ui';
+import { AppLogo } from 'shared/ui';
 
 import styles from './UserAuth.module.scss';
 
@@ -14,11 +14,13 @@ enum UsersAuth {
 export const UserAuth = () => {
   const [isSignUp, setIsSignUp] = useState(false);
 
+  const changeFormType = () => setIsSignUp((isSignUp) => !isSignUp);
+
   return (
     <div className={styles.userAuth}>
       <div className={styles.userAuthHeading}>
         <AppLogo />
-        <UserAuthField>
+        <div className={styles.userAuthHeader}>
           <div className={styles.userAuthRadios}>
             <input
               className={styles.userAuthRadio}
@@ -27,7 +29,7 @@ export const UserAuth = () => {
               name="user-auth"
               value={UsersAuth.LOGIN}
               defaultChecked
-              onClick={() => setIsSignUp(!isSignUp)}
+              onClick={changeFormType}
             />
             <label
               className={styles.userAuthLabel}
@@ -41,7 +43,7 @@ export const UserAuth = () => {
               type="radio"
               name="user-auth"
               value={UsersAuth.SIGNUP}
-              onClick={() => setIsSignUp(!isSignUp)}
+              onClick={changeFormType}
             />
             <label
               className={styles.userAuthLabel}
@@ -50,7 +52,7 @@ export const UserAuth = () => {
               {UsersAuth.SIGNUP}
             </label>
           </div>
-        </UserAuthField>
+        </div>
       </div>
       <UserAuthForm isSignUp={isSignUp} />
     </div>

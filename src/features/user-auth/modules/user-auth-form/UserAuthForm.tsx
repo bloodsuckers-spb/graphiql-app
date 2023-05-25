@@ -6,6 +6,7 @@ import {
 
 import { useForm, SubmitHandler } from 'react-hook-form';
 
+import { classNames } from 'shared/libs';
 import { UserAuthField, FormBtn } from 'shared/ui';
 
 import { Props, FormFields } from './types';
@@ -16,7 +17,7 @@ export const UserAuthForm = ({ isSignUp }: Props) => {
   const {
     register,
     handleSubmit,
-    // formState: { errors },
+    formState: { errors },
   } = useForm<FormFields>();
 
   const signIn = async ({ email, password }: FormFields) => {
@@ -40,7 +41,7 @@ export const UserAuthForm = ({ isSignUp }: Props) => {
   };
 
   const isEmailValid = (email: string) => {
-    return /^\S+@\S+.\S+$/.test(email);
+    return /^\S{2,}@\S{2,}\.\S{2,}$/.test(email);
   };
 
   const isPasswordValid = (password: string) => {
@@ -61,22 +62,30 @@ export const UserAuthForm = ({ isSignUp }: Props) => {
     >
       <UserAuthField>
         <input
-          className={styles.input}
-          type="email"
+          className={classNames(styles.input, {}, [
+            errors.email ? styles.errorInput : '',
+          ])}
+          type="text"
           placeholder="E-mail"
-          autoFocus={true}
           autoComplete="off"
+          autoFocus={true}
           {...register('email', { validate: isEmailValid })}
         />
+        {errors.email && <span className={styles.error}>Invalid E-mail</span>}
       </UserAuthField>
       <UserAuthField>
         <input
-          className={styles.input}
+          className={classNames(styles.input, {}, [
+            errors.password ? styles.errorInput : '',
+          ])}
           type="password"
           placeholder="Password"
           autoComplete="off"
           {...register('password', { validate: isPasswordValid })}
         />
+        {errors.password && (
+          <span className={styles.error}>Invalid Password</span>
+        )}
       </UserAuthField>
       <FormBtn />
     </form>

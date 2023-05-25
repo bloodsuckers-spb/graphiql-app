@@ -18,7 +18,7 @@ export const UserAuth = () => {
     <div className={styles.userAuth}>
       <div className={styles.userAuthHeading}>
         <AppLogo />
-        <UserAuthField>
+        <div className={styles.userAuthHeader}>
           <div className={styles.userAuthRadios}>
             <input
               className={styles.userAuthRadio}
@@ -50,7 +50,7 @@ export const UserAuth = () => {
               {UsersAuth.SIGNUP}
             </label>
           </div>
-        </UserAuthField>
+        </div>
       </div>
       <UserAuthForm isSignUp={isSignUp} />
     </div>

@@ -1,5 +1,6 @@
 .btn {
   @include InterFont(var(--color-white));
+  @extend %standart-animation;
   background-color: var(--form-btn-bg);
   height: 78px;
   border-radius: 10px;

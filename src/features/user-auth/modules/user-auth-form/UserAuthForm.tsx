@@ -18,14 +18,18 @@ export const UserAuthForm = ({ isSignUp }: Props) => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    reset,
+    formState: { errors, isValid, isDirty },
   } = useForm<FormFields>();
+
+  console.log(isValid);
 
   const signIn = async ({ email, password }: FormFields) => {
     try {
       await signInWithEmailAndPassword(auth, email, password);
     } catch (error: unknown) {
       if (error instanceof Error) {
+        reset();
         toast(error.message);
       }
     }
@@ -36,6 +40,7 @@ export const UserAuthForm = ({ isSignUp }: Props) => {
       await createUserWithEmailAndPassword(auth, email, password);
     } catch (error: unknown) {
       if (error instanceof Error) {
+        reset();
         toast(error.message);
       }
     }
@@ -88,7 +93,7 @@ export const UserAuthForm = ({ isSignUp }: Props) => {
           <span className={styles.error}>Invalid Password</span>
         )}
       </UserAuthField>
-      <FormBtn />
+      <FormBtn isDisabled={!isDirty || !isValid} />
     </form>
   );
 };

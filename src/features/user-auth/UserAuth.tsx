@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { UserAuthField, AppLogo } from 'shared/ui';
+import { AppLogo } from 'shared/ui';
 
 import styles from './UserAuth.module.scss';
 

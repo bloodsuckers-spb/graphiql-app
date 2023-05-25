@@ -5,6 +5,7 @@ import {
 } from 'firebase/auth';
 
 import { useForm, SubmitHandler } from 'react-hook-form';
+import { toast } from 'react-toastify';
 
 import { classNames } from 'shared/libs';
 import { UserAuthField, FormBtn } from 'shared/ui';
@@ -25,7 +26,7 @@ export const UserAuthForm = ({ isSignUp }: Props) => {
       await signInWithEmailAndPassword(auth, email, password);
     } catch (error: unknown) {
       if (error instanceof Error) {
-        console.log(error.message);
+        toast(error.message);
       }
     }
   };
@@ -35,7 +36,7 @@ export const UserAuthForm = ({ isSignUp }: Props) => {
       await createUserWithEmailAndPassword(auth, email, password);
     } catch (error: unknown) {
       if (error instanceof Error) {
-        console.log(error.message);
+        toast(error.message);
       }
     }
   };

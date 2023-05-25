@@ -14,6 +14,8 @@ enum UsersAuth {
 export const UserAuth = () => {
   const [isSignUp, setIsSignUp] = useState(false);
 
+  const changeFormType = () => setIsSignUp((isSignUp) => !isSignUp);
+
   return (
     <div className={styles.userAuth}>
       <div className={styles.userAuthHeading}>
@@ -27,7 +29,7 @@ export const UserAuth = () => {
               name="user-auth"
               value={UsersAuth.LOGIN}
               defaultChecked
-              onClick={() => setIsSignUp(!isSignUp)}
+              onClick={changeFormType}
             />
             <label
               className={styles.userAuthLabel}
@@ -41,7 +43,7 @@ export const UserAuth = () => {
               type="radio"
               name="user-auth"
               value={UsersAuth.SIGNUP}
-              onClick={() => setIsSignUp(!isSignUp)}
+              onClick={changeFormType}
             />
             <label
               className={styles.userAuthLabel}

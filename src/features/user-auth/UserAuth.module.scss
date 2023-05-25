@@ -45,6 +45,9 @@ $baseName: 'userAuth';
   }
 
   .#{$baseName}Label {
+    @include media-laptop {
+      font-size: 16px;
+    }
     @include media-tablet {
       font-size: 12px;
     }

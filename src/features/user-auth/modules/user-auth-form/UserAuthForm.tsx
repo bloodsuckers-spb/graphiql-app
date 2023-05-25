@@ -22,8 +22,6 @@ export const UserAuthForm = ({ isSignUp }: Props) => {
     formState: { errors, isValid, isDirty },
   } = useForm<FormFields>();
 
-  console.log(isValid);
-
   const signIn = async ({ email, password }: FormFields) => {
     try {
       await signInWithEmailAndPassword(auth, email, password);

@@ -12,32 +12,43 @@ import { Props, FormFields } from './types';
 
 import styles from './UserAuthForm.module.scss';
 
-const signIn = async ({ email, password }: FormFields) => {
-  try {
-    await signInWithEmailAndPassword(auth, email, password);
-  } catch (error: unknown) {
-    if (error instanceof Error) {
-      console.log(error.message);
-    }
-  }
-};
-
-const signUp = async ({ email, password }: FormFields) => {
-  try {
-    await createUserWithEmailAndPassword(auth, email, password);
-  } catch (error: unknown) {
-    if (error instanceof Error) {
-      console.log(error.message);
-    }
-  }
-};
-
 export const UserAuthForm = ({ isSignUp }: Props) => {
   const {
     register,
     handleSubmit,
     // formState: { errors },
   } = useForm<FormFields>();
+
+  const signIn = async ({ email, password }: FormFields) => {
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        console.log(error.message);
+      }
+    }
+  };
+
+  const signUp = async ({ email, password }: FormFields) => {
+    try {
+      await createUserWithEmailAndPassword(auth, email, password);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        console.log(error.message);
+      }
+    }
+  };
+
+  const isEmailValid = (email: string) => {
+    return /^\S+@\S+.\S+$/.test(email);
+  };
+
+  const isPasswordValid = (password: string) => {
+    if (password.length < 8 || password.length > 20) return false;
+    if (!/\d/.test(password)) return false;
+    if (!/[a-z]/.test(password)) return false;
+    // добавить проверку на спецсимволы
+  };
 
   const onSubmit: SubmitHandler<FormFields> = (data) => {
     isSignUp ? signUp(data) : signIn(data);
@@ -53,7 +64,9 @@ export const UserAuthForm = ({ isSignUp }: Props) => {
           className={styles.input}
           type="email"
           placeholder="E-mail"
-          {...register('email')}
+          autoFocus={true}
+          autoComplete="off"
+          {...register('email', { validate: isEmailValid })}
         />
       </UserAuthField>
       <UserAuthField>
@@ -61,7 +74,8 @@ export const UserAuthForm = ({ isSignUp }: Props) => {
           className={styles.input}
           type="password"
           placeholder="Password"
-          {...register('password')}
+          autoComplete="off"
+          {...register('password', { validate: isPasswordValid })}
         />
       </UserAuthField>
       <FormBtn />

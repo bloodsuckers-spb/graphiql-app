@@ -1,1 +1,1 @@
-export { WelcomeLazy } from './Welcome.lazy';
+export * from './Welcome.lazy';

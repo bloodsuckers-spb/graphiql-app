@@ -1,1 +1,1 @@
-export * from './EditorApiDocs';
+export * from './EditorApiDocs.lazy';

@@ -17,55 +17,61 @@ export const EditorDocsRoot = ({ selectData, schema }: Props) => {
 
   return (
     <div className={styles.docsRoot}>
-      <div>Docs</div>
-      <div>
-        A GraphQL schema provides a root type for each kind of operation.
+      <div className={styles.docsAbout}>
+        <h2>Docs</h2>
+        <p>A GraphQL schema provides a root type for each kind of operation.</p>
+        <span>Root type</span>
       </div>
-      <div>Root type</div>
-      <span>query: </span>
-      <button
-        className={styles.btn}
-        onClick={() =>
-          selectData({
-            typeOfOutput: TypeOfOutput.TYPE,
-            name: queryName,
-          })
-        }
-      >
-        {queryName}
-      </button>
-      {mutationName ? (
-        <>
-          <span>mutation: </span>
-          <button
-            className={styles.btn}
-            onClick={() =>
-              selectData({
-                typeOfOutput: TypeOfOutput.TYPE,
-                name: mutationName,
-              })
-            }
-          >
-            {mutationName}
-          </button>
-        </>
-      ) : null}
-      {subscriptionName ? (
-        <>
-          <span>subscription: </span>
-          <button
-            className={styles.btn}
-            onClick={() =>
-              selectData({
-                typeOfOutput: TypeOfOutput.TYPE,
-                name: subscriptionName,
-              })
-            }
-          >
-            {subscriptionName}
-          </button>
-        </>
-      ) : null}
+      <div className={styles.docsInfo}>
+        <ul className={styles.docsInfoList}>
+          <li>
+            <span>query: </span>
+            <button
+              className={styles.btn}
+              onClick={() =>
+                selectData({
+                  typeOfOutput: TypeOfOutput.TYPE,
+                  name: queryName,
+                })
+              }
+            >
+              {queryName}
+            </button>
+          </li>
+          {mutationName ? (
+            <li>
+              <span>mutation: </span>
+              <button
+                className={styles.btn}
+                onClick={() =>
+                  selectData({
+                    typeOfOutput: TypeOfOutput.TYPE,
+                    name: mutationName,
+                  })
+                }
+              >
+                {mutationName}
+              </button>
+            </li>
+          ) : null}
+          {subscriptionName ? (
+            <li>
+              <span>subscription: </span>
+              <button
+                className={styles.btn}
+                onClick={() =>
+                  selectData({
+                    typeOfOutput: TypeOfOutput.TYPE,
+                    name: subscriptionName,
+                  })
+                }
+              >
+                {subscriptionName}
+              </button>
+            </li>
+          ) : null}
+        </ul>
+      </div>
     </div>
   );
 };

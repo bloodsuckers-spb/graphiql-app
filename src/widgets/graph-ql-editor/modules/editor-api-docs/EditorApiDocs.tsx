@@ -103,7 +103,12 @@ const EditorApiDocs = ({ data: { data }, isFetching, isError }: Props) => {
     <>
       <div>
         {history.length > 1 ? (
-          <button onClick={removeFromHistory}>Back</button>
+          <button
+            className={styles.btnBack}
+            onClick={removeFromHistory}
+          >
+            Back
+          </button>
         ) : null}
       </div>
 

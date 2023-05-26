@@ -4,6 +4,21 @@
   color: yellow;
 }
 
+.btnBack {
+  background-color: transparent;
+  border: 1px solid var(--color-accent);
+  color: var(--color-white);
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 18px;
+  @extend %standart-animation;
+  transition-property: border-color;
+  &:hover {
+    border-color: var(--color-white);
+  }
+}
+
 .rootBox {
   display: flex;
   flex-direction: column;

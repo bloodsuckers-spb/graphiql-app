@@ -1,0 +1,18 @@
+.docsFields {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  button {
+    @extend %editor-docs-button;
+  }
+  li {
+    display: flex;
+    gap: 10px;
+  }
+}
+
+.docsType {
+  button {
+    @extend %editor-docs-button;
+  }
+}

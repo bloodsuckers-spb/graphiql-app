@@ -24,7 +24,7 @@ export const EditorSearchBar = ({ isError }: Props) => {
   };
 
   return (
-    <div className={styles.serchBar}>
+    <div className={styles.searchBar}>
       <div className={styles.inputWrapper}>
         <input
           className={styles.input}

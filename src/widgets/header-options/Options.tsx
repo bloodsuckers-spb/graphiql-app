@@ -1,11 +1,15 @@
 import { Switch } from 'antd';
+
 import { auth } from 'app/firebase';
 import { signOut } from 'firebase/auth';
 import { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, NavLink } from 'react-router-dom';
 import { action as toggleMenu } from 'redux-burger-menu';
+
 import { useAppDispatch } from 'shared/hooks/redux';
+
+import { classNames } from 'shared/libs';
 
 import styles from './Options.module.scss';
 
@@ -72,7 +76,7 @@ export const Options = () => {
             onClick={handleChecked}
           />
         </div>
-        <div className={styles.auth}>
+        <div className={classNames(styles.auth, {}, [styles.authLinkBox])}>
           {user ? (
             <Link
               to="/"

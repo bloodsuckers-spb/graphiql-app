@@ -1,3 +1,5 @@
+import styles from './EditorDocsNonRoot.module.scss';
+
 import { SelectDataProps, TypeOfOutput } from '../types';
 
 import type { CurrentDocData } from '../types';
@@ -16,10 +18,12 @@ export const EditorDocsNonRoot = ({
 }: Props) => {
   const componentPropsArgs = args;
   return !type ? (
-    <div>
-      <h2>{name}</h2>
-      <p>{description}</p>
-      {fields?.length ? <h3>Fields</h3> : null}
+    <div className={styles.docsFields}>
+      <div>
+        <h2>{name}</h2>
+        <p>{description}</p>
+        {fields?.length ? <h3>Fields</h3> : null}
+      </div>
       <ul>
         {fields?.map(([fieldName, { type, args }]) => {
           return (
@@ -73,7 +77,7 @@ export const EditorDocsNonRoot = ({
       </ul>
     </div>
   ) : (
-    <div>
+    <div className={styles.docsType}>
       <h2>{name}</h2>
       <h3>Type</h3>
       <button

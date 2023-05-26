@@ -1,6 +1,21 @@
 .docsRoot {
   display: flex;
   flex-direction: column;
+  gap: 30px;
+  button {
+    @extend %editor-docs-button;
+  }
+}
+
+.docsAbout {
+  display: flex;
+  flex-direction: column;
+}
+
+.docsInfoList {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
 
 .btn {

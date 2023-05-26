@@ -12,7 +12,7 @@
   border-radius: 5px;
   @extend %standart-animation;
   transition-property: background-color;
-  &:hover {
+  &:hover:not(:disabled) {
     background-color: var(--bg-color);
   }
   &:active {
@@ -26,6 +26,9 @@
     & .icon {
       stroke: var(--color-white);
     }
+  }
+  &:disabled {
+    cursor: default;
   }
 }
 

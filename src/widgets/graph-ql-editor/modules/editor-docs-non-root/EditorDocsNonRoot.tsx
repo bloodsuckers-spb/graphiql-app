@@ -22,7 +22,6 @@ export const EditorDocsNonRoot = ({
       <div>
         <h2>{name}</h2>
         <p>{description}</p>
-        {fields?.length ? <h3>Fields</h3> : null}
       </div>
       <ul>
         {fields?.map(([fieldName, { type, args }]) => {

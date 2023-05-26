@@ -18,14 +18,15 @@ export const EditorDocsRoot = ({ selectData, schema }: Props) => {
   return (
     <div className={styles.docsRoot}>
       <div className={styles.docsAbout}>
-        <h2>Docs</h2>
-        <p>A GraphQL schema provides a root type for each kind of operation.</p>
-        <span>Root type</span>
+        <h2 className={styles.docsRootTitle}>Docs</h2>
+        <p className={styles.docsRootDescription}>
+          A GraphQL schema provides a root type for each kind of operation.
+        </p>
       </div>
       <div className={styles.docsInfo}>
         <ul className={styles.docsInfoList}>
           <li>
-            <span>query: </span>
+            <span className={styles.fieldsNames}>query: </span>
             <button
               className={styles.btn}
               onClick={() =>
@@ -40,7 +41,7 @@ export const EditorDocsRoot = ({ selectData, schema }: Props) => {
           </li>
           {mutationName ? (
             <li>
-              <span>mutation: </span>
+              <span className={styles.fieldsNames}>mutation: </span>
               <button
                 className={styles.btn}
                 onClick={() =>
@@ -56,7 +57,7 @@ export const EditorDocsRoot = ({ selectData, schema }: Props) => {
           ) : null}
           {subscriptionName ? (
             <li>
-              <span>subscription: </span>
+              <span className={styles.fieldsNames}>subscription: </span>
               <button
                 className={styles.btn}
                 onClick={() =>

@@ -10,9 +10,9 @@ import { UserAuthForm } from '..';
 export const UserAuth = () => {
   const [isSignUp, setIsSignUp] = useState(false);
 
-  const changeFormType = () => setIsSignUp((isSignUp) => !isSignUp);
-
   const { t } = useTranslation();
+
+  const changeFormType = () => setIsSignUp((isSignUp) => !isSignUp);
 
   return (
     <div className={styles.userAuth}>
@@ -41,7 +41,7 @@ export const UserAuth = () => {
               type="radio"
               name="user-auth"
               value={`${t('formSignUp')}`}
-              onClick={() => setIsSignUp(!isSignUp)}
+              onClick={changeFormType}
             />
             <label
               className={styles.userAuthLabel}

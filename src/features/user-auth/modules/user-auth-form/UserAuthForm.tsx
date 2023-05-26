@@ -21,8 +21,10 @@ export const UserAuthForm = ({ isSignUp }: Props) => {
     register,
     handleSubmit,
     reset,
-    formState: { errors, isValid, isDirty },
+    formState: { errors },
   } = useForm<FormFields>();
+
+  const { t } = useTranslation();
 
   const signIn = async ({ email, password }: FormFields) => {
     try {
@@ -62,8 +64,6 @@ export const UserAuthForm = ({ isSignUp }: Props) => {
     isSignUp ? signUp(data) : signIn(data);
   };
 
-  const { t } = useTranslation();
-
   return (
     <form
       className={styles.form}
@@ -98,7 +98,7 @@ export const UserAuthForm = ({ isSignUp }: Props) => {
           <span className={styles.error}>{t('formErrorPassword')}</span>
         )}
       </UserAuthField>
-      <FormBtn isDisabled={!isDirty || !isValid} />
+      <FormBtn />
     </form>
   );
 };

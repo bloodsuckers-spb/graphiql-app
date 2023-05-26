@@ -21,5 +21,22 @@
   "author3": "Artem",
   "linksAuthor1AriaLabel": "Link to Vitaly's GitHub",
   "linksAuthor2AriaLabel": "Link to Timofey's GitHub",
-  "linksAuthor3AriaLabel": "Link to Artem's GitHub"
+  "linksAuthor3AriaLabel": "Link to Artem's GitHub",
+  "formLogIn": "Log In",
+  "formSignUp": "Sign Up",
+  "formEnter": "Enter",
+  "formPassword": "Password",
+  "formEmail": "E-mail",
+  "formErrorPassword": "Invalid Password",
+  "formErrorEmail": "Invalid E-mail",
+  "docButtonAriaLabel": "documentation",
+  "historyButtonAriaLabel": "history",
+  "refreshButtonAriaLabel": "refresh",
+  "shortKeysButtonAriaLabel": "short-keys",
+  "settingsButtonAriaLabel": "settings",
+  "playButtonAriaLabel": "run code",
+  "apiPlaceholder": "Please enter API url",
+  "apiUrlError": "Server cannot be reached",
+  "toastErrorMessage": "Sorry, There is nothing found",
+  "docsLoadingMessage": "Loading..."
 }

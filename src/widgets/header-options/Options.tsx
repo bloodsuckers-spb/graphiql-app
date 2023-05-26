@@ -1,6 +1,7 @@
+import { Switch } from 'antd';
 import { auth } from 'app/firebase';
 import { signOut } from 'firebase/auth';
-import { useCallback } from 'react';
+import { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, NavLink } from 'react-router-dom';
 import { action as toggleMenu } from 'redux-burger-menu';
@@ -21,8 +22,18 @@ export const Options = () => {
     [dispatch]
   );
 
-  const changeLanguage = (lang: string) => {
-    i18n.changeLanguage(lang);
+  const [checked, setChecked] = useState(
+    localStorage.getItem('i18nextLng') === 'ru-RU' ||
+      localStorage.getItem('i18nextLng') === 'ru'
+  );
+
+  const handleChecked = () => {
+    setChecked((prev) => !prev);
+    changeLanguage();
+  };
+
+  const changeLanguage = () => {
+    !checked ? i18n.changeLanguage('ru') : i18n.changeLanguage('en');
   };
 
   const getActiveClass = (isActive: boolean) => {
@@ -54,18 +65,12 @@ export const Options = () => {
       </nav>
       <div className={styles.options}>
         <div className={styles.localization}>
-          <span
-            onClick={() => changeLanguage('ru')}
-            className={styles.localization__ru}
-          >
-            RU
-          </span>
-          <span
-            onClick={() => changeLanguage('en')}
-            className={styles.localization__en}
-          >
-            EN
-          </span>
+          <Switch
+            checkedChildren="ru"
+            unCheckedChildren="en"
+            checked={checked}
+            onClick={handleChecked}
+          />
         </div>
         <div className={styles.auth}>
           {user ? (

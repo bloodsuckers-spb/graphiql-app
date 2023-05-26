@@ -1,5 +1,6 @@
 import { editorSlice } from 'app/providers/StoreProvider/config/reducers';
 import { FormEvent, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useAppDispatch, useAppSelector } from 'shared/hooks';
 
 import styles from './EditorSearchBar.module.scss';
@@ -21,6 +22,8 @@ export const EditorSearchBar = ({ isError }: Props) => {
     dispatch(setApiURL(value));
   };
 
+  const { t } = useTranslation();
+
   return (
     <div className={styles.serchBar}>
       <div className={styles.inputWrapper}>
@@ -30,11 +33,11 @@ export const EditorSearchBar = ({ isError }: Props) => {
           defaultValue={storeApiURL}
           onBlur={handleSubmit}
           type="text"
-          placeholder="Please enter API url"
+          placeholder={`${t('apiPlaceholder')}`}
           onChange={handleSubmit}
         />
       </div>
-      {isError && <p className={styles.error}>Server cannot be reached</p>}
+      {isError && <p className={styles.error}>{t('apiUrlError')}</p>}
     </div>
   );
 };

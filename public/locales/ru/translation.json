@@ -21,5 +21,22 @@
   "author3": "Артём",
   "linksAuthor1AriaLabel": "Ссылка на GitHub Виталия",
   "linksAuthor2AriaLabel": "Ссылка на GitHub Тимофея",
-  "linksAuthor3AriaLabel": "Ссылка на GitHub Артёма"
+  "linksAuthor3AriaLabel": "Ссылка на GitHub Артёма",
+  "formLogIn": "Вход",
+  "formSignUp": "Зарег.",
+  "formEnter": "Войти",
+  "formPassword": "Пароль",
+  "formEmail": "E-mail",
+  "formErrorPassword": "Неверный пароль",
+  "formErrorEmail": "Неверный E-mail",
+  "docButtonAriaLabel": "документация",
+  "historyButtonAriaLabel": "история",
+  "refreshButtonAriaLabel": "обновить",
+  "shortKeysButtonAriaLabel": "сочетания клавиш",
+  "settingsButtonAriaLabel": "настройки",
+  "playButtonAriaLabel": "запустить код",
+  "apiPlaceholder": "Пожалуйста, введите API URL",
+  "apiUrlError": "Сервер недоступен",
+  "toastErrorMessage": "Извините, ничего не найдено",
+  "docsLoadingMessage": "Загрузка..."
 }

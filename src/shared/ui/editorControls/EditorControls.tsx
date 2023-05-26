@@ -1,5 +1,6 @@
 /* eslint-disable import/no-default-export */
 import { editorSlice } from 'app/providers/StoreProvider/config/reducers';
+import { useTranslation } from 'react-i18next';
 import { useAppDispatch, useAppSelector } from 'shared/hooks';
 
 import styles from './EditorControls.module.scss';
@@ -17,6 +18,8 @@ const EditorControls = ({ isError }: Props) => {
     (state) => state.editorReducer.variables
   );
   const requestHeaders = useAppSelector((state) => state.editorReducer.headers);
+
+  const { t } = useTranslation();
 
   const makeReq = async (
     query: string,
@@ -43,7 +46,7 @@ const EditorControls = ({ isError }: Props) => {
   return (
     <div className={styles.wrapper}>
       <button
-        aria-label="run code"
+        aria-label={`${t('playButtonAriaLabel')}`}
         className={styles.play}
         onClick={() => makeReq(requestString, requestVariables, requestHeaders)}
         disabled={isError}

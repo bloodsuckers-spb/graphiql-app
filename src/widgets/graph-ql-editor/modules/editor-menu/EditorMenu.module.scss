@@ -1,6 +1,9 @@
 .menu {
   @extend %flex-row-center;
   gap: 40px;
+  @include media-tablet {
+    gap: 20px;
+  }
 }
 
 .button {

@@ -7,6 +7,8 @@ import {
 } from 'graphql';
 import { useState } from 'react';
 
+import { useTranslation } from 'react-i18next';
+
 import styles from './EditorApiDocs.module.scss';
 
 import { EditorDocsRoot, EditorDocsNonRoot } from '../';
@@ -31,6 +33,8 @@ const EditorApiDocs = ({ data: { data }, isFetching, isError }: Props) => {
   };
 
   const [history, setHistory] = useState<Array<CurrentDocData>>([rootData]);
+
+  const { t } = useTranslation();
 
   const currentData = history[history.length - 1];
 
@@ -92,7 +96,7 @@ const EditorApiDocs = ({ data: { data }, isFetching, isError }: Props) => {
   };
 
   if (isFetching || isError) {
-    return <div>Loading...</div>;
+    return <div>{t('docsLoadingMessage')}</div>;
   }
 
   return (

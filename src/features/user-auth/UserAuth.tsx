@@ -1,18 +1,16 @@
 import { useState } from 'react';
 
+import { useTranslation } from 'react-i18next';
 import { AppLogo } from 'shared/ui';
 
 import styles from './UserAuth.module.scss';
 
 import { UserAuthForm } from '..';
 
-enum UsersAuth {
-  LOGIN = 'Log In',
-  SIGNUP = 'Sign Up',
-}
-
 export const UserAuth = () => {
   const [isSignUp, setIsSignUp] = useState(false);
+
+  const { t } = useTranslation();
 
   const changeFormType = () => setIsSignUp((isSignUp) => !isSignUp);
 
@@ -27,7 +25,7 @@ export const UserAuth = () => {
               id="radio-login"
               type="radio"
               name="user-auth"
-              value={UsersAuth.LOGIN}
+              value={`${t('formLogIn')}`}
               defaultChecked
               onClick={changeFormType}
             />
@@ -35,21 +33,21 @@ export const UserAuth = () => {
               className={styles.userAuthLabel}
               htmlFor="radio-login"
             >
-              {UsersAuth.LOGIN}
+              {t('formLogIn')}
             </label>
             <input
               className={styles.userAuthRadio}
               id="radio-signup"
               type="radio"
               name="user-auth"
-              value={UsersAuth.SIGNUP}
+              value={`${t('formSignUp')}`}
               onClick={changeFormType}
             />
             <label
               className={styles.userAuthLabel}
               htmlFor="radio-signup"
             >
-              {UsersAuth.SIGNUP}
+              {t('formSignUp')}
             </label>
           </div>
         </div>

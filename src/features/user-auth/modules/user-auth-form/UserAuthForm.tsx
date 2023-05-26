@@ -6,6 +6,7 @@ import {
 } from 'firebase/auth';
 
 import { useForm, SubmitHandler } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 
 import { classNames } from 'shared/libs';
@@ -20,8 +21,10 @@ export const UserAuthForm = ({ isSignUp }: Props) => {
     register,
     handleSubmit,
     reset,
-    formState: { errors, isValid, isDirty },
+    formState: { errors },
   } = useForm<FormFields>();
+
+  const { t } = useTranslation();
 
   const signIn = async ({ email, password }: FormFields) => {
     try {
@@ -72,12 +75,14 @@ export const UserAuthForm = ({ isSignUp }: Props) => {
             errors.email ? styles.errorInput : '',
           ])}
           type="text"
-          placeholder="E-mail"
+          placeholder={`${t('formEmail')}`}
           autoComplete="off"
           autoFocus={true}
           {...register('email', { validate: isEmailValid })}
         />
-        {errors.email && <span className={styles.error}>Invalid E-mail</span>}
+        {errors.email && (
+          <span className={styles.error}>{t('formErrorEmail')}</span>
+        )}
       </UserAuthField>
       <UserAuthField>
         <input
@@ -85,15 +90,15 @@ export const UserAuthForm = ({ isSignUp }: Props) => {
             errors.password ? styles.errorInput : '',
           ])}
           type="password"
-          placeholder="Password"
+          placeholder={`${t('formPassword')}`}
           autoComplete="off"
           {...register('password', { validate: isPasswordValid })}
         />
         {errors.password && (
-          <span className={styles.error}>Invalid Password</span>
+          <span className={styles.error}>{t('formErrorPassword')}</span>
         )}
       </UserAuthField>
-      <FormBtn isDisabled={!isDirty || !isValid} />
+      <FormBtn />
     </form>
   );
 };

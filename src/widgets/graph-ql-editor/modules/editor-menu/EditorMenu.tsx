@@ -1,3 +1,5 @@
+import { useTranslation } from 'react-i18next';
+
 import styles from './EditorMenu.module.scss';
 
 type Props = {
@@ -5,11 +7,13 @@ type Props = {
 };
 
 export const EditorMenu = ({ setIsDocsOpen }: Props) => {
+  const { t } = useTranslation();
+
   return (
     <div className={styles.menu}>
       <button
         className={styles.button}
-        aria-label="documentation"
+        aria-label={`${t('docButtonAriaLabel')}`}
         onClick={setIsDocsOpen}
       >
         <svg className={styles.icon}>
@@ -18,7 +22,7 @@ export const EditorMenu = ({ setIsDocsOpen }: Props) => {
       </button>
       <button
         className={styles.button}
-        aria-label="history"
+        aria-label={`${t('historyButtonAriaLabel')}`}
         disabled
       >
         <svg className={styles.icon}>
@@ -27,7 +31,7 @@ export const EditorMenu = ({ setIsDocsOpen }: Props) => {
       </button>
       <button
         className={styles.button}
-        aria-label="refresh"
+        aria-label={`${t('refreshButtonAriaLabel')}`}
         disabled
       >
         <svg className={styles.icon}>
@@ -36,7 +40,7 @@ export const EditorMenu = ({ setIsDocsOpen }: Props) => {
       </button>
       <button
         className={styles.button}
-        aria-label="short-keys"
+        aria-label={`${t('shortKeysButtonAriaLabel')}`}
         disabled
       >
         <svg className={styles.icon}>
@@ -45,7 +49,7 @@ export const EditorMenu = ({ setIsDocsOpen }: Props) => {
       </button>
       <button
         className={styles.button}
-        aria-label="settings"
+        aria-label={`${t('settingsButtonAriaLabel')}`}
         disabled
       >
         <svg className={styles.icon}>

@@ -1,6 +1,8 @@
+import { Switch } from 'antd';
 import { auth } from 'app/firebase';
 import { signOut } from 'firebase/auth';
-import { useCallback } from 'react';
+import { useCallback, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Link, NavLink } from 'react-router-dom';
 import { action as toggleMenu } from 'redux-burger-menu';
 import { useAppDispatch } from 'shared/hooks/redux';
@@ -13,10 +15,26 @@ export const Options = () => {
 
   const logout = useCallback(() => signOut(auth), []);
 
+  const { t, i18n } = useTranslation();
+
   const handleClick = useCallback(
     () => dispatch(toggleMenu(false)),
     [dispatch]
   );
+
+  const [checked, setChecked] = useState(
+    localStorage.getItem('i18nextLng') === 'ru-RU' ||
+      localStorage.getItem('i18nextLng') === 'ru'
+  );
+
+  const handleChecked = () => {
+    setChecked((prev) => !prev);
+    changeLanguage();
+  };
+
+  const changeLanguage = () => {
+    !checked ? i18n.changeLanguage('ru') : i18n.changeLanguage('en');
+  };
 
   const getActiveClass = (isActive: boolean) => {
     return isActive
@@ -34,21 +52,25 @@ export const Options = () => {
           className={({ isActive }) => getActiveClass(isActive)}
           to="/"
         >
-          Welcome
+          {t('navPageWelcome')}
         </NavLink>
         {user && (
           <NavLink
             className={({ isActive }) => getActiveClass(isActive)}
             to="/editor"
           >
-            Editor
+            {t('navPageEditor')}
           </NavLink>
         )}
       </nav>
       <div className={styles.options}>
         <div className={styles.localization}>
-          <span className={styles.localization__ru}>RU</span>
-          <span className={styles.localization__en}>EN</span>
+          <Switch
+            checkedChildren="ru"
+            unCheckedChildren="en"
+            checked={checked}
+            onClick={handleChecked}
+          />
         </div>
         <div className={styles.auth}>
           {user ? (
@@ -57,14 +79,16 @@ export const Options = () => {
               onClick={logout}
               className={styles.auth}
             >
-              Sign out
+              {t('SignOut')}
             </Link>
           ) : (
             <Link
               to="/login"
               className={styles.auth}
             >
-              Sign In <span className={styles.auth__slash}> / </span> Sign Up
+              {t('signIn')}
+              <span className={styles.auth__slash}> / </span>
+              {t('signUp')}
             </Link>
           )}
         </div>

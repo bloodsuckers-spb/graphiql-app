@@ -1,5 +1,6 @@
 /* eslint-disable import/no-default-export */
 import { editorSlice } from 'app/providers/StoreProvider/config/reducers';
+import { useTranslation } from 'react-i18next';
 import { useAppDispatch, useAppSelector } from 'shared/hooks';
 
 import styles from './EditorControls.module.scss';
@@ -10,6 +11,7 @@ type Props = {
 
 const EditorControls = ({ isError }: Props) => {
   const dispatch = useAppDispatch();
+  const { t } = useTranslation();
 
   const apiURL = useAppSelector((state) => state.editorReducer.apiURL);
   const requestString = useAppSelector((state) => state.editorReducer.request);
@@ -43,7 +45,7 @@ const EditorControls = ({ isError }: Props) => {
   return (
     <div className={styles.wrapper}>
       <button
-        aria-label="run code"
+        aria-label={`${t('playButtonAriaLabel')}`}
         className={styles.play}
         onClick={() => makeReq(requestString, requestVariables, requestHeaders)}
         disabled={isError}

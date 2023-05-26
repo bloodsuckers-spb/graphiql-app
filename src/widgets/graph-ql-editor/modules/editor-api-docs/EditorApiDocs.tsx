@@ -9,7 +9,7 @@ import { useState } from 'react';
 
 import styles from './EditorApiDocs.module.scss';
 
-import { EditorDocsNonRoot } from '../editor-docs-non-root';
+import { EditorDocsRoot, EditorDocsNonRoot } from '../';
 
 import { TypeOfOutput } from '../types';
 
@@ -104,24 +104,11 @@ const EditorApiDocs = ({ data: { data }, isFetching, isError }: Props) => {
       </div>
 
       {history.length === 1 ? (
-        <div>
-          <div>Docs</div>
-          <div>
-            A GraphQL schema provides a root type for each kind of operation.
-          </div>
-          <div>Root type</div>
-          <span>query: </span>
-          <button
-            onClick={() =>
-              selectData({
-                typeOfOutput: TypeOfOutput.TYPE,
-                name: schema.getQueryType()?.name ?? '',
-              })
-            }
-          >
-            {schema.getQueryType()?.name}
-          </button>
-        </div>
+        <EditorDocsRoot
+          {...rootData}
+          selectData={selectData}
+          schema={schema}
+        />
       ) : (
         <EditorDocsNonRoot
           {...currentData}

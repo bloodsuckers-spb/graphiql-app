@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-escape */
 import { auth } from 'app/firebase';
 import {
   createUserWithEmailAndPassword,
@@ -52,7 +53,8 @@ export const UserAuthForm = ({ isSignUp }: Props) => {
     if (password.length < 8 || password.length > 20) return false;
     if (!/\d/.test(password)) return false;
     if (!/[a-z]/.test(password)) return false;
-    // добавить проверку на спецсимволы
+    if (/\s/.test(password)) return false;
+    return /[!@#$%^&()+=[\]{};':"|,.<>\/?_-]/.test(password);
   };
 
   const onSubmit: SubmitHandler<FormFields> = (data) => {

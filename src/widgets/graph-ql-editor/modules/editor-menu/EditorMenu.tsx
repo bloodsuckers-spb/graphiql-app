@@ -19,6 +19,7 @@ export const EditorMenu = ({ setIsDocsOpen }: Props) => {
       <button
         className={styles.button}
         aria-label="history"
+        disabled
       >
         <svg className={styles.icon}>
           <use href={`sprite.svg#history`}></use>
@@ -27,6 +28,7 @@ export const EditorMenu = ({ setIsDocsOpen }: Props) => {
       <button
         className={styles.button}
         aria-label="refresh"
+        disabled
       >
         <svg className={styles.icon}>
           <use href={`sprite.svg#refresh`}></use>
@@ -35,6 +37,7 @@ export const EditorMenu = ({ setIsDocsOpen }: Props) => {
       <button
         className={styles.button}
         aria-label="short-keys"
+        disabled
       >
         <svg className={styles.icon}>
           <use href={`sprite.svg#short-keys`}></use>
@@ -43,6 +46,7 @@ export const EditorMenu = ({ setIsDocsOpen }: Props) => {
       <button
         className={styles.button}
         aria-label="settings"
+        disabled
       >
         <svg className={styles.icon}>
           <use href={`sprite.svg#settings`}></use>

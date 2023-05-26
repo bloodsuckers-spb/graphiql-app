@@ -95,7 +95,10 @@ export const EditorDocsNonRoot = ({
       ) : null}
       <div>
         {args?.map(({ name, type }) => (
-          <div key={name}>
+          <div
+            className={styles.docTypeName}
+            key={name}
+          >
             {`${name}: `}
             <button
               onClick={() =>

@@ -16,3 +16,20 @@
     @extend %editor-docs-button;
   }
 }
+
+.docTypeTitle {
+  color: var(--color-secondary);
+  padding-top: 10px;
+}
+
+button.docTypeName {
+  color: var(--color-secondary);
+}
+
+.docTypeArgs {
+  color: var(--color-white);
+}
+
+.docTypeDescription {
+  color: var(--color-accent);
+}

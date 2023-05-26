@@ -16,18 +16,18 @@ export const EditorDocsNonRoot = ({
   type,
   args,
 }: Props) => {
-  const componentPropsArgs = args;
   return !type ? (
     <div className={styles.docsFields}>
       <div>
-        <h2>{name}</h2>
-        <p>{description}</p>
+        <h2 className={styles.docTypeTitle}>{name}</h2>
+        <p className={styles.docTypeDescription}>{description}</p>
       </div>
       <ul>
         {fields?.map(([fieldName, { type, args }]) => {
           return (
             <li key={fieldName}>
               <button
+                className={styles.docTypeName}
                 onClick={() =>
                   selectData({
                     name: fieldName,
@@ -39,8 +39,9 @@ export const EditorDocsNonRoot = ({
               >
                 {fieldName}
               </button>
-              <span>
-                {componentPropsArgs ? `(` : null}
+
+              <span className={styles.docTypeArgs}>
+                {args ? `(` : null}
                 {args?.map(({ name, type }, index) => (
                   <span key={name}>
                     <span>{name}: </span>
@@ -57,7 +58,7 @@ export const EditorDocsNonRoot = ({
                     {index < args.length - 1 ? ', ' : null}
                   </span>
                 ))}
-                {componentPropsArgs ? `): ` : ':'}
+                {args ? `): ` : ':'}
               </span>
 
               <button

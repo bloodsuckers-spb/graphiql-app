@@ -1,17 +1,11 @@
 import { useState } from 'react';
 
 import { useTranslation } from 'react-i18next';
-
 import { AppLogo } from 'shared/ui';
 
 import styles from './UserAuth.module.scss';
 
 import { UserAuthForm } from '..';
-
-enum UsersAuth {
-  LOGIN = 'Log In',
-  SIGNUP = 'Sign Up',
-}
 
 export const UserAuth = () => {
   const [isSignUp, setIsSignUp] = useState(false);
@@ -47,7 +41,7 @@ export const UserAuth = () => {
               type="radio"
               name="user-auth"
               value={`${t('formSignUp')}`}
-              onClick={changeFormType}
+              onClick={() => setIsSignUp(!isSignUp)}
             />
             <label
               className={styles.userAuthLabel}

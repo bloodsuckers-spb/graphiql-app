@@ -261,6 +261,7 @@
 }
 
 .member {
+  cursor: pointer;
   @extend %flex-col-all-center;
   padding: 25px 45px 45px;
   border-radius: 15px;
@@ -271,6 +272,12 @@
   @include media-tablet {
     padding: 10px;
   }
+
+  &:hover > &__github {
+    color: var(--color-accent);
+    border-color: var(--color-accent);
+  }
+
   &__avatar {
     border-radius: 50%;
     margin-bottom: 30px;
@@ -302,10 +309,6 @@
     color: var(--color-white);
     @extend %standart-animation;
     transition-property: color, border-color;
-    &:hover {
-      color: var(--color-accent);
-      border-color: var(--color-accent);
-    }
     @include media-laptop {
       font-weight: 400;
       padding: 5px 20px;

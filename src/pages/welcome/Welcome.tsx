@@ -1,8 +1,11 @@
 /* eslint-disable import/no-default-export */
 
 import { useTranslation, Trans } from 'react-i18next';
+
 import { Wrapper } from 'shared/ui';
 import { Example } from 'widgets/query-example';
+
+import { developers } from './constants';
 
 import styles from './Welcome.module.scss';
 
@@ -148,51 +151,28 @@ const Welcome = () => {
         <section className={styles.team}>
           <h2 className={styles.team__title}>{t('ourTeam')}</h2>
           <div className={styles.team__members}>
-            <div className={styles.member}>
-              <img
-                className={styles.member__avatar}
-                src="avatar-vitaly.jpg"
-                alt=""
-              />
-              <p className={styles.member__name}>{t('author1')}</p>
-              <a
-                className={styles.member__github}
-                href="https://github.com/bloodsuckers-spb"
-                target="blank"
-              >
-                GitHub
-              </a>
-            </div>
-            <div className={styles.member}>
-              <img
-                className={styles.member__avatar}
-                src="avatar-timofey.jpg"
-                alt=""
-              />
-              <p className={styles.member__name}>{t('author2')}</p>
-              <a
-                className={styles.member__github}
-                href="https://github.com/Timothy7310"
-                target="blank"
-              >
-                GitHub
-              </a>
-            </div>
-            <div className={styles.member}>
-              <img
-                className={styles.member__avatar}
-                src="avatar-artem.jpg"
-                alt=""
-              />
-              <p className={styles.member__name}>{t('author3')}</p>
-              <a
-                className={styles.member__github}
-                href="https://github.com/criphood"
-                target="blank"
-              >
-                GitHub
-              </a>
-            </div>
+            {developers.map(({ imgSrc, github, id }, i) => {
+              return (
+                <article
+                  className={styles.member}
+                  key={id}
+                >
+                  <img
+                    className={styles.member__avatar}
+                    src={imgSrc}
+                    alt={id}
+                  />
+                  <p className={styles.member__name}>{t(`author${i + 1}`)}</p>
+                  <a
+                    className={styles.member__github}
+                    href={github}
+                    target="blank"
+                  >
+                    GitHub
+                  </a>
+                </article>
+              );
+            })}
           </div>
         </section>
       </div>

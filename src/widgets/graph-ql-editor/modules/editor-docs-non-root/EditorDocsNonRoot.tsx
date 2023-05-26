@@ -78,8 +78,8 @@ export const EditorDocsNonRoot = ({
     </div>
   ) : (
     <div className={styles.docsType}>
-      <h2>{name}</h2>
-      <h3>Type</h3>
+      <h2 className={styles.docTypeTitle}>{name}</h2>
+      <h3 className={styles.docTypeSubTitle}>Type</h3>
       <button
         onClick={() =>
           selectData({
@@ -90,7 +90,9 @@ export const EditorDocsNonRoot = ({
       >
         {type}
       </button>
-      {args?.length ? <h3>Arguments</h3> : null}
+      {args?.length ? (
+        <h3 className={styles.docTypeSubTitle}>Arguments</h3>
+      ) : null}
       <div>
         {args?.map(({ name, type }) => (
           <div key={name}>

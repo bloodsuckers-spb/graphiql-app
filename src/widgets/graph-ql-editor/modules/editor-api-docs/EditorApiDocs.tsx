@@ -100,7 +100,7 @@ const EditorApiDocs = ({ data: { data }, isFetching, isError }: Props) => {
   }
 
   return (
-    <>
+    <div className={styles.editorDocs}>
       <div>
         {history.length > 1 ? (
           <button
@@ -124,7 +124,7 @@ const EditorApiDocs = ({ data: { data }, isFetching, isError }: Props) => {
           selectData={selectData}
         />
       )}
-    </>
+    </div>
   );
 };
 

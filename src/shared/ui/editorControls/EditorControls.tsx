@@ -20,8 +20,6 @@ const EditorControls = ({ isError }: Props) => {
   );
   const requestHeaders = useAppSelector((state) => state.editorReducer.headers);
 
-  const { t } = useTranslation();
-
   const makeReq = async (
     query: string,
     variables: string,

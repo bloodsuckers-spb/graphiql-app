@@ -65,3 +65,20 @@ a:focus-visible {
   outline: 3px solid var(--color-focus);
   outline-offset: 2px;
 }
+
+::-webkit-scrollbar {
+  width: 16px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: var(--bg-color);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--color-secondary);
+  border-radius: 100px;
+}
+
+::-webkit-scrollbar-corner {
+  border-radius: 50%;
+}

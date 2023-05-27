@@ -48,6 +48,12 @@
   }
 }
 
+.authLinkBox {
+  width: 150px;
+  display: flex;
+  justify-content: center;
+}
+
 .auth {
   font-family: 'Reaver', 'serif';
   font-weight: 600;
@@ -67,9 +73,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
-
   width: 50%;
   gap: 20px;
+
   &__link {
     font-family: 'Reaver', 'serif';
     font-weight: 600;
@@ -91,4 +97,9 @@
     width: 100%;
     font-size: 16px;
   }
+}
+
+.langCheckedBox {
+  display: flex;
+  align-items: center;
 }

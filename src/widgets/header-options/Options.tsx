@@ -1,11 +1,16 @@
-import { Switch } from 'antd';
+import Switch from '@mui/material/Switch';
+
 import { auth } from 'app/firebase';
+import { Palette } from 'app/providers/ThemeProvider';
 import { signOut } from 'firebase/auth';
 import { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, NavLink } from 'react-router-dom';
 import { action as toggleMenu } from 'redux-burger-menu';
+
 import { useAppDispatch } from 'shared/hooks/redux';
+
+import { classNames } from 'shared/libs';
 
 import styles from './Options.module.scss';
 
@@ -65,14 +70,20 @@ export const Options = () => {
       </nav>
       <div className={styles.options}>
         <div className={styles.localization}>
-          <Switch
-            checkedChildren="ru"
-            unCheckedChildren="en"
-            checked={checked}
-            onClick={handleChecked}
-          />
+          <div className={styles.langCheckedBox}>
+            <span>en</span>
+            <Palette>
+              <Switch
+                checked={checked}
+                onClick={handleChecked}
+                color="secondary"
+                size="medium"
+              />
+            </Palette>
+            <span>ru</span>
+          </div>
         </div>
-        <div className={styles.auth}>
+        <div className={classNames(styles.auth, {}, [styles.authLinkBox])}>
           {user ? (
             <Link
               to="/"

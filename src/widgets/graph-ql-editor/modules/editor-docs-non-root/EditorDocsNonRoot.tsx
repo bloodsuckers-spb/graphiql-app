@@ -16,19 +16,18 @@ export const EditorDocsNonRoot = ({
   type,
   args,
 }: Props) => {
-  const componentPropsArgs = args;
   return !type ? (
     <div className={styles.docsFields}>
       <div>
-        <h2>{name}</h2>
-        <p>{description}</p>
-        {fields?.length ? <h3>Fields</h3> : null}
+        <h2 className={styles.docTypeTitle}>{name}</h2>
+        <p className={styles.docTypeDescription}>{description}</p>
       </div>
       <ul>
         {fields?.map(([fieldName, { type, args }]) => {
           return (
             <li key={fieldName}>
               <button
+                className={styles.docTypeName}
                 onClick={() =>
                   selectData({
                     name: fieldName,
@@ -40,8 +39,9 @@ export const EditorDocsNonRoot = ({
               >
                 {fieldName}
               </button>
-              <span>
-                {componentPropsArgs ? `(` : null}
+
+              <span className={styles.docTypeArgs}>
+                {args ? `(` : null}
                 {args?.map(({ name, type }, index) => (
                   <span key={name}>
                     <span>{name}: </span>
@@ -58,7 +58,7 @@ export const EditorDocsNonRoot = ({
                     {index < args.length - 1 ? ', ' : null}
                   </span>
                 ))}
-                {componentPropsArgs ? `): ` : ':'}
+                {args ? `): ` : ':'}
               </span>
 
               <button
@@ -78,8 +78,8 @@ export const EditorDocsNonRoot = ({
     </div>
   ) : (
     <div className={styles.docsType}>
-      <h2>{name}</h2>
-      <h3>Type</h3>
+      <h2 className={styles.docTypeTitle}>{name}</h2>
+      <h3 className={styles.docTypeSubTitle}>Type</h3>
       <button
         onClick={() =>
           selectData({
@@ -90,10 +90,15 @@ export const EditorDocsNonRoot = ({
       >
         {type}
       </button>
-      {args?.length ? <h3>Arguments</h3> : null}
+      {args?.length ? (
+        <h3 className={styles.docTypeSubTitle}>Arguments</h3>
+      ) : null}
       <div>
         {args?.map(({ name, type }) => (
-          <div key={name}>
+          <div
+            className={styles.docTypeName}
+            key={name}
+          >
             {`${name}: `}
             <button
               onClick={() =>

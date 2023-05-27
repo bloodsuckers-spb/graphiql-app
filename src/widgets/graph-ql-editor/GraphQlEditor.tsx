@@ -1,13 +1,10 @@
 import { useGetSchemaQuery } from 'app/providers/StoreProvider/config/reducers';
-import { EditorOptions } from 'app/types';
 import { useState } from 'react';
 
 import { useAppSelector } from 'shared/hooks';
 
 import { classNames } from 'shared/libs';
 import { Wrapper } from 'shared/ui';
-
-import EditorControls from 'shared/ui/editorControls/EditorControls';
 
 import styles from './GraphQlEditor.module.scss';
 
@@ -17,8 +14,11 @@ import {
   ResponseOutput,
   OptionsEditor,
   EditorApiDocs,
+  EditorSearchBar,
+  EditorControls,
 } from './modules';
-import { EditorSearchBar } from './modules/editor-search-bar';
+
+import type { EditorOptions } from 'app/types';
 
 export const GraphQlEditor = () => {
   const storeApiURL = useAppSelector((state) => state.editorReducer.apiURL);

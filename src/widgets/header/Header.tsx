@@ -11,8 +11,13 @@ export const Header = () => {
   const [isSticky, setSticky] = useState(false);
   const headerRef = useRef<HTMLElement>(null);
 
-  const handleScroll = (elTopOffset: number, elHeight: number) => {
-    if (window.pageYOffset > elTopOffset + elHeight) {
+  const handleScroll = () => {
+    if (!headerRef || !headerRef.current) {
+      return;
+    }
+    const { top, height } = headerRef.current.getBoundingClientRect();
+
+    if (window.pageYOffset > top + height) {
       setSticky(true);
     } else {
       setSticky(false);
@@ -20,20 +25,10 @@ export const Header = () => {
   };
 
   useEffect(() => {
-    if (!headerRef || !headerRef.current) {
-      return;
-    }
-
-    const header = headerRef.current.getBoundingClientRect();
-
-    window.addEventListener('scroll', () =>
-      handleScroll(header.top, header.height)
-    );
+    window.addEventListener('scroll', handleScroll);
 
     return () => {
-      window.removeEventListener('scroll', () =>
-        handleScroll(header.top, header.height)
-      );
+      window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 

@@ -153,24 +153,21 @@ const Welcome = () => {
           <div className={styles.team__members}>
             {developers.map(({ imgSrc, github, id }, i) => {
               return (
-                <article
-                  className={styles.member}
+                <a
+                  href={github}
                   key={id}
+                  target="blank"
                 >
-                  <img
-                    className={styles.member__avatar}
-                    src={imgSrc}
-                    alt={id}
-                  />
-                  <p className={styles.member__name}>{t(`author${i + 1}`)}</p>
-                  <a
-                    className={styles.member__github}
-                    href={github}
-                    target="blank"
-                  >
-                    GitHub
-                  </a>
-                </article>
+                  <div className={styles.member}>
+                    <img
+                      className={styles.member__avatar}
+                      src={imgSrc}
+                      alt={id}
+                    />
+                    <p className={styles.member__name}>{t(`author${i + 1}`)}</p>
+                    <span className={styles.member__github}>GitHub</span>
+                  </div>
+                </a>
               );
             })}
           </div>

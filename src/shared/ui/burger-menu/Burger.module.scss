@@ -5,7 +5,7 @@
   width: 25px;
   height: 18px;
   top: 30px;
-  right: 15px;
+  right: 21px;
   @include media-tablet {
     display: block;
   }
@@ -17,7 +17,7 @@
 
 .menu {
   padding: 20px 0;
-  background-color: var(--form-btn-bg);
+  background-color: var(--bg-secondary);
 }
 
 .overlay,

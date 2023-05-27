@@ -6,6 +6,10 @@
   @include media-mobile {
     padding: 0 10px;
   }
+  @include media-mobilesmall-fix {
+    padding: 0 10px;
+    width: 320px;
+  }
 }
 
 .inner {

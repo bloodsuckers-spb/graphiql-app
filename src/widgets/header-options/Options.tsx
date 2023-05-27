@@ -1,4 +1,5 @@
-import { Switch } from 'antd';
+// import { Switch } from 'antd';
+import Switch from '@mui/material/Switch';
 
 import { auth } from 'app/firebase';
 import { signOut } from 'firebase/auth';
@@ -69,12 +70,16 @@ export const Options = () => {
       </nav>
       <div className={styles.options}>
         <div className={styles.localization}>
-          <Switch
-            checkedChildren="ru"
-            unCheckedChildren="en"
-            checked={checked}
-            onClick={handleChecked}
-          />
+          <div className={styles.langCheckedBox}>
+            <span>ru</span>
+            <Switch
+              checked={checked}
+              onClick={handleChecked}
+              color="secondary"
+              size="medium"
+            />
+            <span>en</span>
+          </div>
         </div>
         <div className={classNames(styles.auth, {}, [styles.authLinkBox])}>
           {user ? (

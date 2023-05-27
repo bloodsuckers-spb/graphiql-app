@@ -1,5 +1,5 @@
-import { Spin } from 'antd';
+import { CircularProgress } from '@mui/material';
 
 import styles from './Spiner.module.scss';
 
-export const Spinner = () => <Spin className={styles.spin} />;
+export const Spinner = () => <CircularProgress className={styles.spin} />;

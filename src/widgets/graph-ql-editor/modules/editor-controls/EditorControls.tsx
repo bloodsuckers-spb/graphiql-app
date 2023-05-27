@@ -9,7 +9,7 @@ type Props = {
   isError: boolean;
 };
 
-const EditorControls = ({ isError }: Props) => {
+export const EditorControls = ({ isError }: Props) => {
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
 
@@ -57,5 +57,3 @@ const EditorControls = ({ isError }: Props) => {
     </div>
   );
 };
-
-export default EditorControls;

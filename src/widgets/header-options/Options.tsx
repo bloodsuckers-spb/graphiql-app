@@ -80,7 +80,6 @@ export const Options = () => {
                 size="medium"
               />
             </Palette>
-
             <span>ru</span>
           </div>
         </div>

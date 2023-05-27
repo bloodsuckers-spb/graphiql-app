@@ -7,7 +7,6 @@
 }
 
 .wrapper {
-  border: 1px solid white;
   background-color: var(--color-dark);
   width: 100%;
   padding: 10px;
@@ -27,7 +26,6 @@
   @include media-tablet {
     grid-template-rows: 1fr 1fr;
     grid-template-columns: 1fr;
-    // grid-template-columns: 1fr;
   }
 }
 

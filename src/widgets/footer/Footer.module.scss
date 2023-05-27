@@ -15,7 +15,6 @@
 
 .authors {
   display: flex;
-  width: 45%;
   gap: 20px;
 }
 
@@ -50,7 +49,6 @@
 .logo {
   display: flex;
   justify-content: end;
-  width: 45%;
   &__href {
     width: 134px;
   }

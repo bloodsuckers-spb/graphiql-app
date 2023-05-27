@@ -31,3 +31,9 @@
     @content;
   }
 }
+
+@mixin media-mobilesmall-fix {
+  @media (max-width: $mobile-small-width-fix) {
+    @content;
+  }
+}

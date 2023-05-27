@@ -17,7 +17,8 @@ export const Burger = () => {
   return (
     <Menu
       right
-      width={200}
+      width={'65%'}
+      maxWidth={400}
       className={styles.wrap}
       burgerButtonClassName={styles.button}
       burgerBarClassName={styles.bars}

@@ -1,6 +1,7 @@
 import Switch from '@mui/material/Switch';
 
 import { auth } from 'app/firebase';
+import { Palette } from 'app/providers/ThemeProvider';
 import { signOut } from 'firebase/auth';
 import { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -70,14 +71,17 @@ export const Options = () => {
       <div className={styles.options}>
         <div className={styles.localization}>
           <div className={styles.langCheckedBox}>
-            <span>ru</span>
-            <Switch
-              checked={checked}
-              onClick={handleChecked}
-              color="secondary"
-              size="medium"
-            />
             <span>en</span>
+            <Palette>
+              <Switch
+                checked={checked}
+                onClick={handleChecked}
+                color="secondary"
+                size="medium"
+              />
+            </Palette>
+
+            <span>ru</span>
           </div>
         </div>
         <div className={classNames(styles.auth, {}, [styles.authLinkBox])}>

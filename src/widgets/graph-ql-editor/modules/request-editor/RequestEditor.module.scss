@@ -1,4 +1,5 @@
 .requestEditor {
   @extend %editor-field;
+  @extend %fieldScroll;
   background-color: var(--bg-main);
 }

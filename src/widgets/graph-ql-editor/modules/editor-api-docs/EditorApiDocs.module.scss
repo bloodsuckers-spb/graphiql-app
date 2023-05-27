@@ -1,7 +1,7 @@
 .editorDocs {
   height: 500px;
-  overflow-y: scroll;
   width: 100%;
+  @extend %fieldScroll;
 }
 
 .btn {

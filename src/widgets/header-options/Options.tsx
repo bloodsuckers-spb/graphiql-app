@@ -1,4 +1,3 @@
-// import { Switch } from 'antd';
 import Switch from '@mui/material/Switch';
 
 import { auth } from 'app/firebase';

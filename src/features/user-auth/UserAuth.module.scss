@@ -8,6 +8,9 @@ $baseName: 'userAuth';
   width: 100%;
   padding: 60px;
   border-radius: 15px;
+  @include media-tablet {
+    padding: 60px 15px;
+  }
 }
 
 .#{$baseName}Header {
@@ -45,15 +48,6 @@ $baseName: 'userAuth';
   }
 
   .#{$baseName}Label {
-    @include media-laptop {
-      font-size: 16px;
-    }
-    @include media-tablet {
-      font-size: 12px;
-    }
-    @include media-mobile {
-      font-size: 10px;
-    }
     cursor: pointer;
     background-color: transparent;
     color: var(--color-white);

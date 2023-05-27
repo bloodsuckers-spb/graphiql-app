@@ -36,7 +36,13 @@ export const EditorSearchBar = ({ isError }: Props) => {
           onChange={handleSubmit}
         />
       </div>
-      {isError && <p className={styles.error}>{t('apiUrlError')}</p>}
+      {isError && (
+        <span className={styles.error}>
+          <svg className={styles.errorIcon}>
+            <use href="sprite.svg#error"></use>
+          </svg>
+        </span>
+      )}
     </div>
   );
 };

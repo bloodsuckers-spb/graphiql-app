@@ -1,7 +1,9 @@
 /* eslint-disable import/no-default-export */
 import { auth } from 'app/firebase';
+import { useEffect } from 'react';
 import { useTranslation, Trans } from 'react-i18next';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { AppRoutes } from 'shared/config';
 import { Wrapper } from 'shared/ui';
@@ -14,6 +16,13 @@ import styles from './Welcome.module.scss';
 const Welcome = () => {
   const { t } = useTranslation();
   const user = auth.currentUser;
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (user) {
+      navigate('/');
+    }
+  }, [user, navigate]);
 
   return (
     <Wrapper className={styles.wrapper}>

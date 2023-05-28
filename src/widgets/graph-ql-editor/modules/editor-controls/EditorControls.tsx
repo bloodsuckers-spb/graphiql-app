@@ -1,7 +1,10 @@
 /* eslint-disable import/no-default-export */
 import { editorSlice } from 'app/providers/StoreProvider/config/reducers';
 import { useTranslation } from 'react-i18next';
+import { toast } from 'react-toastify';
 import { useAppDispatch, useAppSelector } from 'shared/hooks';
+
+import { translateWithLocalStorage } from 'shared/libs';
 
 import styles from './EditorControls.module.scss';
 
@@ -25,21 +28,40 @@ export const EditorControls = ({ isError }: Props) => {
     variables: string,
     requestHeaders: string
   ) => {
-    const res = await fetch(apiURL, {
-      method: 'POST',
-      headers: {
-        'Content-type': 'application/json',
-        ...JSON.parse(!requestHeaders ? '{}' : requestHeaders),
-      },
-      body: JSON.stringify({
-        query,
-        variables: !variables ? {} : JSON.parse(variables),
-      }),
-    });
-    const data = await res.json();
-    return dispatch(
-      editorSlice.actions.setResponse(JSON.stringify(data, null, 2))
-    );
+    try {
+      const res = await fetch(apiURL, {
+        method: 'POST',
+        headers: {
+          'Content-type': 'application/json',
+          ...JSON.parse(!requestHeaders ? '{}' : requestHeaders),
+        },
+        body: JSON.stringify({
+          query,
+          variables: !variables ? {} : JSON.parse(variables),
+        }),
+      });
+      const data = await res.json();
+      return dispatch(
+        editorSlice.actions.setResponse(JSON.stringify(data, null, 2))
+      );
+    } catch (error) {
+      toast(
+        translateWithLocalStorage(
+          'Извините, ничего не найдено',
+          'Sorry, There is nothing found'
+        ),
+        {
+          position: 'top-right',
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: 'dark',
+        }
+      );
+    }
   };
 
   return (

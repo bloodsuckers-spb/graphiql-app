@@ -40,5 +40,6 @@
   "apiPlaceholder": "Пожалуйста, введите API URL",
   "apiUrlError": "Сервер недоступен",
   "toastErrorMessage": "Извините, ничего не найдено",
-  "docsLoadingMessage": "Загрузка..."
+  "docsLoadingMessage": "Загрузка...",
+  "logoAriaLabel": "Стартовая страница"
 }

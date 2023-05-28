@@ -40,5 +40,6 @@
   "apiPlaceholder": "Please enter API url",
   "apiUrlError": "Server cannot be reached",
   "toastErrorMessage": "Sorry, There is nothing found",
-  "docsLoadingMessage": "Loading..."
+  "docsLoadingMessage": "Loading...",
+  "logoAriaLabel": "Welcome Page"
 }

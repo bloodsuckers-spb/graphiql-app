@@ -1,7 +1,5 @@
 .menu {
   display: flex;
-  justify-content: space-between;
-  width: 100%;
   @include media-tablet {
     height: 100%;
     flex-direction: column;
@@ -50,6 +48,7 @@
 .authLinkBox {
   display: flex;
   justify-content: center;
+  width: 150px;
 }
 
 .auth {

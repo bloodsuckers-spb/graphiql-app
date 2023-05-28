@@ -1,3 +1,9 @@
+$content-width: 1197px;
+$tablet-width: 768px;
+$mobile-big-width: 414px;
+$mobile-small-width-fix: 330px;
+$mobile-small-width: 320px;
+
 @mixin InterFont($color) {
   font-family: 'Inter';
   font-style: normal;

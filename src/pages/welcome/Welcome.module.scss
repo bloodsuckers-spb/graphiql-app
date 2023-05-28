@@ -313,3 +313,10 @@
     }
   }
 }
+
+.link {
+  color: var(--color-white);
+  border-bottom: 3px solid var(--color-white);
+  font-weight: 600;
+  @extend %standart-animation;
+}

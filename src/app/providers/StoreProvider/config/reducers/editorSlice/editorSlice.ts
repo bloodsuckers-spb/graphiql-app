@@ -1,12 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { DefaultSchema, DefaultURL } from './default';
+import { DEFAULT_URL } from './default';
 
 export const editorSlice = createSlice({
   name: 'editor',
   initialState: {
-    apiURL: DefaultURL,
-    schema: DefaultSchema,
+    apiURL: DEFAULT_URL,
     response: '',
     request: '',
     variables: '',
@@ -15,10 +14,6 @@ export const editorSlice = createSlice({
   reducers: {
     setApiURL(state, action: PayloadAction<string>) {
       state.apiURL = action.payload;
-    },
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    setSchema(state, action: PayloadAction<any>) {
-      state.schema = action.payload;
     },
     setResponse(state, action: PayloadAction<string>) {
       state.response = action.payload;

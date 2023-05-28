@@ -10,7 +10,7 @@ import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 
 import { classNames } from 'shared/libs';
-import { UserAuthField, FormBtn } from 'shared/ui';
+import { UserAuthField } from 'shared/ui';
 
 import { Props, FormFields } from './types';
 
@@ -98,7 +98,12 @@ export const UserAuthForm = ({ isSignUp }: Props) => {
           <span className={styles.error}>{t('formErrorPassword')}</span>
         )}
       </UserAuthField>
-      <FormBtn />
+      <button
+        className={styles.btn}
+        type="submit"
+      >
+        {t('formEnter')}
+      </button>
     </form>
   );
 };

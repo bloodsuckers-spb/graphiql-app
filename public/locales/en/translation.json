@@ -5,7 +5,10 @@
   "signUp": "Sign Up",
   "SignOut": "Sign Out",
   "startingPlease": "Please",
-  "startingText": "Sign In to start exploring",
+  "startingText": "to start exploring",
+  "startingLogInLink": "Sign In",
+  "startingTryItLink": "Try It",
+  "startingTryItText": "Now you can",
   "features1": "Describe your code",
   "features2": "Ask for what you want",
   "features3": "Get predictable results",
@@ -38,5 +41,6 @@
   "apiPlaceholder": "Please enter API url",
   "apiUrlError": "Server cannot be reached",
   "toastErrorMessage": "Sorry, There is nothing found",
-  "docsLoadingMessage": "Loading..."
+  "docsLoadingMessage": "Loading...",
+  "logoAriaLabel": "Welcome Page"
 }

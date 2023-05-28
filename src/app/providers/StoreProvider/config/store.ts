@@ -5,11 +5,9 @@ import { RTKQueryErrorLogger } from 'shared/ui';
 
 import { schemaApi } from './reducers';
 
-import { userReducer, loginReducer, editorReducer } from './reducers';
+import { editorReducer } from './reducers';
 
 const rootReducer = combineReducers({
-  userReducer,
-  loginReducer,
   editorReducer,
   burgerMenu,
   [schemaApi.reducerPath]: schemaApi.reducer,

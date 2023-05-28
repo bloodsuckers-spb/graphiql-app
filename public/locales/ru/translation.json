@@ -5,7 +5,10 @@
   "signUp": "Зарег.",
   "SignOut": "Выйти",
   "startingPlease": "Пожалуйста",
-  "startingText": "Войдите чтобы начать изучение",
+  "startingText": "чтобы начать изучение",
+  "startingLogInLink": "войдите",
+  "startingTryItLink": "попробовать",
+  "startingTryItText": "Теперь вы можете",
   "features1": "Опиши свой код",
   "features2": "Укажи чего ты хочешь",
   "features3": "Получи результат",
@@ -38,5 +41,6 @@
   "apiPlaceholder": "Пожалуйста, введите API URL",
   "apiUrlError": "Сервер недоступен",
   "toastErrorMessage": "Извините, ничего не найдено",
-  "docsLoadingMessage": "Загрузка..."
+  "docsLoadingMessage": "Загрузка...",
+  "logoAriaLabel": "Стартовая страница"
 }

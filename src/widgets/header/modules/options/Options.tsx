@@ -5,7 +5,7 @@ import { Palette } from 'app/providers/ThemeProvider';
 import { signOut } from 'firebase/auth';
 import { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link, NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { action as toggleMenu } from 'redux-burger-menu';
 
 import { useAppDispatch } from 'shared/hooks/redux';
@@ -41,33 +41,11 @@ export const Options = () => {
     !checked ? i18n.changeLanguage('ru') : i18n.changeLanguage('en');
   };
 
-  const getActiveClass = (isActive: boolean) => {
-    return isActive
-      ? `${styles.nav__link} ${styles.nav__link_active}`
-      : `${styles.nav__link}`;
-  };
-
   return (
     <div
       className={styles.menu}
       onClick={handleClick}
     >
-      <nav className={styles.nav}>
-        <NavLink
-          className={({ isActive }) => getActiveClass(isActive)}
-          to="/"
-        >
-          {t('navPageWelcome')}
-        </NavLink>
-        {user && (
-          <NavLink
-            className={({ isActive }) => getActiveClass(isActive)}
-            to="/editor"
-          >
-            {t('navPageEditor')}
-          </NavLink>
-        )}
-      </nav>
       <div className={styles.options}>
         <div className={styles.localization}>
           <div className={styles.langCheckedBox}>

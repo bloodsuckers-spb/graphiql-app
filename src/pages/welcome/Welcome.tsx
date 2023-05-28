@@ -19,23 +19,28 @@ const Welcome = () => {
     <Wrapper className={styles.wrapper}>
       <div className={styles.welcome}>
         <h2 className={styles.title}>
-          <span>{t('startingPlease')}</span>,{' '}
           {!user ? (
-            <Link
-              to={AppRoutes.LOGIN}
-              className={styles.link}
-            >
-              {t('startingLogInLink')}
-            </Link>
+            <>
+              <span>{t('startingPlease')}</span>,{' '}
+              <Link
+                to={AppRoutes.LOGIN}
+                className={styles.link}
+              >
+                {t('startingLogInLink')}
+              </Link>{' '}
+              {t('startingText')}
+            </>
           ) : (
-            <Link
-              to={AppRoutes.EDITOR}
-              className={styles.link}
-            >
-              {t('startingTryItLink')}
-            </Link>
-          )}{' '}
-          {t('startingText')}
+            <>
+              {t('startingTryItText')}{' '}
+              <Link
+                to={AppRoutes.EDITOR}
+                className={styles.link}
+              >
+                {t('startingTryItLink')}
+              </Link>
+            </>
+          )}
         </h2>
         <section className={styles.intro}>
           <div className={styles.logo}>

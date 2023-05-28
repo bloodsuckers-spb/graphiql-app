@@ -1,2 +1,2 @@
 export * from './editorSlice';
-export * from './schemaApi';
+export * from '../services/schemaApi';

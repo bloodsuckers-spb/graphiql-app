@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import { classNames } from 'shared/libs';
 import { Wrapper, AppLogo, Burger } from 'shared/ui';
 
-import { Options } from 'widgets/header-options';
+import { Options } from 'widgets/header/modules/options';
 
 import styles from './Header.module.scss';
 

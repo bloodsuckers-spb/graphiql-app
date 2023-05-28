@@ -1,6 +1,6 @@
 import { action as toggleMenu } from 'redux-burger-menu';
 import { useAppSelector, useAppDispatch } from 'shared/hooks/redux';
-import { Options } from 'widgets/header-options';
+import { Options } from 'widgets/header/modules/options';
 
 import styles from './Burger.module.scss';
 import { Menu } from './BurgerRedux';

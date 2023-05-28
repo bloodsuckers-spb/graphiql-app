@@ -1,5 +1,5 @@
 .responseOutput {
   @extend %editor-field;
+  @extend %fieldScroll;
   background-color: transparent;
-  overflow-y: scroll;
 }

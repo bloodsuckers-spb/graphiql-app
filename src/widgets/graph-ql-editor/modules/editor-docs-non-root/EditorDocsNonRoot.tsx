@@ -25,7 +25,10 @@ export const EditorDocsNonRoot = ({
       <ul>
         {fields?.map(([fieldName, { type, args }]) => {
           return (
-            <li key={fieldName}>
+            <li
+              className={styles.listItem}
+              key={fieldName}
+            >
               <button
                 className={styles.docTypeName}
                 onClick={() =>
@@ -41,7 +44,7 @@ export const EditorDocsNonRoot = ({
               </button>
 
               <span className={styles.docTypeArgs}>
-                {args ? `(` : null}
+                {Array.isArray(args) && args.length ? `(` : null}
                 {args?.map(({ name, type }, index) => (
                   <span key={name}>
                     <span>{name}: </span>
@@ -58,7 +61,7 @@ export const EditorDocsNonRoot = ({
                     {index < args.length - 1 ? ', ' : null}
                   </span>
                 ))}
-                {args ? `): ` : ':'}
+                {Array.isArray(args) && args.length ? `): ` : ''}
               </span>
 
               <button

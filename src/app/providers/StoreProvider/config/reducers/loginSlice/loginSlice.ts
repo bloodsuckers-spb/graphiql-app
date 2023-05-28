@@ -3,8 +3,8 @@ import { createSlice } from '@reduxjs/toolkit';
 export const loginSlice = createSlice({
   name: 'test',
   initialState: {
-    value: window.localStorage.getItem('isLogin')
-      ? window.localStorage.getItem('isLogin') === 'true'
+    value: localStorage.getItem('isLogin')
+      ? localStorage.getItem('isLogin') === 'true'
       : false,
   },
   reducers: {

@@ -9,6 +9,8 @@ import { useState } from 'react';
 
 import { useTranslation } from 'react-i18next';
 
+import { Spinner } from 'shared/ui';
+
 import styles from './EditorApiDocs.module.scss';
 
 import { EditorDocsRoot, EditorDocsNonRoot } from '../';
@@ -95,34 +97,36 @@ const EditorApiDocs = ({ data: { data }, isFetching, isError }: Props) => {
     }
   };
 
-  if (isFetching || isError) {
-    return <div>{t('docsLoadingMessage')}</div>;
-  }
-
   return (
     <div className={styles.editorDocs}>
-      <div>
-        {history.length > 1 ? (
-          <button
-            className={styles.btnBack}
-            onClick={removeFromHistory}
-          >
-            Back
-          </button>
-        ) : null}
-      </div>
-
-      {history.length === 1 ? (
-        <EditorDocsRoot
-          {...rootData}
-          selectData={selectData}
-          schema={schema}
-        />
+      {isFetching || isError ? (
+        <Spinner />
       ) : (
-        <EditorDocsNonRoot
-          {...currentData}
-          selectData={selectData}
-        />
+        <>
+          <div>
+            {history.length > 1 ? (
+              <button
+                className={styles.btnBack}
+                onClick={removeFromHistory}
+              >
+                Back
+              </button>
+            ) : null}
+          </div>
+
+          {history.length === 1 ? (
+            <EditorDocsRoot
+              {...rootData}
+              selectData={selectData}
+              schema={schema}
+            />
+          ) : (
+            <EditorDocsNonRoot
+              {...currentData}
+              selectData={selectData}
+            />
+          )}
+        </>
       )}
     </div>
   );

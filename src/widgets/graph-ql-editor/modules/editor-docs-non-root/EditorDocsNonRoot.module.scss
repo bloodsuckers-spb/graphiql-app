@@ -1,4 +1,5 @@
 .docsFields {
+  padding: 3px;
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -7,7 +8,15 @@
   }
   li {
     display: flex;
-    gap: 10px;
+    gap: 3px;
+  }
+}
+
+.listItem {
+  @include media-laptop {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
   }
 }
 

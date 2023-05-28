@@ -1,7 +1,11 @@
 /* eslint-disable import/no-default-export */
-
+import { auth } from 'app/firebase';
+import { useEffect } from 'react';
 import { useTranslation, Trans } from 'react-i18next';
+import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
+import { AppRoutes } from 'shared/config';
 import { Wrapper } from 'shared/ui';
 import { Example } from 'widgets/query-example';
 
@@ -11,12 +15,29 @@ import styles from './Welcome.module.scss';
 
 const Welcome = () => {
   const { t } = useTranslation();
+  const user = auth.currentUser;
 
   return (
     <Wrapper className={styles.wrapper}>
       <div className={styles.welcome}>
         <h2 className={styles.title}>
-          <span>{t('startingPlease')}</span>, {t('startingText')}
+          <span>{t('startingPlease')}</span>,{' '}
+          {!user ? (
+            <Link
+              to={AppRoutes.LOGIN}
+              className={styles.link}
+            >
+              {t('startingLogInLink')}
+            </Link>
+          ) : (
+            <Link
+              to={AppRoutes.EDITOR}
+              className={styles.link}
+            >
+              {t('startingTryItLink')}
+            </Link>
+          )}{' '}
+          {t('startingText')}
         </h2>
         <section className={styles.intro}>
           <div className={styles.logo}>

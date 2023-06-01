@@ -1,0 +1,36 @@
+.docsRoot {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  button {
+    @extend %editor-docs-button;
+  }
+}
+
+.docsRootTitle {
+  color: var(--color-secondary);
+}
+
+.docsRootDescription {
+  padding-top: 10px;
+  color: var(--color-accent);
+}
+
+.fieldsNames {
+  color: var(--color-white);
+}
+
+.docsAbout {
+  display: flex;
+  flex-direction: column;
+}
+
+.docsInfoList {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.btn {
+  max-width: max-content;
+}

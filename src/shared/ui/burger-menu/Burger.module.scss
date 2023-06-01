@@ -1,0 +1,27 @@
+.button {
+  display: none;
+  position: fixed;
+  z-index: 101;
+  width: 25px;
+  height: 18px;
+  top: 30px;
+  right: 21px;
+  @include media-tablet {
+    display: block;
+  }
+}
+
+.bars {
+  background: #ffffff;
+}
+
+.menu {
+  padding: 20px 0;
+  background-color: var(--bg-secondary);
+}
+
+.overlay,
+.wrap {
+  top: 0;
+  right: 0;
+}

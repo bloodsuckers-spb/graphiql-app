@@ -1,0 +1,43 @@
+.wrapper {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  top: 10px;
+  right: 20px;
+}
+
+.play {
+  width: 44px;
+  height: 44px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  border: 1px solid transparent;
+  background-color: var(--editor-play-bg);
+  @extend %standart-animation;
+  transition-property: background-color, border-color;
+  &:hover:not([disabled]) {
+    background-color: transparent;
+    border-color: var(--editor-play-bg);
+    & .playIcon {
+      fill: var(--editor-play-bg);
+    }
+  }
+
+  &:disabled {
+    cursor: default;
+    background-color: var(----code-grey);
+    border-color: var(--color-secondary);
+  }
+}
+
+.playIcon {
+  width: 20px;
+  height: 20px;
+  fill: var(--color-white);
+  @extend %standart-animation;
+  transition-property: fill;
+}

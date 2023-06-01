@@ -1,0 +1,47 @@
+.docsFields {
+  padding: 3px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  button {
+    @extend %editor-docs-button;
+  }
+  li {
+    display: flex;
+    gap: 3px;
+  }
+}
+
+.listItem {
+  @include media-laptop {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+.docsType {
+  button {
+    @extend %editor-docs-button;
+  }
+}
+
+.docTypeTitle {
+  color: var(--code-yellow);
+  padding-top: 10px;
+  padding-bottom: 5px;
+}
+
+.docTypeSubTitle,
+.docTypeArgs {
+  color: var(--color-white);
+}
+
+button.docTypeName,
+.docTypeName {
+  color: var(--color-secondary);
+}
+
+.docTypeDescription {
+  color: var(--color-white);
+}

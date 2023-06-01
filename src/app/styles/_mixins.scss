@@ -1,0 +1,45 @@
+$content-width: 1197px;
+$tablet-width: 768px;
+$mobile-big-width: 414px;
+$mobile-small-width-fix: 330px;
+$mobile-small-width: 320px;
+
+@mixin InterFont($color) {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 21px;
+  line-height: 25px;
+  height: 78px;
+  color: $color;
+}
+
+@mixin media-laptop {
+  @media (max-width: $content-width) {
+    @content;
+  }
+}
+
+@mixin media-tablet {
+  @media (max-width: $tablet-width) {
+    @content;
+  }
+}
+
+@mixin media-mobile {
+  @media (max-width: $mobile-big-width) {
+    @content;
+  }
+}
+
+@mixin media-mobilesmall {
+  @media (max-width: $mobile-small-width) {
+    @content;
+  }
+}
+
+@mixin media-mobilesmall-fix {
+  @media (max-width: $mobile-small-width-fix) {
+    @content;
+  }
+}

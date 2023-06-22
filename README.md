@@ -18,5 +18,6 @@ https://sweet-bubblegum-0225c9.netlify.app/
 - React
 - Redux Toolkit / RTK Query
 - Typescript
+- Graph QL
 - Vite
 - Code Mirror

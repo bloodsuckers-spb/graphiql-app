@@ -13,6 +13,10 @@ _Команда для запуска проекта: `npm run start`_
 
 https://sweet-bubblegum-0225c9.netlify.app/
 
+## Скриншот
+
+![crosscheck](https://github.com/bloodsuckers-spb/graphiql-app/assets/90127354/1e878f58-9025-44b2-984c-9a16c1febc71)
+
 ## Стек технологий
 
 - React
@@ -21,3 +25,7 @@ https://sweet-bubblegum-0225c9.netlify.app/
 - Graph QL
 - Vite
 - Code Mirror
+
+## Видео
+
+https://www.youtube.com/watch?v=F4oRn5CVPRU

@@ -30,3 +30,7 @@ https://sweet-bubblegum-0225c9.netlify.app/
 ## Видео
 
 https://www.youtube.com/watch?v=F4oRn5CVPRU
+
+## Техническое задание
+
+https://github.com/rolling-scopes-school/tasks/blob/master/react/modules/graphiql.md

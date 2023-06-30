@@ -22,6 +22,11 @@ https://sweet-bubblegum-0225c9.netlify.app/
 - Vite
 - Code Mirror
 
+## Скриншоты
+
+![изображение](https://github.com/bloodsuckers-spb/graphiql-app/assets/90127354/6837be1d-abed-4bf2-b46f-f898112b67ef)
+
+
 ## Видео
 
 https://www.youtube.com/watch?v=F4oRn5CVPRU

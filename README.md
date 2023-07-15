@@ -1,7 +1,14 @@
 # GraphiQL
 
 _GraphiQL - это песочница / IDE для Graph QL запросов c подсветкой синтаксиса и автодополнением.
-Так же реализована авторизация/аутентификация._
+
+- Используется Feature Slice Design архитектура.
+- Lazy-loaded подгрузка документации (Парсинг Graph QL схемы API с учётом типизации).
+- Реализована авторизация с помощью Firebase.
+- Client-side validation
+- Приватные роуты, 404, error boundary
+- Code-splitting
+- Локализация
 
 ## Начало работы
 
@@ -13,7 +20,7 @@ _Команда для запуска проекта: `npm run start`_
 
 https://sweet-bubblegum-0225c9.netlify.app/
 
-## Стек технологий
+## Технологий стек
 
 - React
 - Redux Toolkit / RTK Query
@@ -21,16 +28,13 @@ https://sweet-bubblegum-0225c9.netlify.app/
 - Graph QL
 - Vite
 - Code Mirror
+- CSS Modules
 
 ## Скриншоты
 
 ![изображение](https://github.com/bloodsuckers-spb/graphiql-app/assets/90127354/6837be1d-abed-4bf2-b46f-f898112b67ef)
 
 
-## Видео
+## Видео презентация
 
 https://www.youtube.com/watch?v=F4oRn5CVPRU
-
-## Техническое задание
-
-https://github.com/rolling-scopes-school/tasks/blob/master/react/modules/graphiql.md
